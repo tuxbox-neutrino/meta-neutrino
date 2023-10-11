@@ -20,10 +20,11 @@ set_root_passwd() {
 	rm -rf ${IMAGE_ROOTFS}/tmp/*
 }
 
-# ROOTFS_PREPROCESS_COMMAND += "set_image_build_version; "
-# set_image_build_version () {
-# 	echo ${BUILD_VERSION} > ${DEPLOY_DIR_IMAGE}/build_version
-# }
+TMP_BUILD_DATE_FILE = "${DEPLOY_DIR_IMAGE}/tmp_build_date"
+ROOTFS_PREPROCESS_COMMAND += "set_image_build_version; "
+set_image_build_version () {
+	echo ${BUILD_VERSION} > ${TMP_BUILD_DATE_FILE}
+}
 
 ROOTFS_POSTPROCESS_COMMAND += "set_image_version; "
 # We create file /etc/image-version for common use (required by some plugins)
@@ -50,12 +51,12 @@ set_image_version () {
 	# required to synchronize version entry with content of ../imageversion file, which is used for image updates
 # 	echo ${IMAGE_NAME} > ${DEPLOY_DIR_IMAGE}/imageversion
 
-# 	IMAGE_STAMP_STR=`cat ${DEPLOY_DIR_IMAGE}/build_version`
-	IMAGE_STAMP_STR=${BUILD_VERSION}
+	IMAGE_STAMP_STR=$(cat ${TMP_BUILD_DATE_FILE})
 	IMAGE_STAMP_LEN=${#IMAGE_STAMP_STR}
 	IMAGE_STAMP_START=`expr ${IMAGE_STAMP_LEN}-14`
 	IMAGE_STAMP=`echo ${IMAGE_STAMP_STR} | cut -d '-' -f3`
 	IMAGE_BUILD_TIME_STAMP=`echo ${IMAGE_STAMP} | cut -c1-12`
+	rm -f ${TMP_BUILD_DATE_FILE}
 
 	#IMAGE_ROOTFS_ETC_DIR=${D}${sysconfdir}
 	IMAGE_ROOTFS_ETC_DIR=${IMAGE_ROOTFS}/etc
