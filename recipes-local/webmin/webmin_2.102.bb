@@ -3,6 +3,17 @@ HOMEPAGE = "http://www.webmin.com"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=0a6446108c96d0819d21e40b48109507"
 
+# for some common variables, e.g. plugin paths
+include ../../recipes-neutrino/neutrino/neutrino-common-vars.inc
+
+PR = "r1"
+
+RM_WORK_EXCLUDE += "${PN}"
+
+WEBMIN_THEME ?= "authentic-theme"
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/${WEBMIN_THEME}:"
+
 SRC_URI = " \
 		${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
 \
@@ -20,8 +31,6 @@ SRC_URI = " \
 		file://0012-Adjust-Mysql-config-defaults.patch \
 		file://0013-webmin-use-correct-path-path-to-opkg.patch \
 \
-		file://authentic_settings.js \
-		file://authentic_settings-root \
 		file://exports_config \
 		file://proftpd_config \
 		file://samba_config \
@@ -29,6 +38,10 @@ SRC_URI = " \
 		file://smart_config \
 		file://webmin \
 		file://webmin.service \
+\
+		file://background_content.png  \
+		file://logo.png  \
+		file://logo_welcome.png  \
 "
 
 SRC_URI += " \
@@ -37,7 +50,7 @@ SRC_URI += " \
 
 RDEPENDS-${PN}-module += "perl"
 
-SRC_URI[sha256sum] = "5212a5b8fd1ce86ef47038f0ff30131f7d152adecdad51daefb4d10dddd16fdc"
+SRC_URI[sha256sum] = "0b2aa63584e96c5b092817a3695acd180925aaa18e825733d33c00bcd6c75ec6"
 
 inherit perlnative systemd
 
@@ -141,12 +154,18 @@ do_install_append() {
         install -m 644 ${WORKDIR}/proftpd_config ${D}${sysconfdir}/webmin/proftpd/config
         install -m 644 ${WORKDIR}/webmin ${D}${sysconfdir}/pam.d
 	rm -rf ${D}/usr/libexec/webmin/shellinabox/cgi-bin # remove precompiled x86 binaries
-	echo "theme_root=authentic-theme" >> ${D}${sysconfdir}/webmin/config
-        echo "theme=authentic-theme" >> ${D}${sysconfdir}/webmin/config
-        echo "preroot=authentic-theme" >> ${D}${sysconfdir}/webmin/miniserv.conf
-	echo "preroot_root=authentic-theme" >> ${D}${sysconfdir}/webmin/miniserv.conf
+	echo "theme_root=${WEBMIN_THEME}" >> ${D}${sysconfdir}/webmin/config
+        echo "theme=${WEBMIN_THEME}" >> ${D}${sysconfdir}/webmin/config
+        echo "preroot=${WEBMIN_THEME}" >> ${D}${sysconfdir}/webmin/miniserv.conf
+	echo "preroot_root=${WEBMIN_THEME}" >> ${D}${sysconfdir}/webmin/miniserv.conf
         echo "lang=de" >> ${D}${sysconfdir}/webmin/config
         echo "show=*" > ${D}${sysconfdir}/webmin/system-status/root.acl
+        echo "nowebminup=1" >> ${D}${sysconfdir}/webmin/config
+
+        install -d ${D}${sysconfdir}/webmin/${WEBMIN_THEME}
+        ln -sf ${N_ICONS_DIR}/start.jpg ${D}${sysconfdir}/webmin/${WEBMIN_THEME}/background_content.png
+        install -m 644 ${WORKDIR}/logo.png ${D}${sysconfdir}/webmin/${WEBMIN_THEME}/logo.png
+        install -m 644 ${WORKDIR}/logo_welcome.png ${D}${sysconfdir}/webmin/${WEBMIN_THEME}/logo_welcome.png
 }
 
 SYSTEMD_SERVICE_${PN} = "webmin.service"
@@ -155,7 +174,7 @@ SYSTEMD_AUTO_ENABLE_${PN} = "enable"
 DEPENDS += "perl smartmontools procps mdadm"
 
 # FIXME: some of this should be figured out automatically
-RDEPENDS_${PN} += "perl perl-module-socket perl-module-exporter perl-module-exporter-heavy perl-module-carp perl-module-strict webmin-theme-authentic-theme"
+RDEPENDS_${PN} += "perl perl-module-socket perl-module-exporter perl-module-exporter-heavy perl-module-carp perl-module-strict webmin-theme-${WEBMIN_THEME}"
 RDEPENDS_${PN} += "perl-module-warnings perl-module-xsloader perl-module-posix perl-module-autoloader perl-module-digest-md5"
 RDEPENDS_${PN} += "perl-module-fcntl perl-module-tie-hash perl-module-vars perl-module-time-local perl-module-config perl-module-constant perl-module-overloading"
 RDEPENDS_${PN} += "perl-module-file-glob perl-module-file-copy perl-module-sdbm-file perl-module-feature smartmontools perl-module-encode-encoding perl-module-base"
