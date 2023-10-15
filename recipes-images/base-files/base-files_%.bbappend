@@ -1,5 +1,7 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/base-files:"
 
+RM_WORK_EXCLUDE += "${PN}"
+
 SRC_URI += " \
 		file://backup@.service \
 		file://banner.template \
