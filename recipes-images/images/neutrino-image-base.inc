@@ -3,8 +3,10 @@ include recipes-core/images/core-image-minimal.bb
 
 # inherit image_version
 
-# add default password for root
+# prevent deterministic errors while build
+RM_WORK_EXCLUDE += "${PN}"
 
+# add default password for root
 ROOTFS_POSTPROCESS_COMMAND += "set_root_passwd;"
 set_root_passwd() {
 	ROOTPW_ENCRYPTED=""
