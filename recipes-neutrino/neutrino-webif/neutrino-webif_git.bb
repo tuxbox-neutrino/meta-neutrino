@@ -16,6 +16,8 @@ DEPENDS = " \
 	neutrino-mp \
 "
 
+RM_WORK_EXCLUDE += "${PN}"
+
 PROVIDES = "virtual/neutrino-webif"
 RPROVIDES_${PN} = "virtual/neutrino-webif"
 
