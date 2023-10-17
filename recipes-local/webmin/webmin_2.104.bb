@@ -14,6 +14,7 @@ WEBMIN_THEME ?= "authentic-theme"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${WEBMIN_THEME}:"
 
+# webmin
 SRC_URI = " \
 		${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
 \
@@ -38,19 +39,23 @@ SRC_URI = " \
 		file://smart_config \
 		file://webmin \
 		file://webmin.service \
-\
+"
+
+# authentic theme
+SRC_URI += " \
 		file://background_content.png  \
 		file://logo.png  \
 		file://logo_welcome.png  \
 "
 
+# only for context)
 SRC_URI += " \
 		file://disable-version-check.patch;apply=no \
 "
 
 RDEPENDS-${PN}-module += "perl"
 
-SRC_URI[sha256sum] = "0b2aa63584e96c5b092817a3695acd180925aaa18e825733d33c00bcd6c75ec6"
+SRC_URI[sha256sum] = "4cb227a72ee72247a511d17ca846c4cad0107dc62d2d237f6783914149fa13c7"
 
 inherit perlnative systemd
 
@@ -162,6 +167,12 @@ do_install_append() {
         echo "show=*" > ${D}${sysconfdir}/webmin/system-status/root.acl
         echo "nowebminup=1" >> ${D}${sysconfdir}/webmin/config
 
+        # presets for filemin
+        install -d ${D}${sysconfdir}/webmin/filemin
+	echo "config_portable_module_filemanager_records_for_server_pagination=250" >> ${D}${sysconfdir}/webmin/filemin/config
+        echo "per_page=30" >> ${D}${sysconfdir}/webmin/filemin/config
+
+        # presets for theme
         install -d ${D}${sysconfdir}/webmin/${WEBMIN_THEME}
         ln -sf ${N_ICONS_DIR}/start.jpg ${D}${sysconfdir}/webmin/${WEBMIN_THEME}/background_content.png
         install -m 644 ${WORKDIR}/logo.png ${D}${sysconfdir}/webmin/${WEBMIN_THEME}/logo.png
