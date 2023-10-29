@@ -116,11 +116,11 @@ EXTRA_OECONF = " \
     --pkg-config=pkg-config \
 "
 
-EXTRA_OECONF_append_linux-gnux32 = " --disable-asm"
+EXTRA_OECONF:append_linux-gnux32 = " --disable-asm"
 # gold crashes on x86, another solution is to --disable-asm but thats more hacky
 # ld.gold: internal error in relocate_section, at ../../gold/i386.cc:3684
 
-LDFLAGS_append_x86 = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
+LDFLAGS:append_x86 = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
 
 EXTRA_OEMAKE = "V=1"
 

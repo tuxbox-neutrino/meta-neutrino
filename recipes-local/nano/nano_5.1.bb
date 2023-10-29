@@ -24,7 +24,7 @@ do_install(){
 	install -m 755 ${WORKDIR}/build/src/nano ${D}${bindir}/
 }
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/home/root/.local/share
 }
 

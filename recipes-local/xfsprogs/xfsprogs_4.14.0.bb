@@ -45,7 +45,7 @@ export DEBUG="-DNDEBUG"
 export BUILD_VERBOSE="1"
 export tagname="CC"
 
-CFLAGS_append += "-Wno-incompatible-pointer-types"
+CFLAGS:append += "-Wno-incompatible-pointer-types"
 
 EXTRA_OEMAKE = "DIST_ROOT='${D}'"
 
@@ -58,7 +58,7 @@ do_configure_prepend () {
     oe_runmake configure
 }
 
-do_install_append() {
+do_install:append() {
         oe_runmake 'DESTDIR=${D}' install-dev
         rm ${D}${libdir}/*.la
         rmdir --ignore-fail-on-non-empty ${D}${libdir}

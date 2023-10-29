@@ -49,7 +49,7 @@ do_configure () {
     oe_runconf
 }
 
-do_configure_append() {
+do_configure:append() {
     # Configuring  test for fprint %llu ability fails if cross compiling.
     # This breaks the shown filesize for large files. Let's hack this, because we know we have it.
     sed -i "s|HAVE_LU|HAVE_LLU|" ${S}/configure
@@ -84,7 +84,7 @@ do_install () {
         -i ${D}/${bindir}/prxs
 }
 
-do_install_append () {
+do_install:append () {
     rm -rf ${D}${libexecdir}
     find ${D}${datadir}/locale/. -type d -maxdepth 1 -not -name en_US -exec rm -rf {} \;
     rm -rf ${D}${bindir}/ftpmail

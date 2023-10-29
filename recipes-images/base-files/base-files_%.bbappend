@@ -26,7 +26,7 @@ SRC_URI += " \
 		file://vconsole.conf \
 "
 
-RDEPENDS_${PN}_append += "coreutils"
+RDEPENDS_${PN}:append += "coreutils"
 
 BASEFILESISSUEINSTALL = "do_custom_baseissueinstall"
 
@@ -39,7 +39,7 @@ do_custom_baseissueinstall() {
 	cat ${D}${sysconfdir}/welcome 								> ${D}${sysconfdir}/issue.net
 }
 
-do_install_append () {
+do_install:append () {
 	install -d ${D}${localstatedir}/update ${D}${systemd_unitdir}/system/multi-user.target.wants ${D}${bindir} ${D}${sysconfdir}/systemd/system/multi-user.target.wants
 	if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
 		install -d ${D}${systemd_unitdir}/system ${D}${sysconfdir}/modules-load.d
@@ -70,10 +70,10 @@ do_install_append () {
 # 	Allthough it's possible to remove some files from SRC_URI with help of local.conf with such line:
 #	SRC_URI_remove_pn-base-files = " file1 file2 ... "
 #
-# 	... despite that without any check for existing files the do_install_append task will execute all defined install commands
+# 	... despite that without any check for existing files the do_install:append task will execute all defined install commands
 # 	so the install task will fail and the build aborts.
 # 	Problem:
-#	do_install_append() can not be override completly with appropriate adjustments inside local.conf entries and
+#	do_install:append() can not be override completly with appropriate adjustments inside local.conf entries and
 #	in the best case commands will be just append.
 # 	If you want to remove some files, add file paths to ${WORKDIR}/.remove
 #	and the follow command will delete defined files.

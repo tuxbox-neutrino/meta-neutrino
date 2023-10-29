@@ -25,7 +25,7 @@ BBCLASSEXTEND = "native"
 # you need to install the multilib development package (e.g.
 # libc6-dev-i386 on Debian/Ubuntu) and build a 32 bit host part
 # (HOST_CC="gcc -m32").
-BUILD_CC_ARCH_append = " ${@['-m32',''][d.getVar('SITEINFO_BITS') != '32']}"
+BUILD_CC_ARCH:append = " ${@['-m32',''][d.getVar('SITEINFO_BITS') != '32']}"
 
 # The lua makefiles expect the TARGET_SYS to be from uname -s
 # Values: Windows, Linux, Darwin, iOS, SunOS, PS3, GNU/kFreeBSD
@@ -79,7 +79,7 @@ do_install () {
           ${D}${libdir}/lua
 }
 
-do_install_append() {
+do_install:append() {
 		ln -sf $(basename ${D}/usr/bin/luajit-*) ${D}/usr/bin/luajit
 }
 

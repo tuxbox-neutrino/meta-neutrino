@@ -85,7 +85,7 @@ PATCHTOOL = "git"
 
 PR = "r15"
 PV = "18.9-gitr${SRCPV}"
-SRC_URI_append = "git://github.com/xbmc/xbmc.git;protocol=https;branch=Leia \
+SRC_URI:append = "git://github.com/xbmc/xbmc.git;protocol=https;branch=Leia \
            \
            file://0001-Add-support-for-musl-triplets.patch \
            file://0004-Replace-u_int64_t-with-uint64_t-from-stdint.h.patch \
@@ -109,7 +109,7 @@ SRC_URI_append = "git://github.com/xbmc/xbmc.git;protocol=https;branch=Leia \
            file://0001-kodi-adjust-path-for-mmc-mount.patch \
           "
 
-SRC_URI_append_libc-musl = " \
+SRC_URI:append_libc-musl = " \
            file://0002-Fix-file_Emu-on-musl.patch \
            file://0003-Remove-FILEWRAP.patch \
 "
@@ -148,10 +148,10 @@ PACKAGECONFIG[gold] = "-DENABLE_LDGOLD=ON,-DENABLE_LDGOLD=OFF"
 PACKAGECONFIG[lto] = "-DUSE_LTO=${@oe.utils.cpu_count()},-DUSE_LTO=OFF"
 
 LDFLAGS += "${TOOLCHAIN_OPTIONS}"
-LDFLAGS_append_mips = " -latomic"
-LDFLAGS_append_mipsel = " -latomic"
-LDFLAGS_append_mips64 = " -latomic"
-LDFLAGS_append_mips64el = " -latomic"
+LDFLAGS:append_mips = " -latomic"
+LDFLAGS:append_mipsel = " -latomic"
+LDFLAGS:append_mips64 = " -latomic"
+LDFLAGS:append_mips64el = " -latomic"
 
 KODI_ARCH = ""
 KODI_ARCH_mips = "-DWITH_ARCH=${TARGET_ARCH}"
@@ -168,7 +168,7 @@ KODI_DISABLE_INTERNAL_LIBRARIES = " \
   -DENABLE_INTERNAL_FFMPEG=OFF \
 "
 
-EXTRA_OECMAKE_append = " \
+EXTRA_OECMAKE:append = " \
     ${KODI_ARCH} \
     ${KODI_DISABLE_INTERNAL_LIBRARIES} \
     \
@@ -228,7 +228,7 @@ FILES_${PN}-dbg += "${libdir}/kodi/.debug ${libdir}/kodi/*/.debug ${libdir}/kodi
 
 # kodi uses some kind of dlopen() method for libcec so we need to add it manually
 # OpenGL builds need glxinfo, that's in mesa-demos
-RRECOMMENDS_${PN}_append = " libcec \
+RRECOMMENDS_${PN}:append = " libcec \
                              libcurl \
                              libnfs \
                              nss \
@@ -267,7 +267,7 @@ RRECOMMENDS_${PN}_append = " libcec \
                              alsa-plugins \
                            "
 
-RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-ibm850 \
+RRECOMMENDS_${PN}:append_libc-glibc = " glibc-charmap-ibm850 \
                                         glibc-gconv-ibm850 \
                                         glibc-charmap-ibm437 \
                                         glibc-gconv-ibm437 \

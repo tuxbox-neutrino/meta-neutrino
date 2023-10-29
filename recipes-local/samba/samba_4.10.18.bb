@@ -29,7 +29,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0001-Add-options-to-configure-the-use-of-libbsd.patch \
            file://0001-nsswitch-nsstest.c-Avoid-nss-function-conflicts-with.patch \
            "
-SRC_URI_append_libc-musl = " \
+SRC_URI:append_libc-musl = " \
            file://samba-pam.patch \
            file://samba-4.3.9-remove-getpwent_r.patch \
            file://cmocka-uintptr_t.patch \
@@ -50,9 +50,9 @@ DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libld
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "pam"
 
-DEPENDS_append_libc-musl = " libtirpc"
-CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
-LDFLAGS_append_libc-musl = " -ltirpc"
+DEPENDS:append_libc-musl = " libtirpc"
+CFLAGS:append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
+LDFLAGS:append_libc-musl = " -ltirpc"
 
 INITSCRIPT_NAME = "samba"
 INITSCRIPT_PARAMS = "start 20 3 5 . stop 20 0 1 6 ."
@@ -138,7 +138,7 @@ EXTRA_OECONF += "--enable-fhs \
 
 LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
 
-do_install_append() {
+do_install:append() {
     for section in 1 5 7; do
         install -d ${D}${mandir}/man$section
         install -m 0644 ctdb/doc/*.$section ${D}${mandir}/man$section
@@ -308,7 +308,7 @@ FILES_smbclient = "${bindir}/cifsdd \
                    ${bindir}/smbtree \
                    ${libdir}/samba/smbspool_krb5_wrapper"
 
-RDEPENDS_${PN}-pidl_append = " perl"
+RDEPENDS_${PN}-pidl:append = " perl"
 FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
 
 RDEPENDS_${PN}-client = "\

@@ -18,7 +18,7 @@ S = "${WORKDIR}/git"
 
 inherit cmake
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/${LUA_VER}/lanes ${D}/usr/lib/lua ${D}/usr/share/lua/${LUA_VER}
 	rm -r ${D}/usr/share/lanes
 	mv ${D}/usr/share/lua/cmod/core.so ${D}/${LUA_VER}/lanes

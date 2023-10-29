@@ -1,3 +1,3 @@
-DEPENDS_append += "virtual/libiconv"
+DEPENDS:append += "virtual/libiconv"
 
 

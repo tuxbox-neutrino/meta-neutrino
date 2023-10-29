@@ -29,7 +29,7 @@ do_install() {
     install -m 644 ${WORKDIR}/bootlogo.service ${D}${systemd_unitdir}/system
 }
 
-FILES_${PN}_append += "/usr \
+FILES_${PN}:append += "/usr \
 					   /lib \
 "
 

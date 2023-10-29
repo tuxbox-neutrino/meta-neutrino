@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b"
 
 SRC_URI[sha256sum] = "7979331bfcba207414f5e1263b5a0f8f521d0f457318836a7355531ed1a4c7d8"
 
-SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch "
+SRC_URI:append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch "
 
 inherit update-alternatives pypi setuptools3
 

@@ -22,7 +22,7 @@ EXTRA_OECMAKE = " \
         "
 
 # Make zip package for manual installation
-do_install_append() {
+do_install:append() {
 	install -d ${D}${datadir}/kodi/addons/packages/
 	( cd ${D}${datadir}/kodi/addons
 	  zip -r ${D}${datadir}/kodi/addons/packages/${KODIADDONNAME}-${PV}.zip ${KODIADDONNAME} -x '*.debug*' )

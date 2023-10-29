@@ -123,8 +123,8 @@ PACKAGECONFIG[webrtc] = "--enable-webrtc-aec,--disable-webrtc-aec,webrtc-audio-p
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 PACKAGECONFIG[manpages] = "--enable-manpages, --disable-manpages, "
 
-EXTRA_OECONF_append_arm = "${@bb.utils.contains("TUNE_FEATURES", "neon", "", " --enable-neon-opt=no", d)}"
-EXTRA_OECONF_append_armeb = "${@bb.utils.contains("TUNE_FEATURES", "neon", "", " --enable-neon-opt=no", d)}"
+EXTRA_OECONF:append_arm = "${@bb.utils.contains("TUNE_FEATURES", "neon", "", " --enable-neon-opt=no", d)}"
+EXTRA_OECONF:append_armeb = "${@bb.utils.contains("TUNE_FEATURES", "neon", "", " --enable-neon-opt=no", d)}"
 
 
 export TARGET_PFPU = "${TARGET_FPU}"
@@ -141,13 +141,13 @@ set_cfg_value () {
 	fi
 }
 
-do_compile_append () {
+do_compile:append () {
 	if ${@bb.utils.contains('PACKAGECONFIG', 'autospawn-for-root', 'true', 'false', d)}; then
 		set_cfg_value src/client.conf allow-autospawn-for-root yes
 	fi
 }
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}${sysconfdir}/default/volatiles
 	install -m 0644 ${WORKDIR}/volatiles.04_pulse  ${D}${sysconfdir}/default/volatiles/04_pulse
 }

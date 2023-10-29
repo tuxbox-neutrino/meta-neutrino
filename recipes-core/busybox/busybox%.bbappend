@@ -7,7 +7,7 @@ SRC_URI[tarball.sha256sum] = "9d57c4bd33974140fd4111260468af22856f12f5b5ef7c70c8
 
 SYSTEMD_SERVICE_${PN} = "telnet.service"
 
-SRC_URI_append += "file://telnet.service \
+SRC_URI:append += "file://telnet.service \
 		   file://telnetd.cfg \
 		   file://dos2unix.cfg \
 		   file://ether-wake.cfg \
@@ -23,7 +23,7 @@ SRC_URI_append += "file://telnet.service \
 
 BUSYBOX_SPLIT_SUID = "0"
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}${systemd_unitdir}/system/multi-user.target.wants/
 	install -m644 ${WORKDIR}/profile ${D}${sysconfdir}
 	install -m644 ${WORKDIR}/telnet.service ${D}${systemd_unitdir}/system/

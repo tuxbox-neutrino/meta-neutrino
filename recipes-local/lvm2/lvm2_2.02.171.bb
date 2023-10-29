@@ -9,7 +9,7 @@ DEPENDS += "autoconf-archive-native"
 
 CACHED_CONFIGUREVARS += "MODPROBE_CMD=${base_sbindir}/modprobe"
 
-do_install_append() {
+do_install:append() {
     # Install machine specific configuration file
     install -d ${D}${sysconfdir}/lvm
     install -m 0644 ${WORKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
@@ -44,7 +44,7 @@ FILES_${PN}-scripts = " \
 # Specified explicitly for the udev rules, just in case that it does not get picked
 # up automatically:
 FILES_${PN}-udevrules = "${nonarch_base_libdir}/udev/rules.d"
-RDEPENDS_${PN}_append_class-target = " libdevmapper"
+RDEPENDS_${PN}:append_class-target = " libdevmapper"
 
 RDEPENDS_${PN}-scripts = "${PN} (= ${EXTENDPKGV}) bash"
 RRECOMMENDS_${PN}_class-target = "${PN}-scripts (= ${EXTENDPKGV})"

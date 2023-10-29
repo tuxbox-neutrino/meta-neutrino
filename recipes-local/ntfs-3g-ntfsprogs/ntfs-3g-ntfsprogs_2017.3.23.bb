@@ -34,7 +34,7 @@ RRECOMMENDS_ntfs-3g = "util-linux-mount"
 FILES_ntfsprogs = "${base_sbindir}/* ${bindir}/* ${sbindir}/*"
 FILES_libntfs-3g = "${libdir}/*${SOLIBS}"
 
-do_install_append() {
+do_install:append() {
     # Standard mount will execute the program /sbin/mount.TYPE
     # when called. Add the symbolic to let mount could find ntfs.
     ln -sf mount.ntfs-3g ${D}/${base_sbindir}/mount.ntfs

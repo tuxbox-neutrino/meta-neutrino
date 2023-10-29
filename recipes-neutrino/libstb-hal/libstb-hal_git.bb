@@ -34,7 +34,7 @@ SRCREV = "${AUTOREV}"
 # libstb-hal-bin package for testing binaries etc.
 PACKAGES += "${PN}-bin"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 	file://blank_480.mpg \
 	file://blank_576.mpg \
 	file://timer-wakeup.init \
@@ -61,7 +61,7 @@ do_configure_prepend() {
 	export AUTOMAKE="automake --foreign --add-missing"
 }
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/${datadir}
 	install -d ${D}/${includedir}/libstb-hal
 	install -d ${D}/${includedir}/common

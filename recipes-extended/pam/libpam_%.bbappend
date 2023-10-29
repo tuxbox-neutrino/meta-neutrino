@@ -1,4 +1,4 @@
-do_install_append() {
+do_install:append() {
 	echo "QTWEBENGINE_DISABLE_SANDBOX=1" >> ${D}${sysconfdir}/environment
 	echo "QT_QPA_PLATFORM=eglfs" >> ${D}${sysconfdir}/environment
 	echo "QT_SCALE_FACTOR=1" >> ${D}${sysconfdir}/environment

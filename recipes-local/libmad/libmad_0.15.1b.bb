@@ -24,8 +24,8 @@ inherit autotools-brokensep pkgconfig
 
 EXTRA_OECONF = "-enable-speed --enable-shared"
 # The ASO's don't take any account of thumb...
-EXTRA_OECONF_append_thumb = " --disable-aso --enable-fpm=default"
-EXTRA_OECONF_append_arm = " --enable-fpm=arm"
+EXTRA_OECONF:append_thumb = " --disable-aso --enable-fpm=default"
+EXTRA_OECONF:append_arm = " --enable-fpm=arm"
 
 do_configure_prepend () {
 #	damn picky automake...

@@ -19,7 +19,7 @@ inherit autotools update-rc.d
 INITSCRIPT_NAME = "openvpn"
 INITSCRIPT_PARAMS = "start 60 S . stop 20 0 1 2 3 4 6 ."
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/${sysconfdir}/init.d
 	install -d ${D}/${sysconfdir}/openvpn
 	install -m 755 ${WORKDIR}/openvpn ${D}/${sysconfdir}/init.d

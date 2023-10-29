@@ -37,7 +37,7 @@ do_compile_prepend() {
 	          ${B}/CMakeFiles/kodiplatform.dir/link.txt
 }
 
-do_install_append() {
+do_install:append() {
 	sed -i -e '/CXX/d' \
                -e '/CC/d' \
                -e 's:${STAGING_LIBDIR}:${libdir}:g' \

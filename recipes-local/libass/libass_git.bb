@@ -21,7 +21,7 @@ EXTRA_OECONF = " \
 "
 
 # Disable compiling with ASM for x86 to avoid textrel
-EXTRA_OECONF_append_x86 = " --disable-asm"
+EXTRA_OECONF:append_x86 = " --disable-asm"
 
 PACKAGES =+ "${PN}-tests"
 

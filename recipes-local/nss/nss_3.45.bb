@@ -199,7 +199,7 @@ do_install() {
 
 do_install[vardepsexclude] += "SITEINFO_BITS"
 
-do_install_append() {
+do_install:append() {
     # Create empty .chk files for the NSS libraries at build time. They could
     # be regenerated at target's boot time.
     for file in libsoftokn3.chk libfreebl3.chk libnssdbm3.chk; do
@@ -216,7 +216,7 @@ do_install_append() {
     sed -i s:OEINCDIR:${includedir}/nss3:g ${D}${libdir}/pkgconfig/nss.pc
 }
 
-do_install_append_class-target() {
+do_install:append_class-target() {
     # It used to call certutil to create a blank certificate with empty password at
     # build time, but the checksum of key4.db changes every time when certutil is called.
     # It causes non-determinism issue, so provide databases with a blank certificate

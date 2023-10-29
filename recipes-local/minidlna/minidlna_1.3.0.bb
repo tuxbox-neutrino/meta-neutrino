@@ -32,7 +32,7 @@ do_configure_prepend() {
 	sed -i "s|Coolstream|${MACHINE}|" ${WORKDIR}/minidlna.conf
 }
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}${sysconfdir} ${D}${systemd_unitdir}/system ${D}${sysconfdir}/systemd/system/multi-user.target.wants/
 	install -m 644 ${WORKDIR}/minidlna.conf ${D}${sysconfdir}/minidlna.conf
 	install -m 644 ${WORKDIR}/minidlna.service ${D}${systemd_unitdir}/system/minidlna.service

@@ -19,7 +19,7 @@ do_install () {
 	install -m 644 ${S}/myspass.png ${D}/usr/share/tuxbox/plugins
 }
 
-do_install_append () {
+do_install:append () {
 echo "integration=2" >> ${D}/usr/share/tuxbox/plugins/myspass.cfg
 }
 

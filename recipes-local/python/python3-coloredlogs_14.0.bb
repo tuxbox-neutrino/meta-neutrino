@@ -13,7 +13,7 @@ do_compile_prepend() {
     sed -ie "s/find_pth_directory(),/'',/g" ${S}/setup.py
 }
 
-do_install_append() {
+do_install:append() {
     rm -rf ${D}${datadir}
 }
 

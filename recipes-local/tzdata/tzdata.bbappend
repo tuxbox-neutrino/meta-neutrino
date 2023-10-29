@@ -11,13 +11,13 @@ CONFFILES_${PN} += " \
 	${sysconfdir}/timezone \
 	"
 
-do_install_append () {
+do_install:append () {
 	# rather create in postinst than package it...
 	rm ${D}${sysconfdir}/localtime
 }
 
 # this depends on the implementation of the original .bb file...
-pkg_postinst_${PN}_append () {
+pkg_postinst_${PN}:append () {
 	if [ ! -e "${etc_lt}" ]; then
 		ln -s "${datadir}/zoneinfo/${tz}" "${etc_lt}"
 	fi

@@ -19,13 +19,13 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep systemd
 
-do_install_append () {
+do_install:append () {
 	install -d ${D}${systemd_unitdir}/system/timers.target.wants
 	install -m 644 ${WORKDIR}/etckeeper.conf ${D}/etc/etckeeper
 	ln -s /lib/systemd/system/etckeeper.timer ${D}${systemd_unitdir}/system/timers.target.wants/etckeeper.timer
 }
 
-FILES_${PN}_append += "/lib/systemd \
+FILES_${PN}:append += "/lib/systemd \
 		       /usr/share/bash-completion \
 		       /usr/lib/ \
 "

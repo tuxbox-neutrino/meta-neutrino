@@ -14,7 +14,7 @@ RDEPENDS_${PN} += "\
     python3-appdirs \
 "
 
-do_install_append() {
+do_install:append() {
     # Stop this from being installed
     rm -rf ${D}/usr/share
 }

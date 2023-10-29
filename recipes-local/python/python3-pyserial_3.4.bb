@@ -7,7 +7,7 @@ SRC_URI[sha256sum] = "6e2d401fdee0eab996cf734e67773a0143b932772ca8b42451440cfed9
 
 inherit pypi setuptools3 ptest
 
-do_install_append() {
+do_install:append() {
     rm -f ${D}${bindir}/miniterm.py
     rmdir ${D}${bindir}
 }

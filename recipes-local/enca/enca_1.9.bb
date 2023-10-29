@@ -24,7 +24,7 @@ do_configure_prepend() {
     sed -i -e '/ye_FUNC_SCANF_MODIF_SIZE_T/d' ${S}/configure.ac
 }
 
-do_configure_append() {
+do_configure:append() {
     sed -i s:-I/usr/include::g ${B}/Makefile
     sed -i s:-I/usr/include::g ${B}/*/Makefile
 }

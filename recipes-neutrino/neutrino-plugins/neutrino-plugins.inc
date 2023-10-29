@@ -93,7 +93,7 @@ do_compile () {
 	oe_runmake CFLAGS="${N_CFLAGS}" CXXFLAGS="${N_CXXFLAGS}" LDFLAGS="${N_LDFLAGS}"
 }
 
-do_install_append() {
+do_install:append() {
 	rm -rf ${D}/usr/share/tuxbox/neutrino/plugins/*.la
 	rm -rf ${D}/usr/share/tuxbox/neutrino/luaplugins
 }

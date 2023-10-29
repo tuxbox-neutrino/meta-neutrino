@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/qtwebengine:"
 
-SRC_URI_append = "file://0001-qtwebengine-set-user-agent.patch \
+SRC_URI:append = "file://0001-qtwebengine-set-user-agent.patch \
 		  file://chromium/0004-enable-openmax.patch;patchdir=src/3rdparty \
 		  file://chromium/0005-mediahost.patch;patchdir=src/3rdparty \
 "
@@ -12,8 +12,8 @@ SRC_URI_remove = "file://chromium/0021-chromium-Fix-build-on-32bit-arches-with-6
 
 inherit ccache
 
-PACKAGECONFIG_append += "libwebp libvpx opus ffmpeg proprietary-codecs pepper-plugins webrtc"
+PACKAGECONFIG:append += "libwebp libvpx opus ffmpeg proprietary-codecs pepper-plugins webrtc"
 
-DEPENDS_append = "libnss-mdns"
+DEPENDS:append = "libnss-mdns"
  
  

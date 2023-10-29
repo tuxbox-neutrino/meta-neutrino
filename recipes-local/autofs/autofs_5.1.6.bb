@@ -69,7 +69,7 @@ do_configure_prepend () {
     cp ${STAGING_DATADIR_NATIVE}/aclocal/pkg.m4 .
 }
 
-do_install_append () {
+do_install:append () {
     # samples have been removed from SUBDIRS from 5.1.5, need to install separately
     oe_runmake 'DESTDIR=${D}' install_samples
 

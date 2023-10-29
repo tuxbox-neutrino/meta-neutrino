@@ -25,7 +25,7 @@ EXTRA_OECONF = " \
 SRCREV = "${AUTOREV}"
 S = "${WORKDIR}/${PN}-${PV}"
 
-do_install_append() {
+do_install:append() {
 	# pcsc-spy needs python2 .... remove it
 	rm -rf ${D}${bindir}
 	rm -rf ${D}${libdir}/libpcscspy.so

@@ -18,7 +18,7 @@ INITSCRIPT_NAME = "tor"
 
 EXTRA_OECONF += "--disable-tool-name-check"
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}${sysconfdir}/init.d ${D}${sysconfdir}/tor
 	install ${WORKDIR}/tor.init ${D}${sysconfdir}/init.d/tor
 	install ${WORKDIR}/tsocks.conf ${D}${sysconfdir}/tor/tor-tsocks.conf

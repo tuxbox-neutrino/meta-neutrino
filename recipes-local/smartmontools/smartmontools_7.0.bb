@@ -30,7 +30,7 @@ inherit autotools update-rc.d systemd
 SYSTEMD_SERVICE_${PN} = "smartd.service"
 SYSTEMD_AUTO_ENABLE = "disable"
 
-do_install_append () {
+do_install:append () {
     #install the init.d/smartd
     install -d ${D}${sysconfdir}/init.d
     install -p -m 0755 ${WORKDIR}/initd.smartd ${D}${sysconfdir}/init.d/smartd

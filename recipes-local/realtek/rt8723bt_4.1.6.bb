@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://Makefile;md5=137c892e644370bd9573a3091781d8fa"
 inherit module
 
 
-MACHINE_KERNEL_PR_append = ".0"
+MACHINE_KERNEL_PR:append = ".0"
 
 SRC_URI = "http://source.mynonpublic.com/ini/8723AE_8723AU_Linux_BT_20140623.tar.gz"
 

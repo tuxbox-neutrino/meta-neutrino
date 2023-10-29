@@ -34,7 +34,7 @@ EXTRA_OECONF = " \
     --disable-alsatest \
 "
 
-do_install_append() {
+do_install:append() {
 	rm -r ${D}${datadir}/icons
 }
 

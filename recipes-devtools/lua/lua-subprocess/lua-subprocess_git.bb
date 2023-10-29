@@ -22,7 +22,7 @@ inherit autotools-brokensep
 
 TARGET_CC_ARCH += "${LDFLAGS}" 
 
-CFLAGS_append += "-I${STAGING_INCDIR}"
+CFLAGS:append += "-I${STAGING_INCDIR}"
 
 do_configure_prepend() {
 	cp -rf ${WORKDIR}/Makefile ${S}/Makefile

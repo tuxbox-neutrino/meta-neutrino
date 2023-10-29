@@ -29,7 +29,7 @@ PACKAGECONFIG[zlib] = "--with-zlib,--without-zlib,zlib"
 
 EXTRA_OECONF += "--enable-shared"
 
-do_compile_append() {
+do_compile:append() {
 	oe_runmake -C test
 }
 

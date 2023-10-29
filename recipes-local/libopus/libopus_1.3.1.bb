@@ -29,9 +29,9 @@ EXTRA_OECONF = " \
 "
 
 # ne10 is available only for armv7a, armv7ve and aarch64
-DEPENDS_append_aarch64 = " ne10"
-DEPENDS_append_armv7a = " ne10"
-DEPENDS_append_armv7ve = " ne10"
+DEPENDS:append_aarch64 = " ne10"
+DEPENDS:append_armv7a = " ne10"
+DEPENDS:append_armv7ve = " ne10"
 
 python () {
     if d.getVar('TARGET_FPU') in [ 'soft' ]:

@@ -55,7 +55,7 @@ do_compile_prepend () {
     cd ..
 }
 
-do_install_append() {
+do_install:append() {
     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
         install -d ${D}${systemd_unitdir}/system
         install -m 0644 ${WORKDIR}/saslauthd.service ${D}${systemd_unitdir}/system

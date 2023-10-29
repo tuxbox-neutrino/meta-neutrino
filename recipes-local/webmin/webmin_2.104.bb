@@ -151,7 +151,7 @@ do_install() {
     sed -i -e 's#${D}##g' ${D}${sysconfdir}/webmin/start
 }
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}${sysconfdir}/pam.d
 	install -m 644 ${WORKDIR}/samba_config ${D}${sysconfdir}/webmin/samba/config
         install -m 644 ${WORKDIR}/exports_config ${D}${sysconfdir}/webmin/exports/config

@@ -144,7 +144,7 @@ PACKAGES += "${PN}-overlay-proxycache"
 # Append URANDOM_DEVICE='/dev/urandom' to CPPFLAGS:
 # This allows tls to obtain random bits from /dev/urandom, by default
 # it was disabled for cross-compiling.
-CPPFLAGS_append = " -D_GNU_SOURCE -DURANDOM_DEVICE=\'/dev/urandom\'"
+CPPFLAGS:append = " -D_GNU_SOURCE -DURANDOM_DEVICE=\'/dev/urandom\'"
 
 do_configure() {
     cp ${STAGING_DATADIR_NATIVE}/libtool/build-aux/ltmain.sh ${S}/build
@@ -173,7 +173,7 @@ FILES_${PN}-bin = "${bindir}"
 FILES_${PN}-dev = "${includedir} ${libdir}/lib*.so ${libdir}/*.la ${libdir}/*.a ${libexecdir}/openldap/*.a ${libexecdir}/openldap/*.la ${libexecdir}/openldap/*.so"
 FILES_${PN}-dbg += "${libexecdir}/openldap/.debug"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${sysconfdir}/init.d
     cat ${WORKDIR}/initscript > ${D}${sysconfdir}/init.d/openldap
     chmod 755 ${D}${sysconfdir}/init.d/openldap

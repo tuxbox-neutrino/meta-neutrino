@@ -53,7 +53,7 @@ do_configure_prepend() {
     export MOUNT_FUSE_PATH="${base_sbindir}"
 }
 
-do_install_append() {
+do_install:append() {
     rm -rf ${D}/dev
 
     # systemd class remove the sysv_initddir only if systemd_system_unitdir
@@ -69,7 +69,7 @@ do_install_append() {
     fi
 }
 
-do_install_append_class-nativesdk() {
+do_install:append_class-nativesdk() {
     install -d ${D}${sysconfdir}
     mv ${D}/etc/* ${D}${sysconfdir}/
     rmdir ${D}/etc

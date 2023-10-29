@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/libimobiledevice/libplist;protocol=https"
 
 S = "${WORKDIR}/git"
 
-do_install_append () {
+do_install:append () {
     if [ -e ${D}${libdir}/python*/site-packages/plist/_plist.so ]; then
         chrpath -d ${D}${libdir}/python*/site-packages/plist/_plist.so
     fi

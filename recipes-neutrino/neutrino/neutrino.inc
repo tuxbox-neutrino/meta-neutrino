@@ -171,7 +171,7 @@ do_install_prepend () {
 	touch ${D}/usr/bin/enigma2
 }
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}${sysconfdir}/neutrino/bin ${D}${sysconfdir}/neutrino/plugins/luaplugins
 	install -d ${D}${sysconfdir}/neutrino/plugins/webradio ${D}${sysconfdir}/neutrino/plugins/webtv
 

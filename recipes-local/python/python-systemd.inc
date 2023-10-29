@@ -17,4 +17,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/python-systemd:"
 
 SRC_URI += "file://endian.patch"
 
-SRC_URI_append_libc-musl = " file://0001-Provide-implementation-of-strndupa-for-musl.patch"
+SRC_URI:append_libc-musl = " file://0001-Provide-implementation-of-strndupa-for-musl.patch"

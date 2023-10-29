@@ -11,7 +11,7 @@ REQUIRED_DISTRO_FEATURES = ""
 SYSTEMD_SERVICE_${PN} = "weston.service"		
 SYSTEMD_AUTO_ENABLE = "disable"
 
-do_install_append() {
+do_install:append() {
 	rm -f ${D}${systemd_unitdir}/system/weston@.service
 	rm -f ${D}${systemd_unitdir}/system/weston@.socket
 	install -d ${D}${datadir}/tuxbox/neutrino/plugins

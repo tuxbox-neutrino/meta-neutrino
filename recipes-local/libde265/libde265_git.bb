@@ -12,5 +12,5 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig
 
-CXXFLAGS_append += "-fPIC"
+CXXFLAGS:append += "-fPIC"
 

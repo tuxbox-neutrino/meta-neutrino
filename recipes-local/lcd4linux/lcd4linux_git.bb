@@ -40,14 +40,14 @@ EXTRE_OECONF += "\
     --without-x \
 "
 
-LDFLAGS_append += "-lcurses"
+LDFLAGS:append += "-lcurses"
 
 inherit autotools systemd gettext pkgconfig
 
 SYSTEMD_SERVICE_${PN} = "lcd4linux.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${systemd_unitdir}/system
     install -m 0755 ${WORKDIR}/lcd4linux.service ${D}${systemd_unitdir}/system
     rm -rf ${D}${sysconfdir}

@@ -239,7 +239,7 @@ PLUGIN_LUA_INSTALL = "	\
 	zdfhbbtv \
 "
 
-PLUGIN_INSTALL_append= " \
+PLUGIN_INSTALL:append= " \
 	${PLUGIN_LUA_INSTALL} \
 "
 

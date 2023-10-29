@@ -22,6 +22,6 @@ FILES_${PN}-doc += "${datadir}/devhelp"
 BBCLASSEXTEND = "native"
 SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
 
-do_install_append() {
+do_install:append() {
 	cp -rf ${B}/sigc++config.h ${D}/usr/include/sigc++-2.0/
 }

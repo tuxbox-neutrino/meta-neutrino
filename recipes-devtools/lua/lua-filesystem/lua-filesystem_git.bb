@@ -21,7 +21,7 @@ inherit autotools-brokensep pkgconfig
 
 TARGET_CC_ARCH += "${LDFLAGS}" 
 
-CFLAGS_append += "-I${STAGING_INCDIR}"
+CFLAGS:append += "-I${STAGING_INCDIR}"
 
 do_install () {
 	install -d ${D}${libdir}/lua/${LUA_VER}

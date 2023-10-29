@@ -28,7 +28,7 @@ inherit autotools-brokensep native gettext
 
 S = "${WORKDIR}/git/tools/depends/native/TexturePacker/src"
 
-#OECMAKE_CXX_FLAGS_append = " -DTARGET_POSIX -DTARGET_LINUX -D_LINUX -std=gnu++11 -I${WORKDIR}/git/xbmc/linux"
+#OECMAKE_CXX_FLAGS:append = " -DTARGET_POSIX -DTARGET_LINUX -D_LINUX -std=gnu++11 -I${WORKDIR}/git/xbmc/linux"
 
 do_configure_prepend() {
     sed -i '/STATIC_FLAG/d' ${S}/Makefile.am

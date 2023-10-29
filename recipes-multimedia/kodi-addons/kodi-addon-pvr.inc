@@ -53,7 +53,7 @@ do_compile_prepend() {
 
 
 # Make zip package for manual installation
-do_install_append() {
+do_install:append() {
 	install -d ${D}${datadir}/kodi/addons/packages/
 	( cd ${D}${datadir}/kodi/addons
 	  zip -r ${D}${datadir}/kodi/addons/packages/pvr.${KODIADDONPLUGIN}-${PV}.zip pvr.${KODIADDONPLUGIN} -x '*.debug*' )

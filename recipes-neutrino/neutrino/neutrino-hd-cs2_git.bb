@@ -29,10 +29,10 @@ SRC_URI = "git://github.com/tuxbox-neutrino/gui-neutrino.git;branch=master;proto
 
 include neutrino.inc
 
-EXTRA_OECONF_append += "--with-boxtype=coolstream \
+EXTRA_OECONF:append += "--with-boxtype=coolstream \
 						--with-boxmodel=hd2 \
 "
 
-N_CFLAGS_append += "-I${STAGING_INCDIR}/sigc++-2.0"
+N_CFLAGS:append += "-I${STAGING_INCDIR}/sigc++-2.0"
 
-N_CPPFLAGS_append += "-D_GLIBCXX_USE_CXX11_ABI=0"
+N_CPPFLAGS:append += "-D_GLIBCXX_USE_CXX11_ABI=0"

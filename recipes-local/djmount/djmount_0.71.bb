@@ -47,7 +47,7 @@ do_compile () {
 	oe_runmake LDFLAGS="${LDFLAGS} -Wl,--copy-dt-needed-entries"
 }
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/etc/init.d
 	install -m 0755 ${WORKDIR}/init ${D}/etc/init.d/djmount
 }

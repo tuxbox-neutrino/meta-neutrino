@@ -41,7 +41,7 @@ SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '', '${NOPAM_SRC}', d
 inherit update-rc.d useradd systemd
 
 CONFFILES_${PN} = "${sysconfdir}/vsftpd.conf"
-LDFLAGS_append =" -lcrypt -lcap"
+LDFLAGS:append =" -lcrypt -lcap"
 EXTRA_OEMAKE = "-e MAKEFLAGS="
 
 do_configure() {

@@ -16,7 +16,7 @@ SRC_URI = "http://source.mynonpublic.com/rtl8822bu-driver-1.0.0.9-20180511a.zip 
     file://add-linux-5.2-support.patch \
 "
 
-SRC_URI_append_sh4 = " file://fix_sh4_build.patch"
+SRC_URI:append_sh4 = " file://fix_sh4_build.patch"
 
 EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR}"
 

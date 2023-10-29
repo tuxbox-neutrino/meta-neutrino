@@ -75,15 +75,15 @@ do_install() {
 	find ${D}${includedir} -name ..install.cmd | xargs rm -f
 }
 
-do_install_append_aarch64 () {
+do_install:append_aarch64 () {
         do_install_armmultilib
 }
 
-do_install_append_arm () {
+do_install:append_arm () {
 	do_install_armmultilib
 }
 
-do_install_append_armeb () {
+do_install:append_armeb () {
 	do_install_armmultilib
 }
 

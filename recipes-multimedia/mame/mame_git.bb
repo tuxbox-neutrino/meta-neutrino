@@ -34,9 +34,9 @@ DEPENDS = " \
 
 # avoid stip fail for size of executable >> 4GB - stolen from chromium
 DEBUG_FLAGS_remove_arm = "-g"
-DEBUG_FLAGS_append_arm = "-g1"
+DEBUG_FLAGS:append_arm = "-g1"
 DEBUG_FLAGS_remove_aarch64 = "-g"
-DEBUG_FLAGS_append_aarch64 = "-g1"
+DEBUG_FLAGS:append_aarch64 = "-g1"
 
 PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
 
@@ -76,7 +76,7 @@ EXTRA_OEMAKE = " \
     PYTHON_EXECUTABLE=python3 \
 "
 
-do_configure_append() {
+do_configure:append() {
     # seems there is some race. Build complains
     # | Assembler messages:
     # | Fatal error: can't create obj/Release/3rdparty/lzma/C/7zAlloc.o: No such file or directory

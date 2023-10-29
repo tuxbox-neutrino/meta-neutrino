@@ -16,7 +16,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git;protocol=http \
            "
 
 DEPENDS += "kmod"
-DEPENDS_append_libc-musl = " fts"
+DEPENDS:append_libc-musl = " fts"
 RDEPENDS_${PN} += "binutils"
 inherit bash-completion pkgconfig
 
@@ -39,7 +39,7 @@ PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/
 
 EXTRA_OEMAKE += 'libdir=${prefix}/lib LDLIBS="${LDLIBS}"'
 
-LDLIBS_append_libc-musl = " -lfts"
+LDLIBS:append_libc-musl = " -lfts"
 
 do_configure() {
     ./configure ${EXTRA_OECONF}

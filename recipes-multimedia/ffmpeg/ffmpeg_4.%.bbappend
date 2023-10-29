@@ -1,8 +1,8 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/ffmpeg:"
 
-DEPENDS_append += "libass libxml2 freetype rtmpdump"
+DEPENDS:append += "libass libxml2 freetype rtmpdump"
 
-SRC_URI_append =  " \
+SRC_URI:append =  " \
 	file://4_02_fix_mpegts.patch \
 	file://4_03_allow_to_choose_rtmp_impl_at_runtime.patch \
 	file://4_04_hls_replace_key_uri.patch \
@@ -26,7 +26,7 @@ PACKAGECONFIG[webp] = "--enable-libwebp,--disable-libwebp,libwebp"
 PACKAGECONFIG[libv4l2] = "--enable-libv4l2,--disable-libv4l2,v4l-utils"
 PACKAGECONFIG[pulseaudio] = "--enable-libpulse,--disable-libpulse,pulseaudio"
 
-PACKAGECONFIG_append = " libass libbluray libfreetype librtmp libvorbis \
+PACKAGECONFIG:append = " libass libbluray libfreetype librtmp libvorbis \
                         mp3lame openssl pulseaudio vpx webp wavpack x265 libv4l2"
 
 MIPSFPU = "${@bb.utils.contains('TARGET_FPU', 'soft', '--disable-mipsfpu', '--enable-mipsfpu', d)}"

@@ -43,6 +43,6 @@ FILES_fuse3-utils = "${bindir} ${base_sbindir}"
 DEBIAN_NOAUTONAME_fuse3-utils = "1"
 DEBIAN_NOAUTONAME_${PN}-dbg = "1"
 
-do_install_append() {
+do_install:append() {
     rm -rf ${D}${base_prefix}/dev
 }

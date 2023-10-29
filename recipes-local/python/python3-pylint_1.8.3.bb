@@ -10,7 +10,7 @@ inherit pypi setuptools3 python3-dir
 
 DEPENDS += "${PYTHON_PN}-pytest-runner-native"
 
-do_install_append(){
+do_install:append(){
     rm ${D}${bindir}/pylint
     cat >> ${D}${bindir}/pylint <<EOF
 #!/usr/bin/env ${PYTHON_PN}

@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 DEPENDS += "${PYTHON_PN}-protobuf"
 
 SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch"
-SRC_URI_append_class-target = " file://ppc-boringssl-support.patch \
+SRC_URI:append_class-target = " file://ppc-boringssl-support.patch \
                                 file://riscv64_support.patch \
                                 file://0001-Fix-build-on-riscv32.patch \
 "

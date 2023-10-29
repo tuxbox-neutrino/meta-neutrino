@@ -39,7 +39,7 @@ EXTRA_OECONF += "--disable-rpath \
                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
                 "
 
-do_install_append() {
+do_install:append() {
      # add this link for cross check python module existence. eg: on x86-64 host, check python module
      # under recipe-sysroot which is mips64.
      cd ${D}${PYTHON_SITEPACKAGES_DIR}; ln -s tdb.*.so tdb.so

@@ -22,7 +22,7 @@ inherit autotools pkgconfig
 PACKAGES += "${BPN}-ckport"
 PACKAGES_DYNAMIC += "^${BPN}-plugin-.*"
 
-do_install_append () {
+do_install:append () {
     find "${D}" -name '*.la' -exec rm -f {} +
 }
 

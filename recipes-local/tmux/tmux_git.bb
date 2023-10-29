@@ -19,7 +19,7 @@ S = "${WORKDIR}/git"
 
 inherit autotools-brokensep pkgconfig
 
-do_install_append () {
+do_install:append () {
 	install -d ${D}/${bindir} ${D}${sysconfdir}/
 	install -m 755 ${WORKDIR}/tmux.sh ${D}/${bindir}/
 }

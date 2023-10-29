@@ -21,7 +21,7 @@ SRC_URI += "file://supervisord.conf \
 	"
 SYSTEMD_SERVICE_${PN} = "supervisor.service"
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}${sysconfdir}/supervisor
 	install -d ${D}${systemd_system_unitdir}
 

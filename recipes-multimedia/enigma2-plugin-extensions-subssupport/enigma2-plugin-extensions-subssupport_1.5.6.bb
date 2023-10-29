@@ -16,6 +16,6 @@ ${localstatedir}/lib/subssupport"
 
 inherit autotools-brokensep gettext
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${localstatedir}/lib/subssupport
 }

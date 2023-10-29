@@ -8,6 +8,6 @@ SRC_URI[sha256sum] = "6be55fd8c5a2a6f02974f37438c1c47a3d9e764ce81c9d0a1a8c9a1815
 
 inherit pypi setuptools3
 
-do_install_append() {
+do_install:append() {
     rm -rf ${D}/usr/share
 }

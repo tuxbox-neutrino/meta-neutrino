@@ -12,7 +12,7 @@ PYPI_PACKAGE = "rfc3986_validator"
 
 inherit pypi setuptools3
 
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://0001-setup.py-move-pytest-runner-to-test_requirements.patch \
 "
 

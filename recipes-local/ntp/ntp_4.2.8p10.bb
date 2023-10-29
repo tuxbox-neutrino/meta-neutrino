@@ -37,7 +37,7 @@ EXTRA_OECONF += "--with-net-snmp-config=no \
                  --with-locfile=redhat \
                  --without-rpath \
                  "
-CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
+CFLAGS:append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
 
 USERADD_PACKAGES = "${PN}"
 NTP_USER_HOME ?= "/var/lib/ntp"
@@ -61,7 +61,7 @@ PACKAGECONFIG[debug] = "--enable-debugging,--disable-debugging"
 PACKAGECONFIG[mdns] = "ac_cv_header_dns_sd_h=yes,ac_cv_header_dns_sd_h=no,mdns"
 PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${sysconfdir}/init.d
     install -m 644 ${WORKDIR}/ntp.conf ${D}${sysconfdir}
     install -m 755 ${WORKDIR}/ntpd ${D}${sysconfdir}/init.d

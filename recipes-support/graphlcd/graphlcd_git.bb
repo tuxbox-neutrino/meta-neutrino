@@ -25,7 +25,7 @@ do_install_prepend() {
 }
 
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/usr
 	mv ${D}/bin ${D}/usr/bin
 	mv ${D}/lib ${D}/usr/lib

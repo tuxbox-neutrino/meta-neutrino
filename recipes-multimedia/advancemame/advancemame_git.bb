@@ -24,7 +24,7 @@ do_configure_prepend() {
     cp -f $(automake --print-libdir)/install-sh ${S}/
 }
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}${sysconfdir} -d ${D}${systemd_unitdir}/system -d ${D}${datadir}/tuxbox/neutrino/plugins
 	install -m644 ${WORKDIR}/advmame.rc ${D}${sysconfdir}
 	install -m644 ${WORKDIR}/advmame@.service ${D}${systemd_unitdir}/system

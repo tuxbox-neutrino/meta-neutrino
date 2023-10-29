@@ -15,7 +15,7 @@ PYPI_PACKAGE_EXT = "tar.bz2"
 
 inherit pypi setuptools3
 
-do_install_append() {
+do_install:append() {
     # remove some useless files before packaging
     find ${D} \( -name "*.bat" -o -name "*.c" -o -name "*.h" \) -exec rm -f {} \;
 }
@@ -261,7 +261,7 @@ FILES_${PN}-src = " \
     ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/*.py \
 "
 
-FILES_${PN}-core_append = " \
+FILES_${PN}-core:append = " \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/__pycache__ \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/__pycache__/*pyc \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/__init__*.pyc \
@@ -281,45 +281,45 @@ FILES_${PN}-core_append = " \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/dropin*.cache \
 "
 
-FILES_${PN}-names_append = " \
+FILES_${PN}-names:append = " \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_names*.pyc \
 "
 
-FILES_${PN}-news_append = " \
+FILES_${PN}-news:append = " \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_news*.pyc \
 "
 
-FILES_${PN}-protocols_append = " \
+FILES_${PN}-protocols:append = " \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/__pycache__/*pyc \
 "
 
-FILES_${PN}-conch_append = " \
+FILES_${PN}-conch:append = " \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_conch*.pyc \
 "
 
-FILES_${PN}-lore_append = " \
+FILES_${PN}-lore:append = " \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_lore*.pyc \
 "
-FILES_${PN}-mail_append = " \
+FILES_${PN}-mail:append = " \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_mail*.pyc \
 "
 
-FILES_${PN}-web_append = " \
+FILES_${PN}-web:append = " \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_web*.pyc \
 "
 
-FILES_${PN}-words_append = " \
+FILES_${PN}-words:append = " \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_words*.pyc \
 "
 
-FILES_${PN}-flow_append = " \
+FILES_${PN}-flow:append = " \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_flow*.pyc \
 "
 
-FILES_${PN}-pair_append = " \
+FILES_${PN}-pair:append = " \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_pair*.pyc \
 "
 
-FILES_${PN}-runner_append = " \
+FILES_${PN}-runner:append = " \
   ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_runner*.pyc \
 "

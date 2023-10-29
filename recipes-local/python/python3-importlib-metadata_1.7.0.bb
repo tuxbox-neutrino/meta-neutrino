@@ -12,7 +12,7 @@ SRC_URI[sha256sum] = "90bb658cdbbf6d1735b6341ce708fc7024a3e14e99ffdc5783edea9f9b
 
 DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
 RDEPENDS_${PN} += "${PYTHON_PN}-zipp ${PYTHON_PN}-pathlib2"
-RDEPENDS_${PN}_append_class-target = " python3-misc"
-RDEPENDS_${PN}_append_class-nativesdk = " python3-misc"
+RDEPENDS_${PN}:append_class-target = " python3-misc"
+RDEPENDS_${PN}:append_class-nativesdk = " python3-misc"
 
 BBCLASSEXTEND = "native nativesdk"

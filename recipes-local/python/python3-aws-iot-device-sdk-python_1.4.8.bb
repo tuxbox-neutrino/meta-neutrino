@@ -14,7 +14,7 @@ inherit pypi setuptools3
 
 PYPI_PACKAGE = "AWSIoTPythonSDK"
 
-do_install_append() {
+do_install:append() {
         install -d -m0755 ${D}${datadir}/${BPN}/examples
         cp --preserve=mode,timestamps -R ${S}/samples/* ${D}${datadir}/${BPN}/examples
         # this requires the full blown AWS Python SDK

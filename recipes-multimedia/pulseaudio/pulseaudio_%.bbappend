@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-SRC_URI_append += "file://client.conf \
+SRC_URI:append += "file://client.conf \
 		   file://default.pa \
 		   file://pulseaudio.service \
 		   file://pulseaudio.socket \
@@ -10,7 +10,7 @@ SRC_URI_append += "file://client.conf \
 		   file://daemon.conf \
 "
 
-PACKAGECONFIG_append = "systemd autospawn-for-root"
+PACKAGECONFIG:append = "systemd autospawn-for-root"
 
 RRECOMMENDS_${PN} += " \
 		alsa-utils \
@@ -46,7 +46,7 @@ RRECOMMENDS_${PN} += " \
 		pulseaudio-module-systemd-login \
 		"
 		
-do_install_append() {
+do_install:append() {
 	install -d ${D}${systemd_unitdir}/system/multi-user.target.wants
 	install -m644 ${WORKDIR}/pulseaudio-system.conf ${D}${sysconfdir}/dbus-1/system.d
 	install -m644 ${WORKDIR}/pulseaudio-bluetooth.conf ${D}${sysconfdir}/dbus-1/system.d

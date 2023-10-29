@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/mx3L/kodiext;protocol=git;branch=master \
 
 S = "${WORKDIR}/git"
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}/usr/share/kodi/system
 	install -m 0755 ${WORKDIR}/advancedsettings.xml ${D}/usr/share/kodi/system
 }

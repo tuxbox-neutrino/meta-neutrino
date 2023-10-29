@@ -36,7 +36,7 @@ SYSTEMD_AUTO_ENABLE_${PN} = "enable"
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system netdata"
 
-do_install_append() {
+do_install:append() {
     #set S UID for plugins
     chmod 4755 ${D}${libexecdir}/netdata/plugins.d/apps.plugin
 

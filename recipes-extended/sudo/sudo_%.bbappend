@@ -3,9 +3,9 @@ RDEPENDS_${PN}_libc-uclibc = " ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'p
 
 SRC_URI += "file://sudoers"
 
-EXTRA_OECONF_append_libc-uclibc +="--without-noexec"
+EXTRA_OECONF:append_libc-uclibc +="--without-noexec"
 
-do_install_append () {
+do_install:append () {
 	install -d ${D}${sysconfdir}
 	install -m 644 ${WORKDIR}/sudoers ${D}${sysconfdir}
 }

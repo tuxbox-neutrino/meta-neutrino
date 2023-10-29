@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b3a719e97f49e4841e90573f9b1a98ac"
 DEPENDS = "p8platform udev ncurses swig-native python3"
 
 DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libx11 libxrandr', '', d)}"
-DEPENDS_append_rpi = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '', ' userland', d)}"
+DEPENDS:append_rpi = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '', ' userland', d)}"
 
 SRCREV = "29d82c80bcc62be2878a9ac080de7eb286c4beb9"
 SRC_URI = "git://github.com/Pulse-Eight/libcec.git;branch=release \

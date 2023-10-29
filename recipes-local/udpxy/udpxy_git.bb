@@ -18,7 +18,7 @@ inherit autotools systemd
 
 SYSTEMD_SERVICE_${PN} = "udpxy.service"
 
-do_configure_append () {
+do_configure:append () {
 	ln -sf ${S}/* ${WORKDIR}/build/
 }
 

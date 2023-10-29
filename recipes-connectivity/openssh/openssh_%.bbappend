@@ -7,12 +7,12 @@ SRC_URI += "file://sshd_config \
 	    file://sshd_check_keys \
 "
 
-DEPENDS_append += "libpam"
+DEPENDS:append += "libpam"
 
 # no compile problems with uclibc here. therefore overriding default bb settings
-EXTRA_OECONF_append = " --with-pam"
+EXTRA_OECONF:append = " --with-pam"
 
-do_install_append () {
+do_install:append () {
 	#sed -i "s|yocto|${MACHINE}|" ${WORKDIR}/sshd_banner
 	ln -sf /etc/welcome ${D}${sysconfdir}/ssh/sshd_banner
 	#install -m 0600 ${WORKDIR}/sshd_banner ${D}${sysconfdir}/ssh/sshd_banner

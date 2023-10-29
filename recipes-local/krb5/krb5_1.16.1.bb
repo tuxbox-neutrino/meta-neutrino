@@ -50,9 +50,9 @@ CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regc
                   ac_cv_printf_positional=yes ac_cv_file__etc_environment=yes \
                   ac_cv_file__etc_TIMEZONE=no"
 
-CFLAGS_append = " -fPIC -DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
-CFLAGS_append_riscv64 = " -D_REENTRANT -pthread"
-LDFLAGS_append = " -pthread"
+CFLAGS:append = " -fPIC -DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
+CFLAGS:append_riscv64 = " -D_REENTRANT -pthread"
+LDFLAGS:append = " -pthread"
 
 do_configure() {
     gnu-configize --force
@@ -60,7 +60,7 @@ do_configure() {
     oe_runconf
 }
 
-do_install_append() {
+do_install:append() {
     rm -rf ${D}/${localstatedir}/run
     rm -f ${D}${bindir}/sclient
     rm -f ${D}${bindir}/sim_client

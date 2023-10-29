@@ -31,8 +31,8 @@ EXTRA_OECONF = " \
 EXTRA_OECONF_ARM = " \
     ${@bb.utils.contains("TUNE_FEATURES","neon","--enable-neon","--disable-neon",d)} \
 "
-EXTRA_OECONF_append_arm = " ${EXTRA_OECONF_ARM}"
-EXTRA_OECONF_append_armeb = " ${EXTRA_OECONF_ARM}"
+EXTRA_OECONF:append_arm = " ${EXTRA_OECONF_ARM}"
+EXTRA_OECONF:append_armeb = " ${EXTRA_OECONF_ARM}"
 
 inherit autotools lib_package
 

@@ -18,7 +18,7 @@ RPROVIDES_${PN} += "virtual/lua"
 inherit pkgconfig binconfig ptest
 
 UCLIBC_PATCHES += "file://uclibc-pthread.patch"
-SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
+SRC_URI:append_libc-uclibc = "${UCLIBC_PATCHES}"
 
 TARGET_CC_ARCH += " -fPIC ${LDFLAGS}"
 EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -DLUA_USE_LINUX -fPIC' MYLDFLAGS='${LDFLAGS}'"

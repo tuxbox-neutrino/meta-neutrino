@@ -41,7 +41,7 @@ EXTRA_OECONF = " \
 	--without-x \
 "
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}${datadir}/tuxbox/neutrino/plugins -d ${D}${sysconfdir}/neutrino/config/links
 	ln -sf /usr/bin/links ${D}${datadir}/tuxbox/neutrino/plugins/links.so
 	install -m 0644 ${WORKDIR}/bookmarks ${D}${sysconfdir}/neutrino/config
