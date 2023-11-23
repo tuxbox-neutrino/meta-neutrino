@@ -297,6 +297,7 @@ EXTRA_IMAGEDEPENDS = " \
 	\
 	browser \
 	dropbear \
+	davfs2 \
 	etckeeper \
 	ethtool \
 	favorites-to-bin \
