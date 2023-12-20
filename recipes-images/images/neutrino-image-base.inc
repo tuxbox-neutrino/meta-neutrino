@@ -1,8 +1,6 @@
 # Base this image on core-image-minimal
 include recipes-core/images/core-image-minimal.bb
 
-# inherit image_version
-
 # prevent deterministic errors while build
 RM_WORK_EXCLUDE += "${PN}"
 
@@ -33,8 +31,6 @@ ROOTFS_POSTPROCESS_COMMAND += "set_image_version; "
 # and for compatibility we make a symlink from /etc/image-version to /.version
 # required by neutrino itself.
 set_image_version () {
-	META_NAME="meta-neutrino"
-	META_VERSION=$(git -C ${COREBASE}/${META_NAME} rev-list --count $(git -C ${COREBASE}/${META_NAME} branch --show-current))
 	RELEASE_NAME="${IMAGE_BASENAME}"
 	RELEASE_NAME_DISCRIBE=$(git -C ${COREBASE}/${META_NAME}  describe --always --tags --dirty)
 
@@ -47,7 +43,7 @@ set_image_version () {
 		RELEASE_STATE="2"
 	fi
 
-	IMAGE_DESCRIPTION="${MACHINE_BRAND}-${MACHINE_NAME}-${DISTRO_VERSION}.${META_VERSION}"
+	IMAGE_DESCRIPTION="${MACHINE_BRAND}-${MACHINE_NAME}-${DISTRO_VERSION}${IMAGE_VERSION_SUFFIX}"
 
 	# get content of ../imageversion file
 	# required to synchronize version entry with content of ../imageversion file, which is used for image updates
