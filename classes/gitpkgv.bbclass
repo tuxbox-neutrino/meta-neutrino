@@ -1,66 +1,56 @@
-# WARNING:
-# Usage of varables ${GITPKGV} and ${GITPKGVTAG} inside recipes are possible but not recommended.
-# Its working not reliable especially before sources are fetched because
-# ${GITPKGV} and ${GITPKGVTAG} need already existing fetched git repositories inside ${DL_DIR}.
-# Working with external sources in the workspace is also not reliable.
-# e.g. If you want to use gitpkgv class ensure call this command:
+# gitpkgv.bbclass provides the GITPKGV and GITPKGVTAG variables, which
+# are to be used in PKGV, as described below:
 #
-# 'bitbake --runall=fetch --continue  <target> && bitbake <target>
+# - GITPKGV is a sortable version with the format NN+GITHASH, for
+#   use in PKGV, where
 #
-# gitpkgv.bbclass provides a GITPKGV and GITPKGVTAG variables to be
-# used in PKGV, as described bellow:
+#   NN corresponds to the total number of revisions up to SRCREV
+#   GITHASH is the (full) hash of SRCREV
 #
-# - GITPKGV which is a sortable version with the format NN+GITHASH, to
-#   be used in PKGV, where
-#
-#   NN equals the total number of revs up to SRCREV
-#   GITHASH is SRCREV's (full) hash
-#
-# - GITPKGVTAG which is the output of 'git describe' allowing for
+# - GITPKGVTAG is the output of 'git describe', enabling
 #   automatic versioning
 #
-# gitpkgv.bbclass assumes the git repository has been cloned, and
-# contains SRCREV. So ${GITPKGV} and ${GITPKGVTAG} should never be
-# used in PV, only in PKGV.  It can handle SRCREV = ${AUTOREV}, as
-# well as SRCREV = "<some fixed git hash>".
+# Important: Use ${GITPKGV} and ${GITPKGVTAG} exclusively with PKGV, not with PV!
 #
-# WARNING: if upstream repository is always using consistent and
-# sortable tag name scheme you can get sortable version including tag
-# name with ${GITPKGVTAG}, but be aware that ie tag sequence "v1.0,
-# v1.2, xtest, v2.0" will force you to increment PE to get upgradeable
-# path to v2.0 revisions
+# The gitpkgv.bbclass assumes a Git repository has been cloned and contains SRCREV.
+# Therefore, it is crucial to use ${GITPKGV} and ${GITPKGVTAG} only in PKGV.
+# These variables are compatible with SRCREV = ${AUTOREV} as well as with fixed Git hash values
+# in the form of SRCREV = "<a specific fixed Git hash>".
+# Using ${GITPKGV} and ${GITPKGVTAG} in conjunction with PV can lead to inconsistencies.
+# PV is essential for internal build processes, whereas PKGV mainly affects the naming of
+# the generated packages, which are stored in the deployment area.
+# This is exactly the main objective of GITPKGV and GITPKGVTAG.
 #
-# # use example:
+# WARNING: If the upstream repository always uses a consistent and
+# sortable tag naming scheme, you can get a sortable version including the tag
+# name with ${GITPKGVTAG}, but be aware that for example, a tag sequence "v1.0,
+# v1.2, xtest, v2.0" will force you to increase PE to get an upgradeable
+# path to the v2.0 revisions
+# 
+# If ${GITPKGVTAG} is applied to a Git repository without tags, it will not function as expected.
+# In this case, there will be an automatic fallback to the PV entry defined for the recipe or to default
+# values for PV. The build system will then issue warnings.
+# To avoid such issues, ${GITPKGV} can be used as an alternative.
+# If a recipe includes multiple Git repositories in SRC_URI,
+# ideally, the first repository should contain tags.
+# Note that warnings may still be issued.
+# These can usually be ignored as long as the final result meets expectations.
+
 #
-# # inherit line is required
+# use example:
 #
 # inherit gitpkgv
 #
-# PV = "1.0+gitr${SRCPV}"      # expands to something like 1.0+gitr3+4c1c21d7dbbf93b0df336994524313dfe0d4963b
 # PKGV = "1.0+gitr${GITPKGV}"  # expands also to something like 1.0+gitr31337+4c1c21d7d
 #
-# # or
+# or
 #
-# PV = "1.0+gitr${SRCPV}" # expands to something like 1.0+gitr3+4c1c21d7dbbf93b0df336994524313dfe0d4963b
+# inherit gitpkgv
+#
 # PKGV = "${GITPKGVTAG}"  # expands to something like 1.0-31337+g4c1c21d
 #                           if there is tag v1.0 before this revision or
 #                           ver1.0-31337+g4c1c21d if there is tag ver1.0
-#
-# # also possible:
-#
-# PV = "${FLAVOUR}-${GITPKGV}" 	# if any git repository has no tags expands to something like tango-31337+g4c1c21d
-# PV = "${GITPKGVTAG}" 		# expands to something like 1.0-31337+g4c1c21d (see above)
-#
-# # NOTE:
-# # If you moved a target with 'devtool modify <target>' into workspace, Git tags and commit values will be not considered.
-# # GITPKGVTAG and GITPKGV will return the default version string
-# # with built targets from workspace is '999' as default output with 'bitbake <target>' or 'devtool build <target>'.
-#
-# # for PV and PKGV see also:
-#
-# #	https://www.yoctoproject.org/docs/current/mega-manual/mega-manual.html#var-PV
-# #	https://www.yoctoproject.org/docs/current/mega-manual/mega-manual.html#PKGV
-#
+
 
 GITPKGV = "${@get_git_pkgv(d, 0)}"
 GITPKGVTAG = "${@get_git_pkgv(d, 1)}"
@@ -108,6 +98,7 @@ def get_git_pkgv(d, use_tags):
                 if not os.path.exists(url.localpath):
                     return None
 
+                commits = "0"
                 found = True
 
                 vars = { 'repodir' : quote(url.localpath),
@@ -133,13 +124,14 @@ def get_git_pkgv(d, use_tags):
                         commits = f.readline(128).strip()
 
                 if use_tags:
-                    output = bb.fetch2.runfetchcmd(
-                    "git -C %(repodir)s describe --tags 2>/dev/null" % vars,
-                    d, quiet=True).strip()
-                    ver = gitpkgv_drop_tag_prefix(output)
-                else:
-                    ver = "%s+%s" % (commits, vars['rev'][:7])
+                    try:
+                        ver = "0"
+                        output = bb.fetch2.runfetchcmd("git -C %(repodir)s describe --tags 2>/dev/null" % vars, d, quiet=True).strip()
+                        ver = gitpkgv_drop_tag_prefix(output)
+                    except Exception as e:
+                        bb.warn("Missing Git tags, falling back to presets or defaults! GITPKGVTAG will be overridden")
 
+                ver = str(ver) if ver is not None else "0"
                 format = format.replace(name, ver)
 
     if found:
