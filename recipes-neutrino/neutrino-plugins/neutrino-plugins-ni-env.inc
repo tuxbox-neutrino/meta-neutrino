@@ -3,6 +3,8 @@ include neutrino-plugins.inc
 MAINTAINER = "ni"
 HOMEPAGE = "https://neutrino-images.de"
 
+PKGV = "${SRCPV}"
+
 SRCREV_${PLUGIN_NAME} = "${AUTOREV}"
 SRCREV_data = "${AUTOREV}"
 SRCREV_include = "${AUTOREV}"

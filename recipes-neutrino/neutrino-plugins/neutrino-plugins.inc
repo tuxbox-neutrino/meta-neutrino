@@ -21,8 +21,7 @@ DEPENDS = "freetype ffmpeg zlib libxml2 virtual/libiconv openssl libpng curl gif
 PROVIDES = "virtual/neutrino-plugin-${PLUGIN_NAME}"
 RPROVIDES_${PN} = "virtual/neutrino-plugin-${PLUGIN_NAME}"
 
-PV = "git+${SRCPV}"
-
+PV = "${SRCPV}"
 SRCREV = "${AUTOREV}"
 
 inherit gitpkgv

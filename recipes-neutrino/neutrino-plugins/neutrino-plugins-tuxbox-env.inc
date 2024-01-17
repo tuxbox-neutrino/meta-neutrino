@@ -3,6 +3,8 @@ include neutrino-plugins.inc
 MAINTAINER = "tuxbox"
 HOMEPAGE = "https://tuxbox-neutrino.org"
 
+PKGV = "${GITPKGVTAG}"
+
 SRCREV_${PLUGIN_NAME} = "${AUTOREV}"
 SRCREV_FORMAT = "${MAINTAINER}-${PLUGIN_NAME}"
 
