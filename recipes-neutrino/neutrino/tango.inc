@@ -6,7 +6,7 @@ MAINTAINER = "TangoCash"
 SRC_URI:append += "git://github.com/TangoCash/neutrino-tangos.git;protocol=https \
 "
 
-PV = "${FLAVOUR}-git${SRCPV}"
+PKGV = "${FLAVOUR}-${GITPKGV}"
 
 EXTRA_OECONF:append += " \
 			--enable-reschange \

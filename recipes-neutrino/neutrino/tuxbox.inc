@@ -7,7 +7,7 @@ SRC_URI:append += "git://github.com/tuxbox-neutrino/gui-neutrino.git;protocol=ht
 		   file://0001-hdd_menu.cpp-assume-device-mounted.patch \
 "
 
-PV = "3.23.${SRCPV}"
+PKGV = "${GITPKGVTAG}"
 
 DEFAULT_THEME ?= "Neutrino-3.0"
 
