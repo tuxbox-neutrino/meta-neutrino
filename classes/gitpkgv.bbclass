@@ -50,7 +50,26 @@
 # PKGV = "${GITPKGVTAG}"  # expands to something like 1.0-31337+g4c1c21d
 #                           if there is tag v1.0 before this revision or
 #                           ver1.0-31337+g4c1c21d if there is tag ver1.0
+#
+# Additionally, this class introduces a mechanism to control warning messages
+# when Git tags are missing in the repository. This is particularly useful
+# in cases where the absence of tags is expected and should not trigger warnings.
+#
+# - GITPKGVTAG_NO_WARN_ON_NO_TAG: This variable controls the emission of warnings
+#   when GITPKGVTAG is used but no Git tags are found in the repository.
+#   By default, it is set to "0", which means warnings are enabled.
+#   Set this variable to "1" to suppress these warnings.
+#
+#   Example usage in a recipe:
+#   GITPKGVTAG_NO_WARN_ON_NO_TAG = "1"  # Suppresses warning for this recipe
+#
+#   It can also be set globally in local.conf or layer.conf, or for a specific recipe:
+#   GITPKGVTAG_NO_WARN_ON_NO_TAG:pn-myrecipe = "1"  # Suppresses warning for 'myrecipe'
+#
+# NOTE Suppressing warnings should only be done when you are certain that the
+# absence of Git tags will not negatively impact the build process or package versioning.
 
+GITPKGVTAG_NO_WARN_ON_NO_TAG = "0"
 
 GITPKGV = "${@get_git_pkgv(d, 0)}"
 GITPKGVTAG = "${@get_git_pkgv(d, 1)}"
@@ -129,7 +148,9 @@ def get_git_pkgv(d, use_tags):
                         output = bb.fetch2.runfetchcmd("git -C %(repodir)s describe --tags 2>/dev/null" % vars, d, quiet=True).strip()
                         ver = gitpkgv_drop_tag_prefix(output)
                     except Exception as e:
-                        bb.warn("Missing Git tags, falling back to presets or defaults! GITPKGVTAG will be overridden")
+                        warn_on_no_tag = d.getVar('GITPKGVTAG_NO_WARN_ON_NO_TAG', False)
+                        if warn_on_no_tag == "0":
+                          bb.warn("Missing Git tags, falling back to presets or defaults! GITPKGVTAG will be overridden")
 
                 ver = str(ver) if ver is not None else "0"
                 format = format.replace(name, ver)
