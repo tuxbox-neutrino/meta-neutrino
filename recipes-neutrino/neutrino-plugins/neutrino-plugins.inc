@@ -25,6 +25,9 @@ PV = "${SRCPV}"
 SRCREV = "${AUTOREV}"
 
 inherit gitpkgv
+# We have more as one repository without tags, so we
+# suppress warnings for that.
+GITPKGVTAG_NO_WARN_ON_NO_TAG = "1"
 
 # we need an independent file stack for the build, some templates for configure.ac and Makefile.am
 # The plugin source and other required sources itself will be defined inside the file: neutrino-plugins-<provider>-env.inc
