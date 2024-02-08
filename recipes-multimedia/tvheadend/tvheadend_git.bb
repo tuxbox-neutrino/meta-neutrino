@@ -14,8 +14,12 @@ PR = "r1"
 #PV = "4.3.${SRCPV}"
 PKGV = "${GITPKGVTAG}"
 
-SRCREV_tvheadend = "${AUTOREV}"
-SRCREV_tvheadend-packaging = "${AUTOREV}"
+# We have more than one repository and it is sure that the second repository contains no tags, so we
+# must suppress warnings for that.
+GITPKGVTAG_NO_WARN_ON_NO_TAG = "1"
+
+SRCREV:tvheadend = "${AUTOREV}"
+SRCREV:tvheadend-packaging = "${AUTOREV}"
 SRCREV_FORMAT = "tvheadend"
 
 S = "${WORKDIR}/${PN}"
@@ -26,9 +30,12 @@ SRC_URI = "git://github.com/tvheadend/tvheadend.git;name=tvheadend;protocol=http
 "
 
 do_patch() {
-    git -C ${WORKDIR}/tvheadend-packaging apply ${WORKDIR}/0001-tvheadend.service_adjustments_for_stb_environment.patch
-    sed -i -e 's/0.0.0-unknown/${PKGV}-${PR}/g' -e 's/0.0.0~unknown/${PKGV}-${PR}/g' ${WORKDIR}/tvheadend/support/version
-    
+    service_patch="${WORKDIR}/0001-tvheadend.service_adjustments_for_stb_environment.patch"
+    service_repo="${WORKDIR}/tvheadend-packaging"
+    if git -C "$service_repo" apply --check "$service_patch"; then
+        git -C "$service_repo" apply "$service_patch"
+    fi
+    sed -i -e 's/0.0.0-unknown/${PKGV}-${PR}/g' -e 's/0.0.0~unknown/${PKGV}-${PR}/g' "${WORKDIR}/tvheadend/support/version"
 }
 
 EXTRA_OECONF += "--arch=${TARGET_ARCH} \
@@ -56,11 +63,9 @@ do_install:append() {
 	install -m 0644 ${WORKDIR}/${PN}-packaging/systemd/${PN}.service ${D}${systemd_unitdir}/system/${PN}.service
 }
 
-FILES_${PN} += "${systemd_unitdir}"
+FILES:${PN} += "${systemd_unitdir}"
 
 CLEANBROKEN = "1"
-
-RM_WORK_EXCLUDE += "${PN}"
 
 
 pkg_preinst_${PN} () {
