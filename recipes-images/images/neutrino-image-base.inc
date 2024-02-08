@@ -26,12 +26,13 @@ set_image_build_version () {
 	echo ${BUILD_VERSION} > ${TMP_BUILD_DATE_FILE}
 }
 
+do_rootfs[vardepsexclude] = "DATE DATETIME BUILD_VERSION"
+
 ROOTFS_POSTPROCESS_COMMAND += "set_image_version; "
 # We create file /etc/image-version for common use (required by some plugins)
 # and for compatibility we make a symlink from /etc/image-version to /.version
 # required by neutrino itself.
 set_image_version () {
-	RELEASE_NAME="${IMAGE_BASENAME}"
 	RELEASE_NAME_DISCRIBE=$(git -C ${COREBASE}/${META_NAME}  describe --always --tags --dirty)
 
 	RELEASE_STATE="3"
@@ -43,7 +44,7 @@ set_image_version () {
 		RELEASE_STATE="2"
 	fi
 
-	IMAGE_DESCRIPTION="${MACHINE_BRAND}-${MACHINE_NAME}-${DISTRO_VERSION}${IMAGE_VERSION_SUFFIX}"
+	IMAGE_DESCRIPTION="${IMAGE_NAME}"
 
 	# get content of ../imageversion file
 	# required to synchronize version entry with content of ../imageversion file, which is used for image updates
@@ -100,7 +101,7 @@ set_image_version () {
 		if [ ! -d ${DEPLOY_DIR_IMAGE} ]; then
 			mkdir -p ${DEPLOY_DIR_IMAGE}
 		fi
-		echo "${IMAGE_URL} ${VERSION_STAMP} MD5 ${RELEASE_NAME}-${IMAGE_DESCRIPTION} ${UPDATE_SERVER_URL}" >> ${RELEASE_TEXT_LOCATION_FILE}
+		echo "${IMAGE_URL} ${VERSION_STAMP} MD5 ${IMAGE_DESCRIPTION} ${UPDATE_SERVER_URL}" >> ${RELEASE_TEXT_LOCATION_FILE}
 
 		sed -i -e "s|@hostname@|${H}|g" "${RELEASE_TEXT_LOCATION_FILE}"
 		sed -i -e "s|@build-dirname@|${BUILD_DIR}|g" "${RELEASE_TEXT_LOCATION_FILE}"
