@@ -4,6 +4,9 @@ include recipes-core/images/core-image-minimal.bb
 # prevent deterministic errors while build
 RM_WORK_EXCLUDE += "${PN}"
 
+# libcharset is required while the image is being completed. NOTE: libcharset will be provieded by libiconv!
+DEPENDS += "libiconv-native"
+
 # add default password for root
 ROOTFS_POSTPROCESS_COMMAND += "set_root_passwd;"
 set_root_passwd() {
