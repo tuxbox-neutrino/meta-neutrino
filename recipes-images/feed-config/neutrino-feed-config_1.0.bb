@@ -6,6 +6,7 @@ PR = "r2"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 INHIBIT_DEFAULT_DEPS = "1"
 
+DEPENDS = "opkg"
 
 do_compile () {
 	# Create a new directory with the path ${S}/${sysconfdir}/opkg/, if not exists.
