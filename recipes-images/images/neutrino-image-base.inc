@@ -36,6 +36,19 @@ ROOTFS_POSTPROCESS_COMMAND += "set_image_version; "
 # and for compatibility we make a symlink from /etc/image-version to /.version
 # required by neutrino itself.
 set_image_version () {
+	# This block is a workaround to address an issue where Git operations within the build process
+	# trigger security warnings due to the directory not being marked as 'safe' in Git's configuration.
+	# Recent versions of Git restrict operations in directories not explicitly marked as safe, leading
+	# to potential interruptions in the build process. To circumvent this, we check if the directory
+	# "${COREBASE}/${META_NAME}" is already marked as safe in the global Git configuration. If it is not,
+	# we add it as a safe directory. This ensures that Git operations proceed without security warnings,
+	# while preventing the directory from being added multiple times to avoid cluttering the configuration.
+	# Note: This is a workaround and should be revisited for potential removal or adjustment in the
+	# context of future Git version changes or build environment updates.
+	if ! git config --global --get-all safe.directory | grep -q "${COREBASE}/${META_NAME}"; then
+		git config --global --add safe.directory "${COREBASE}/${META_NAME}"
+	fi
+
 	RELEASE_NAME_DISCRIBE=$(git -C ${COREBASE}/${META_NAME}  describe --always --tags --dirty)
 
 	RELEASE_STATE="3"
