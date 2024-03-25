@@ -25,7 +25,7 @@ SRCREV_FORMAT = "tvheadend"
 S = "${WORKDIR}/${PN}"
 
 SRC_URI = "git://github.com/tvheadend/tvheadend.git;name=tvheadend;protocol=https;destsuffix=${BPN};branch=master \
-	   git://github.com/tvheadend/tvheadend-packaging.git;name=tvheadend-packaging;protocol=https;destsuffix=${BPN}-packaging \
+	   git://github.com/tuxbox-fork-migrations/recycled-tvheadend-packaging.git;name=tvheadend-packaging;protocol=https;destsuffix=${BPN}-packaging \
 	   file://0001-tvheadend.service_adjustments_for_stb_environment.patch \
 "
 
