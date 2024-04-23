@@ -5,22 +5,24 @@ SUMMARY = "Channellogos for Neutrino GUI"
 DESCRIPTION = "${SUMMARY}"
 SECTION = "neutrino-plugin"
 MAINTAINER = "Fred Feuerstein"
-HOMEPAGE = "https://github.com/neutrino-images/ni-logo-stuff.git.git"
+HOMEPAGE = "https://github.com/neutrino-images/ni-logo-stuff"
 
-# There is no license defined...but considers itself as a free project.
-# Pretty strange conditions actually because it's public on Github, but the provider
-# insists on nobody is it allowed to distribute these graphics. Of course we don't do that.
-# In addition, the users are tracked by whose integrated updater, and we will not use it.
-# We do only package the git version to be able to do it properly. The graphics will be
-# downloaded and installed directly from GitHub on the STB by users.
-# We use our own logo updater for this, which can also be used without the package manager.
+# The provider of the logos has not defined a clear license. However, according to current knowledge,
+# the provider insists that no one may package these graphics into their own packages and distribute them.
+# Additionally, users are explicitly tracked through its integrated update tool.
+# We will not adopt this practice. In order to offer reasonable packaging, we use only the Git revision of the GitHub repository.
+# Should this change, as is usual, possible updates will be indicated by the package manager.
+# This is sufficient to offer available updates in the usual way as a package. The only difference is that no installation files are provided.
+# For the actual installation, we use our own logo updater, as usual, which can still be used as before but is utilized by the package manager
+# for post-installation to install the logos. This is thus comparable to a virtual package that brings no files but only does what users
+# would otherwise have to do manually to download and install the graphic files on their STBs.
 
 LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = ""
 
 PACKAGE_ARCH = "all"
 
-DEPENDS = " \
+RDEPENDS_${PN} = " \
 	curl \
 	logoupdater \
 "
