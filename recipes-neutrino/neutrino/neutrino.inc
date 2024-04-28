@@ -1,9 +1,13 @@
 
 PROVIDES = "virtual/neutrino"
-RPROVIDES_${PN} = "virtual/neutrino"
+RPROVIDES_${PN} = "neutrino-mp virtual/neutrino"
 
-CONFLICTS = "neutrino-mp"
-REPLACES = "neutrino-mp"
+RCONFLICTS_${PN} = "neutrino-mp"
+RREPLACES_${PN} = "neutrino-mp"
+
+CONFLICTS_${PN} = "neutrino-mp"
+REPLACES_${PN} = "neutrino-mp"
+
 
 inherit autotools pkgconfig systemd ccache gitpkgv
 
