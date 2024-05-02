@@ -81,15 +81,36 @@ def gitpkgv_drop_tag_prefix(version):
     else:
         return version
 
+SRCPV_WORKSPACE ?= "999"
+
 def get_git_pkgv(d, use_tags):
     import os
     import bb
     from pipes import quote
 
-    workspace_tag = '999'
-    ver = d.getVar('SRCPV')
-    if ver == workspace_tag:
-        return ver
+    ## Start workaround ########################################################
+    import re
+    # Check DISTRO_VERSION to see if Workaround is needed
+    distro_version = d.getVar('DISTRO_VERSION', True)
+    if re.match(r"^([0-4]|[1-4]\.\d+)", distro_version):
+      bb.debug(1, f"Used DISTRO_VERSION {distro_version} using a SRCPV_WORKSPACE workaround. See gitpkgv.bbclass.")
+    else:
+      bb.warn(f"Used DISTRO_VERSION {distro_version} does not need a SRCPV_WORKSPACE workaround. SRCPV should be removed. See gitpkgv.bbclass.")
+
+    # NOTE: This is only a Workaround. SRCPV will be removed in newer versions > 4.x:
+    # https://git.yoctoproject.org/poky/commit/?id=62afa02d01794376efab75623f42e7e08af08526
+    # https://git.yoctoproject.org/poky/commit/?id=65318019cd8c6db19ae5d4526a0fa2d8c8ef25fa
+    workspace_tag = d.getVar('SRCPV_WORKSPACE', True)  # default value as fallback
+    ver = d.getVar('SRCPV', True)
+    if ver == '999' and ver != workspace_tag:  # Check if the dummy number is set an differ
+      bb.debug(1, f"SRCPV is set to dummy value: {ver}, changing to workspace_tag: {workspace_tag}")
+      ver = workspace_tag
+    elif not ver:  # Additional check if ver is undefined or empty
+      bb.warn(f"SRCPV is undefined or empty, setting to default workspace_tag: {workspace_tag} (See workaround within gitpkgv.bbclass)")
+      ver = workspace_tag
+
+    return ver  # Ensure the return statement is outside the condition blocks
+    ## End workaround ##########################################################
 
     src_uri = d.getVar('SRC_URI').split()
     fetcher = bb.fetch2.Fetch(src_uri, d)
