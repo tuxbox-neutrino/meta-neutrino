@@ -55,6 +55,8 @@ SHOUTCAST_DEV_KEY ?= "XXXXXXXXXXXXXXXX"
 
 OMDB_API_KEY ?= "XXXXXXXX"
 
+WEATHER_DEV_KEY ?= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
 # to find in neutrino-common-vars.inc
 #N_PREFIX = "/usr" 
 
@@ -113,16 +115,12 @@ EXTRA_OECONF = " \
 	--with-hosted_httpddir=${N_HOSTED_HTTPDDIR} \
 	--with-flagdir=${N_FLAGDIR} \
 	\
-	--with-tmdb-dev-key="${TMDB_DEV_KEY}" \
+	--with-tmdb-api-key="${TMDB_DEV_KEY}" \
 	--with-omdb-api-key="${OMDB_API_KEY}" \
-	--with-youtube-dev-key="${YT_DEV_KEY}" \
-	--with-shoutcast-dev-key="${SHOUTCAST_DEV_KEY}" \
-	--with-weather-dev-key="${WEATHER_DEV_KEY}" \
-	--disable-tmdb-key-manage \
-	--disable-omdb-key-manage \
-	--disable-youtube-key-manage \
-	--disable-shoutcast-key-manage \
-	--disable-weather-key-manage \
+	--with-youtube-api-key="${YT_DEV_KEY}" \
+	--with-shoutcast-api-key="${SHOUTCAST_DEV_KEY}" \
+	--with-weather-api-key="${WEATHER_DEV_KEY}" \
+	--with-weather-api-version="${WEATHER_API_VERSION}" \
 	\
 	--enable-pip \
 	--enable-lcd4linux \
