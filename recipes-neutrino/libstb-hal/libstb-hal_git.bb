@@ -2,7 +2,7 @@ SUMMARY = "Library to abstract STB hardware. Supports Tripledragon, AZbox ME, Fu
 DESCRIPTION = "Library to abstract STB hardware."
 HOMEPAGE = "https://github.com/neutrino-mp"
 SECTION = "libs"
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://${THISDIR}/libstb-hal/COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
 
 #
@@ -62,7 +62,7 @@ do_configure_prepend() {
 }
 
 do_install:append() {
-	install -d ${D}/${datadir}
+	#install -d ${D}/${datadir}
 	install -d ${D}/${includedir}/libstb-hal
 	install -d ${D}/${includedir}/common
 	install -d ${D}/${includedir}/libarmbox	
@@ -76,7 +76,6 @@ do_install:append() {
 FILES_${PN} = "\
 	${libdir}/* \
 	${bindir}/pic2m2v \
-	${datadir} \
 "
 
 FILES_${PN}-dev += "${includedir}"
