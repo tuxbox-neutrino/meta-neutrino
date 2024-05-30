@@ -118,7 +118,7 @@ EXTRA_OECONF = " \
 	--with-tmdb-api-key="${TMDB_DEV_KEY}" \
 	--with-omdb-api-key="${OMDB_API_KEY}" \
 	--with-youtube-api-key="${YT_DEV_KEY}" \
-	--with-shoutcast-api-key="${SHOUTCAST_DEV_KEY}" \
+	--with-shoutcast-dev-id="${SHOUTCAST_DEV_KEY}" \
 	--with-weather-api-key="${WEATHER_DEV_KEY}" \
 	--with-weather-api-version="${WEATHER_API_VERSION}" \
 	\
