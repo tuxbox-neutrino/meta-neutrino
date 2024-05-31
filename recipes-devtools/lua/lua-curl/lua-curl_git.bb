@@ -11,7 +11,7 @@ S = "${WORKDIR}/git"
 SRCREV = "c38f3d4c298a1ce941158e0b8bc9ea5ca40fe655"
 PV = "0.3.11"
 
-SRC_URI = "git://github.com/Lua-cURL/Lua-cURLv3.git;protocol=https \
+SRC_URI = "git://github.com/Lua-cURL/Lua-cURLv3.git;branch=master;protocol=https \
 	   file://0001-Makefile-adjust-for-OE.patch \
 "
 
