@@ -34,16 +34,17 @@ SRC_URI = " \
 	git://github.com/neutrino-images/ni-logo-stuff.git;protocol=https \
 "
 
-PR = "r0"
+PR = "r1"
 SRCREV = "${AUTOREV}"
-PV = "git-${SRCPV}"
+PV = "git-${SRCREV}"
 
 S = "${WORKDIR}/git"
 
 inherit gitpkgv
 
 do_patch () {
-	echo "${GITPKGV}" > "${S}/.rev";
+	ref=$(git -C ${S} rev-list --count master)
+	echo "${ref}" > "${S}/.rev";
 }
 
 do_configure[noexec] = "1"
@@ -55,7 +56,7 @@ do_install () {
 	install -m 644 ${S}/.rev ${D}${N_LOGODIR}
 }
 
-FILES_${PN} = "\
+FILES:${PN} = "\
 	${N_LOGODIR}\
 "
 
