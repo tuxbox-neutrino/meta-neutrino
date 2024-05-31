@@ -1,17 +1,19 @@
 
-include themes.inc
+include neutrino-themes.inc
 
 DESCRIPTION = "${PRE_DESCRIPTION}"
 HOMEPAGE = "https://github.com/neutrino-images/ni-neutrino"
 MAINTAINER = "NI-Team"
 SUMMARY = "${DESCRIPTION} by ${MAINTAINER}"
 
-SRC_URI = "git://github.com/neutrino-images/ni-neutrino.git;protocol=https;subpath=${SUBPATH}"
+SRC_URI = "git://github.com/neutrino-images/ni-neutrino.git;branch=master;protocol=https;subpath=${SUBPATH}"
 
-PR = "r4"
+PR:append = ".1"
+
 SRCREV = "${AUTOREV}"
-PV = "3.60"
 
+inherit gitpkgv
+PKGV = "${GITPKGVTAG}"
 
 do_install () {
 	install -d ${D}/var/tuxbox/themes

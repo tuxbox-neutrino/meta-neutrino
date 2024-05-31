@@ -10,6 +10,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=801f80980d171dd6
 SUBPATH = "data"
 SRCREV = "${AUTOREV}"
 
+PR = "r5"
+
 S = "${WORKDIR}"
 
 FILES:${PN} = "\

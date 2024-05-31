@@ -1,15 +1,17 @@
 
-include themes.inc
+include neutrino-themes.inc
 
 DESCRIPTION = "${PRE_DESCRIPTION}"
 HOMEPAGE = "https://github.com/TangoCash/neutrino-tangos"
 MAINTAINER = "Tango"
 SUMMARY = "${DESCRIPTION} by ${MAINTAINER}"
 
-SRC_URI = "git://github.com/TangoCash/neutrino-tangos.git;protocol=https;subpath=${SUBPATH}"
+SRC_URI = "git://github.com/TangoCash/neutrino-tangos.git;branch=master;protocol=https;subpath=${SUBPATH}"
 
-PR = "r4"
-PV = "git-${SRCPV}"
+PR:append = ".1"
+
+SRCREV = "${AUTOREV}"
+PV = "git-${SRCREV}"
 
 do_install () {
 	install -d ${D}/var/tuxbox/themes
