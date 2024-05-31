@@ -159,7 +159,7 @@ do_install_prepend () {
 	install -d ${D}${sysconfdir}/network
 	install -d ${D}${systemd_unitdir}/system
 	install -d ${D}${bindir}
-	install -d ${D}${sysconfdir}/neutrino/config
+	install -d ${D}${N_CONFIG_DIR}
 	install -d ${D}${sysconfdir}/neutrino/plugins	
 	install -m 0644 ${WORKDIR}/neutrino.service ${D}${systemd_unitdir}/system/
 	install -m 0644 ${WORKDIR}/neutrino-log.service  ${D}${systemd_unitdir}/system
@@ -193,9 +193,9 @@ do_install:append() {
 	install -m 644 ${WORKDIR}/update_done.jpg ${D}${datadir}/tuxbox/neutrino/icons
 }
 
-FILES_${PN} += "\
-	/etc \
-	/usr/share \
+FILES:${PN} += "\
+	${sysconfdir} \
+	${datadir} \
 	/share \
 	/lib \
 "
