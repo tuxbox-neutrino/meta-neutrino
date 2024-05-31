@@ -5,10 +5,9 @@ HOMEPAGE = "http://luajit.org"
 
 PV = "2.1"
 SRCREV = "dd5032ed844c56964347c7916db66b0eb11d8091"
-SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
-	   file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
-	   file://clang.patch \
-           "
+SRC_URI = "git://luajit.org/git/luajit-2.0.git;branch=v2.1;protocol=https \
+           file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
+           file://clang.patch"
 
 PROVIDES = "virtual/lua"
 RPROVIDES_${PN} += "virtual/lua"
@@ -19,21 +18,15 @@ inherit pkgconfig binconfig siteinfo
 
 BBCLASSEXTEND = "native"
 
-# http://luajit.org/install.html#cross
 # Host luajit needs to be compiled with the same pointer size
-# If you want to cross-compile to any 32 bit target on an x64 OS,
-# you need to install the multilib development package (e.g.
-# libc6-dev-i386 on Debian/Ubuntu) and build a 32 bit host part
-# (HOST_CC="gcc -m32").
 BUILD_CC_ARCH:append = " ${@['-m32',''][d.getVar('SITEINFO_BITS') != '32']}"
 
 # The lua makefiles expect the TARGET_SYS to be from uname -s
-# Values: Windows, Linux, Darwin, iOS, SunOS, PS3, GNU/kFreeBSD
 LUA_TARGET_OS = "Unknown"
-LUA_TARGET_OS_darwin = "Darwin"
-LUA_TARGET_OS_linux = "Linux"
-LUA_TARGET_OS_linux-gnueabi = "Linux"
-LUA_TARGET_OS_mingw32 = "Windows"
+LUA_TARGET_OS:darwin = "Darwin"
+LUA_TARGET_OS:linux = "Linux"
+LUA_TARGET_OS:linux-gnueabi = "Linux"
+LUA_TARGET_OS:mingw32 = "Windows"
 
 # We don't want the lua buildsystem's compiler optimizations, or its
 # stripping, and we don't want it to pick up CFLAGS or LDFLAGS, as those apply
@@ -58,8 +51,16 @@ EXTRA_OEMAKE = "\
     'LDCONFIG=:' \
 "
 
-do_compile () {
+do_compile() {
     oe_runmake
+}
+
+do_configure:append() {
+    # Copy missing headers to the native sysroot if the asm directory is missing
+    if [ ! -d "${STAGING_INCDIR_NATIVE}/asm" ]; then
+        install -d ${STAGING_INCDIR_NATIVE}/asm
+        cp -r ${STAGING_INCDIR}/asm/* ${STAGING_INCDIR_NATIVE}/asm/
+    fi
 }
 
 # There's INSTALL_LIB and INSTALL_SHARE also, but the lua binary hardcodes the
@@ -71,7 +72,7 @@ EXTRA_OEMAKEINST = "\
     'INSTALL_INC=${D}${includedir}/luajit-$(MAJVER).$(MINVER)' \
     'INSTALL_MAN=${D}${mandir}/man1' \
 "
-do_install () {
+do_install() {
     oe_runmake ${EXTRA_OEMAKEINST} install
     rmdir ${D}${datadir}/lua/5.* \
           ${D}${datadir}/lua \
@@ -80,28 +81,28 @@ do_install () {
 }
 
 do_install:append() {
-		ln -sf $(basename ${D}/usr/bin/luajit-*) ${D}/usr/bin/luajit
+    ln -sf $(basename ${D}${bindir}/luajit-*) ${D}${bindir}/luajit
 }
 
-PACKAGES += 'luajit-common'
+PACKAGES += "luajit-common"
 
 # See the comment for EXTRA_OEMAKEINST. This is needed to ensure the hardcoded
 # paths are packaged regardless of what the libdir and datadir paths are.
-FILES_${PN} += "${prefix}/${baselib} ${prefix}/share"
-FILES_${PN} += "${libdir}/libluajit-5.1.so.2 \
+FILES:${PN} += "${prefix}/${baselib} ${prefix}/share"
+FILES:${PN} += "${libdir}/libluajit-5.1.so.2 \
     ${libdir}/libluajit-5.1.so.${PV} \
 "
-FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
+FILES:${PN}-dev += "${libdir}/libluajit-5.1.a \
     ${libdir}/libluajit-5.1.so \
     ${libdir}/pkgconfig/luajit.pc \
 "
-FILES_luajit-common = "${datadir}/${BPN}-${PV}"
+FILES:luajit-common = "${datadir}/${BPN}-${PV}"
 
 # mips64/ppc/ppc64/riscv64 is not supported in this release
-COMPATIBLE_HOST_mipsarchn32 = "null"
-COMPATIBLE_HOST_mipsarchn64 = "null"
-COMPATIBLE_HOST_powerpc = "null"
-COMPATIBLE_HOST_powerpc64 = "null"
-COMPATIBLE_HOST_powerpc64le = "null"
-COMPATIBLE_HOST_riscv64 = "null"
-COMPATIBLE_HOST_riscv32 = "null"
+COMPATIBLE_HOST:mipsarchn32 = "null"
+COMPATIBLE_HOST:mipsarchn64 = "null"
+COMPATIBLE_HOST:powerpc = "null"
+COMPATIBLE_HOST:powerpc64 = "null"
+COMPATIBLE_HOST:powerpc64le = "null"
+COMPATIBLE_HOST:riscv64 = "null"
+COMPATIBLE_HOST:riscv32 = "null"
