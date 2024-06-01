@@ -4,6 +4,8 @@ DESCRIPTION = "Terminal controlled menu manager known as Flexmenu."
 
 DEPENDS += "neutrino-fonts-extra"
 
+PR = "r1"
+
 SRC_URI += " \
 	file://0001-shellexec-Makefile.am-fix-install.patch \
 "
@@ -19,7 +21,7 @@ do_install () {
 	oe_runmake install DESTDIR=${D}
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
 	/share \
 	/var \
 "
