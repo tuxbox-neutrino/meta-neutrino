@@ -21,7 +21,8 @@ DEPENDS = "freetype ffmpeg zlib libxml2 virtual/libiconv openssl libpng curl gif
 PROVIDES = "virtual/neutrino-plugin-${PLUGIN_NAME}"
 RPROVIDES_${PN} = "virtual/neutrino-plugin-${PLUGIN_NAME}"
 
-PV = "${SRCPV}"
+# PV = "${SRCPV}"
+PR = "r1"
 SRCREV = "${AUTOREV}"
 
 inherit gitpkgv
@@ -96,15 +97,15 @@ do_compile () {
 }
 
 do_install:append() {
-	rm -rf ${D}/usr/share/tuxbox/neutrino/plugins/*.la
-	rm -rf ${D}/usr/share/tuxbox/neutrino/luaplugins
+	rm -rf ${D}/${N_PLUGIN_DIR}/*.la
+	rm -rf ${D}/${datadir}/tuxbox/neutrino/luaplugins
 }
 
-FILES_${PN} = " \
-	/usr \
-	/etc \
+FILES:${PN} = " \
+	${N_PREFIX} \
+	${sysconfdir} \
 "
 
-FILES_${PN}-dbg += " \
-	/usr/share/tuxbox/neutrino/plugins/.debug \
+FILES:${PN}-dbg += " \
+	${N_PLUGIN_DIR}/.debug \
 "
