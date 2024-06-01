@@ -7,10 +7,14 @@ SRC_URI = " \
 "
 
 LICENSE = "GPL-2.0"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=801f80980d171dd6425610833a22dbe6"
 
+inherit gitpkgv
+# We have more as one repository without tags, so we
+# suppress warnings for that.
+GITPKGVTAG_NO_WARN_ON_NO_TAG = "1"
 SRCREV = "${AUTOREV}"
-PV = "git-${SRCPV}"
+PKGV = "${GITPKGVTAG}"
 PR = "r1"
 
 S = "${WORKDIR}/${SRC_DEST_SUFFIX}"
