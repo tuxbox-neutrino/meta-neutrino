@@ -19,7 +19,7 @@ do_install_prepend () {
 #	ln -sf ${N_LUAPLUGIN_DIR} ${D}/share/tuxbox/neutrino/plugins
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
 	/usr \
 	/share \
 	${N_LUAPLUGIN_DIR} \
