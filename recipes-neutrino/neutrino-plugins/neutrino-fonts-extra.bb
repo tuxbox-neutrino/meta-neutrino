@@ -25,7 +25,7 @@ SRC_URI = " \
 
 SRC_URI[sha256sum] = "e83b036f6d4e281807b8110c5871bafb7a936d0f25f0d38fa41a00cf2b055261"
 
-PR = "r3"
+PR = "r4"
 
 do_configure[noexec] = "1"
 
@@ -36,6 +36,6 @@ do_install () {
 	install -m 0644 ${WORKDIR}/pakenham.ttf ${D}/${N_FONTDIR}
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
 	${N_FONTDIR} \
 "
