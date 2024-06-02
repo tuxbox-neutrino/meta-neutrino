@@ -2,7 +2,7 @@ SUMMARY = "Library to abstract STB hardware. Supports Tripledragon, AZbox ME, Fu
 DESCRIPTION = "Library to abstract STB hardware."
 HOMEPAGE = "https://github.com/neutrino-mp"
 SECTION = "libs"
-LICENSE = "GPL-2.0-or-later"
+LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${THISDIR}/libstb-hal/COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
 
 #
