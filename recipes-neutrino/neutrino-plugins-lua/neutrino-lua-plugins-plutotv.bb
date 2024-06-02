@@ -1,7 +1,8 @@
 SUMMARY = "Neutrino LUA-Script Plugins for Pluto-TV."
 DESCRIPTION = "${SUMMARY}"
 MAINTAINER = "vanhofen"
-LICENSE = "WTFPLv2"
+LICENSE = "WTFPL"
+LIC_FILES_CHKSUM = "file://${THISDIR}/files/${LICENSE};md5=7993e3336259bdb618ad5a1afc872165"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
