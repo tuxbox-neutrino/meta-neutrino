@@ -3,10 +3,7 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${THISDIR}/${PN}/COPYING;md5=801f80980d171dd6425610833a22dbe6"
 
 PACKAGE_ARCH = "all"
-
-PV = "${FLAVOUR}-${SRCPV}"
-SRCREV = "${AUTOINC}"
-PR = "r1"
+PR = "r2"
 
 S = "${WORKDIR}/src"
 SRC_PREFIX = "git"
@@ -30,16 +27,16 @@ do_patch () {
 	rm -rf ${S}/widget
 	cp -a ${WORKDIR}/${SRC_PREFIX}_widget ${S}/widget
 	rm -rf ${S}/widget/.git
-	sed -i -e 's/= 1.0/= ${PV}/' ${S}/widget/Doxyfile
-	sed -i -e 's/AUTOINC/git/' ${S}/widget/Doxyfile
-	sed -i -e 's/Widget Documentation/Neutrino Widget Classes/' ${S}/widget/Doxyfile
+	sed -i -e "s/= 1.0/= ${PV}-$(date +"%Y-%m-%d")/" ${S}/widget/Doxyfile
+	sed -i -e "s/AUTOINC/git/" ${S}/widget/Doxyfile
+	sed -i -e "s/Widget Documentation/Neutrino Widget Classes/" ${S}/widget/Doxyfile
 
 	rm -rf ${S}/components
 	cp -a ${WORKDIR}/${SRC_PREFIX}_components ${S}/components
 	rm -rf ${S}/components/.git
-	sed -i -e 's/= 1.0/= ${PV}/' ${S}/components/Doxyfile
-	sed -i -e 's/AUTOINC/git/' ${S}/components/Doxyfile
-	sed -i -e 's/CComponents Documentation/Neutrino Component Classes/' ${S}/components/Doxyfile
+	sed -i -e "s/= 1.0/= ${PV}-$(date +"%Y-%m-%d")/" ${S}/components/Doxyfile
+	sed -i -e "s/AUTOINC/git/" ${S}/components/Doxyfile
+	sed -i -e "s/CComponents Documentation/Neutrino Component Classes/" ${S}/components/Doxyfile
 }
 
 do_compile () {
