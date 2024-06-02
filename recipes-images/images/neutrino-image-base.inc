@@ -333,8 +333,8 @@ EXTRA_IMAGEDEPENDS = " \
 	tuxmail \
 	tuxwetter \
 	\
-	themes-ni \
-	themes-tango \
+	neutrino-themes-ni \
+	neutrino-themes-tango \
 "
 
 
