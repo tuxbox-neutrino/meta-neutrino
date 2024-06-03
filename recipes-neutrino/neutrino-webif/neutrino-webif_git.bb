@@ -4,8 +4,9 @@ include ../neutrino/neutrino-common-vars.inc
 SUMMARY = "Webinterface for Neutrino GUI"
 DESCRIPTION = "Web Interface for controlling Neutrino GUI via browser"
 HOMEPAGE = "https://github.com/tuxbox-neutrino"
+MAINTAINER = "Tuxbox-Developers"
 SECTION = "libs"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "git://github.com/Tuxbox-Project/neutrino-webif.git;protocol=https"
@@ -21,11 +22,12 @@ RM_WORK_EXCLUDE += "${PN}"
 PROVIDES = "virtual/neutrino-webif"
 RPROVIDES_${PN} = "virtual/neutrino-webif"
 
-PR = "r1"
-VERSION_MAJOR = "3"
-VERSION_MINOR = "0"
-PV = "${VERSION_MAJOR}.${VERSION_MINOR}-${SRCPV}"
+PR = "r2"
 SRCREV = "${AUTOREV}"
+
+inherit gitpkgv
+PKGV = "${GITPKGVTAG}"
+GITPKGV_PREFIX = ""
 
 S = "${WORKDIR}/git"
 
@@ -33,10 +35,8 @@ do_configure[noexec] = "1"
 
 do_compile[noexec] = "1"
 
-inherit gitpkgv
-
 do_install () {
-	export VERSION="${VERSION_MAJOR}.${VERSION_MINOR}.${GITPKGV}"
+	export VERSION="${PKGV}"
 	export PACKAGE_NAME="${PN}"
 	export PRETTY_PACKAGE_NAME="${DESCRIPTION}"
 
