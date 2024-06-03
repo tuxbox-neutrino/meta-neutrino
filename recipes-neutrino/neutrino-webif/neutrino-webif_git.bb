@@ -12,8 +12,8 @@ SRC_URI = "git://github.com/Tuxbox-Project/neutrino-webif.git;protocol=https"
 
 PACKAGE_ARCH = "all"
 
-DEPENDS = " \
-	neutrino-mp \
+DEPENDS += " \
+	neutrino \
 "
 
 RM_WORK_EXCLUDE += "${PN}"
