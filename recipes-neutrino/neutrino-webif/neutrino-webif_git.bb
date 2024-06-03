@@ -80,6 +80,6 @@ do_install () {
 	oe_runmake  install
 }
 
-FILES_${PN} = "\
+FILES:${PN} = "\
 	${N_PRIVATE_HTTPDDIR}\
 "	
