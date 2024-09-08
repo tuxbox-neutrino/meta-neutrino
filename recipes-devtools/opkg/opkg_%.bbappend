@@ -9,7 +9,8 @@ LIC_FILES_CHKSUM += " \
 "
 
 SRCREV_opkg-upgrade = "${AUTOREV}"
-SRCREV_FORMAT = "${BPN}-${PV}"
+
+PR_append = ".1"
 
 SRC_URI += "git://github.com/dbt1/opkg-upgrade.git;protocol=https;name=opkg-upgrade"
 
