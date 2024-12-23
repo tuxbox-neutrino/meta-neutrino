@@ -4,15 +4,7 @@ DESCRIPTION = "Terminal controlled menu manager known as Flexmenu."
 
 DEPENDS += "neutrino-fonts-extra"
 
-PR = "r1"
-
-SRC_URI += " \
-	file://0001-shellexec-Makefile.am-fix-install.patch \
-"
-
-do_patch () {
-	git -C ${S}/${PLUGIN_NAME} apply ${S}/0001-shellexec-Makefile.am-fix-install.patch
-}
+PR = "r2"
 
 ## Hack: make install is doing strange things, try to fix it here
 do_install () {
