@@ -7,15 +7,19 @@ SECTION = "neutrino-plugin"
 MAINTAINER = "Fred Feuerstein"
 HOMEPAGE = "https://github.com/neutrino-images/ni-logo-stuff"
 
-# The provider of the logos has not defined a clear license. However, according to current knowledge,
-# the provider insists that no one may package these graphics into their own packages and distribute them.
-# Additionally, users are explicitly tracked through its integrated update tool.
-# We will not adopt this practice. In order to offer reasonable packaging, we use only the Git revision of the GitHub repository.
-# Should this change, as is usual, possible updates will be indicated by the package manager.
-# This is sufficient to offer available updates in the usual way as a package. The only difference is that no installation files are provided.
-# For the actual installation, we use our own logo updater, as usual, which can still be used as before but is utilized by the package manager
-# for post-installation to install the logos. This is thus comparable to a virtual package that brings no files but only does what users
-# would otherwise have to do manually to download and install the graphic files on their STBs.
+# The provider of the logos has not defined a clear license. However, based on current knowledge,
+# the provider explicitly prohibits others from packaging these graphics into their own distributions
+# for redistribution. Additionally, users are tracked through the integrated update tool provided by the supplier.
+#
+# We do not endorse this approach. To ensure a reasonable packaging solution, we rely solely on the
+# Git revision of the GitHub repository to trigger updates. For updates, as is customary,
+# the package manager will notify users of any available updates.
+# This method is sufficient to provide updates in the standard way as a package, with the only exception being that no installation files are included.
+#
+# Therefore, manual installation is rarely required. However, for manual logo installations,
+# users can still utilize our logo updater tool, as usual, to manage and install the logos manually.
+# This approach is comparable to a virtual package that does not include any files but automates
+# the steps users would otherwise need to perform manually to download and install the graphic files on their STBs.
 
 LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = ""
