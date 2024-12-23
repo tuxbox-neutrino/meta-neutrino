@@ -4,7 +4,7 @@ MAINTAINER = "TangoCash"
 SRC_URI += "git://github.com/TangoCash/libstb-hal-tangos.git;protocol=https \
 "
 
-PV = "${FLAVOUR}-git${SRCPV}"
+PKGV = "${FLAVOUR}-${GITPKGV}"
 
 EXTRA_OECONF:append += " \
 			--enable-reschange \

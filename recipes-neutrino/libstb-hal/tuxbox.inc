@@ -4,7 +4,7 @@ MAINTAINER = "Tuxbox-Developers"
 SRC_URI += "git://github.com/tuxbox-neutrino/library-stb-hal.git;branch=mpx;protocol=https \
 "
 
-PV = "1.5.0+${SRCPV}"
+PKGV = "${GITPKGVTAG}"
 
 EXTRA_OECONF:append += " \
 			--with-boxtype=${TARGET_ARCH}box \

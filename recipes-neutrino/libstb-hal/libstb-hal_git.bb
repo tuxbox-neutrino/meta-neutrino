@@ -28,8 +28,10 @@ PROVIDES = "virtual/libstb-hal"
 RPROVIDES_${PN} = "virtual/libstb-hal"
 RDEPENDS_${PN} = "ffmpeg"
 
+SRCPV_WORKSPACE = "9999"
+PKGV = "${GITPKGVTAG}"
 SRCREV = "${AUTOREV}"
-#PV = "0.1+git${SRCPV}"
+PR = "r4"
 
 # libstb-hal-bin package for testing binaries etc.
 PACKAGES += "${PN}-bin"
@@ -44,7 +46,7 @@ S = "${WORKDIR}/git"
 
 # the build system is not really broken wrt separate builddir,
 # but I want it to build inside the source for various reasons :-)
-inherit autotools pkgconfig
+inherit autotools pkgconfig gitpkgv
 
 LDFLAGS += " -Wl,-rpath-link,${STAGING_LIBDIR} -L${STAGING_LIBDIR} -lrt -lavformat -lavcodec -lavutil -lswscale -lswresample"
 
