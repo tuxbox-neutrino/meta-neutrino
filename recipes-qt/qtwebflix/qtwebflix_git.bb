@@ -49,4 +49,4 @@ FILES_${PN} = "/usr/bin/qtwebflix \
 
 RDEPENDS_${PN} += "qtwebengine qtflashplayer qtwidevine libnss-mdns"
 
-PATH_prepend = "${STAGING_DIR_NATIVE}${OE_QMAKE_PATH_QT_BINS}:"
+PATH:prepend = "${STAGING_DIR_NATIVE}${OE_QMAKE_PATH_QT_BINS}:"

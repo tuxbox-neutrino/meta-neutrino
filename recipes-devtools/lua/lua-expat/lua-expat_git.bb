@@ -18,7 +18,7 @@ PV = "1.3.3"
 inherit autotools-brokensep
 CFLAGS += "-I${STAGING_INCDIR}/luajit-2.1"
 
-do_configure_prepend () {
+do_configure:prepend () {
         sed -i "s|CFLAGS =.*|CFLAGS = ${CFLAGS} -fPIC|" ${S}/makefile
         sed -i "s|CC =.*|CC = ${CC}|" ${S}/makefile
         sed -i "s|-lexpat|${LDFLAGS}|" ${S}/makefile

@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 DEPENDS = "libusb1 openssl pcsc-lite"
 
-DEPENDS_APPEND_libc-uclibc += "virtual/libstb-hal"
+DEPENDS_APPEND:libc-uclibc += "virtual/libstb-hal"
 
 SRC_URI = "git://github.com/Schimmelreiter/oscam-smod.git;protocol=https \
            file://oscam.service \

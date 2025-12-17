@@ -48,7 +48,7 @@ FILES_fuse-utils = "${bindir} ${base_sbindir}"
 DEBIAN_NOAUTONAME_fuse-utils = "1"
 DEBIAN_NOAUTONAME_${PN}-dbg = "1"
 
-do_configure_prepend() {
+do_configure:prepend() {
     # Make this explicit so overriding base_sbindir propagates properly.
     export MOUNT_FUSE_PATH="${base_sbindir}"
 }
@@ -69,7 +69,7 @@ do_install:append() {
     fi
 }
 
-do_install:append_class-nativesdk() {
+do_install:append:class-nativesdk() {
     install -d ${D}${sysconfdir}
     mv ${D}/etc/* ${D}${sysconfdir}/
     rmdir ${D}/etc

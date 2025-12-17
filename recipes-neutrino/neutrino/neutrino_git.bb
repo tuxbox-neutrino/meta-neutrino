@@ -35,6 +35,6 @@ S = "${WORKDIR}/git"
 include neutrino.inc
 include ${FLAVOUR}.inc
 
-do_configure_prepend() {
+do_configure:prepend() {
 	cp ${WORKDIR}/neutrino.ttf ${S}/data/fonts
 }

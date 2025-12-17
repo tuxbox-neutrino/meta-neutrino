@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/ffmpeg:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/ffmpeg:"
 
 DEPENDS:append += "libass libxml2 freetype rtmpdump"
 

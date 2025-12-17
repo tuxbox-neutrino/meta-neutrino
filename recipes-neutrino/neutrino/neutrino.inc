@@ -144,7 +144,7 @@ N_LDFLAGS += "-Wl,--hash-style=gnu -Wl,-rpath-link, ${STAGING_LIBDIR} -lcurl -ld
 N_CPPFLAGS = "-DDYNAMIC_LUAPOSIX -D__KERNEL_STRICT_NAMES -D__STDC_CONSTANT_MACROS"
 CPPFLAGS = "${N_CPPFLAGS}"
 
-do_configure_prepend() {
+do_configure:prepend() {
         ln -sf ${B}/src/gui/version.h ${S}/src/gui/
 }
 
@@ -155,7 +155,7 @@ do_compile () {
 }
 
 
-do_install_prepend () {
+do_install:prepend () {
 	install -d ${D}${sysconfdir}/network
 	install -d ${D}${systemd_unitdir}/system
 	install -d ${D}${bindir}

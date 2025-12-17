@@ -8,7 +8,7 @@ SRC_URI[sha256sum] = "b1c649b4fed7252711011da235782b2c260b32e004058d62473471e5cd
 
 inherit pypi setuptools3
 
-do_compile_prepend() {
+do_compile:prepend() {
     rm -rf ${S}/evdev/ecodes.c
 }
 

@@ -18,12 +18,12 @@ RPROVIDES_${PN} += "virtual/lua"
 inherit pkgconfig binconfig ptest
 
 UCLIBC_PATCHES += "file://uclibc-pthread.patch"
-SRC_URI:append_libc-uclibc = "${UCLIBC_PATCHES}"
+SRC_URI:append:libc-uclibc = "${UCLIBC_PATCHES}"
 
 TARGET_CC_ARCH += " -fPIC ${LDFLAGS}"
 EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -DLUA_USE_LINUX -fPIC' MYLDFLAGS='${LDFLAGS}'"
 
-do_configure_prepend() {
+do_configure:prepend() {
     sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
 }
 

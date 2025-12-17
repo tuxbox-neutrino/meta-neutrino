@@ -12,7 +12,7 @@ RM_WORK_EXCLUDE += "${PN}"
 
 WEBMIN_THEME ?= "authentic-theme"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${WEBMIN_THEME}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${WEBMIN_THEME}:"
 
 # webmin
 SRC_URI = " \
@@ -205,7 +205,7 @@ RRECOMMENDS_${PN}-module-exports = "perl-module-file-basename perl-module-file-p
 RRECOMMENDS_${PN}-module-fdisk = "parted"
 RRECOMMENDS_${PN}-module-lvm = "lvm2"
 
-python populate_packages_prepend() {
+python populate_packages:prepend() {
     import os, os.path
 
     wadir = bb.data.expand('${libexecdir}/webmin', d)

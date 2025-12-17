@@ -62,7 +62,7 @@ CACHED_CONFIGUREVARS = "ac_cv_path_RANLIB=${RANLIB} \
                         piddir=/run \
 "
 
-do_configure_prepend () {
+do_configure:prepend () {
     if [ ! -e ${S}/acinclude.m4 ]; then
         cp ${S}/aclocal.m4 ${S}/acinclude.m4
     fi

@@ -6,8 +6,8 @@ PROVIDES = "libv4l media-ctl"
 
 DEPENDS = "jpeg \
            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
-DEPENDS:append_libc-musl = " argp-standalone"
-DEPENDS:append_class-target = " udev"
+DEPENDS:append:libc-musl = " argp-standalone"
+DEPENDS:append:class-target = " udev"
 LDFLAGS:append = " -pthread"
 
 inherit autotools gettext pkgconfig
@@ -52,5 +52,5 @@ FILES_libv4l-dev += "${includedir} ${libdir}/pkgconfig \
                      ${libdir}/libv4l*${SOLIBSDEV} ${libdir}/*.la \
                      ${libdir}/v4l*${SOLIBSDEV} ${libdir}/libv4l/*.la ${libdir}/libv4l/plugins/*.la"
 
-PARALLEL_MAKE_class-native = ""
+PARALLEL_MAKE:class-native = ""
 BBCLASSEXTEND = "native"

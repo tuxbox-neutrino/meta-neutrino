@@ -204,7 +204,7 @@ SYSTEMD_AUTO_ENABLE_${PN}-slapd ?= "disable"
 
 PACKAGES_DYNAMIC += "^${PN}-backends.* ^${PN}-backend-.*"
 
-python populate_packages_prepend () {
+python populate_packages:prepend () {
     backend_dir    = d.expand('${libexecdir}/openldap')
     do_split_packages(d, backend_dir, 'back_([a-z]*)\-.*\.so\..*$', 'openldap-backend-%s', 'OpenLDAP %s backend', extra_depends='', allow_links=True)
 

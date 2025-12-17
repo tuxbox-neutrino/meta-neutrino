@@ -3,7 +3,7 @@ SUMMARY = "Kodi Media Center"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=7b423f1c9388eae123332e372451a4f7"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 PACKAGE_ARCH = "${MACHINE}"
 
@@ -109,7 +109,7 @@ SRC_URI:append = "git://github.com/xbmc/xbmc.git;protocol=https;branch=Leia \
            file://0001-kodi-adjust-path-for-mmc-mount.patch \
           "
 
-SRC_URI:append_libc-musl = " \
+SRC_URI:append:libc-musl = " \
            file://0002-Fix-file_Emu-on-musl.patch \
            file://0003-Remove-FILEWRAP.patch \
 "
@@ -207,7 +207,7 @@ export PYTHON_DIR
 
 export TARGET_PREFIX
 
-do_configure_prepend() {
+do_configure:prepend() {
     # Ensure 'nm' can find the lto plugins 
     liblto=$(find ${STAGING_DIR_NATIVE} -name "liblto_plugin.so.0.0.0")
     mkdir -p ${STAGING_LIBDIR_NATIVE}/bfd-plugins
@@ -267,7 +267,7 @@ RRECOMMENDS_${PN}:append = " libcec \
                              alsa-plugins \
                            "
 
-RRECOMMENDS_${PN}:append_libc-glibc = " glibc-charmap-ibm850 \
+RRECOMMENDS_${PN}:append:libc-glibc = " glibc-charmap-ibm850 \
                                         glibc-gconv-ibm850 \
                                         glibc-charmap-ibm437 \
                                         glibc-gconv-ibm437 \

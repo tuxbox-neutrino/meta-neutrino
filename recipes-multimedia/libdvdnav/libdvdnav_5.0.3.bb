@@ -10,5 +10,5 @@ SRC_URI[sha256sum] = "5097023e3d2b36944c763f1df707ee06b19dc639b2b68fb30113a5f2cb
 
 inherit autotools lib_package binconfig pkgconfig
 
-CONFIGUREOPTS_remove = "--disable-silent-rules"
+CONFIGUREOPTS:remove = "--disable-silent-rules"
 

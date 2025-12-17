@@ -21,6 +21,6 @@ PROVIDES += "libcharset"
 
 EXTRA_OECONF = "--enable-shared"
 
-do_install_append() {
+do_install:append() {
   chrpath -d ${D}${bindir}/iconv
 }

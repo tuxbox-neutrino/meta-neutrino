@@ -27,7 +27,7 @@ RDEPENDS_${PN}_class-target += "\
     ${PYTHON_PN}-setuptools \
 "
 
-RDEPENDS_${PN}-tests_class-target += "\
+RDEPENDS_${PN}-tests:class-target += "\
     ${PYTHON_PN}-unittest \
     ${PYTHON_PN}-xml \
 "

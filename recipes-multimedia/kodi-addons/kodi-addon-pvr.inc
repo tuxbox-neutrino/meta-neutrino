@@ -42,7 +42,7 @@ EXTRA_OECMAKE = " \
     -DXLOCALE_NOT_USED=1 \
 "
 
-do_compile_prepend() {
+do_compile:prepend() {
 	sed -i -e 's:I/usr/include:I${STAGING_INCDIR}:g' \
 	       -e 's:-pipe:${HOST_CC_ARCH} ${TOOLCHAIN_OPTIONS} -pipe:g' \
 		   -e 's:/recipe-sysroot-native/usr/include:/recipe-sysroot/usr/include:g' \

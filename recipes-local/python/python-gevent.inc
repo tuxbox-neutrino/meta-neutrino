@@ -14,7 +14,7 @@ RDEPENDS_${PN} = "${PYTHON_PN}-greenlet \
 		  ${PYTHON_PN}-pprint \
 		 "
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/python-gevent:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/python-gevent:"
 
 SRC_URI:append = " \
     file://libev-conf.patch;patch=1;pnum=1 \

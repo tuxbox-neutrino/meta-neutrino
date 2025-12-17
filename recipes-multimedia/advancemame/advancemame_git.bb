@@ -19,7 +19,7 @@ DEPENDS = "virtual/libsdl2 alsa-lib ncurses freetype zlib expat"
 
 inherit autotools-brokensep pkgconfig gettext
 
-do_configure_prepend() {
+do_configure:prepend() {
     # Upstream doesn't ship this and autoreconf won't install it as automake isn't used.
     cp -f $(automake --print-libdir)/install-sh ${S}/
 }

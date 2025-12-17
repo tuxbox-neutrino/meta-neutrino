@@ -28,7 +28,7 @@ EXTRA_OECMAKE = " -DCMAKE_INSTALL_PREFIX_TOOLCHAIN=${STAGING_DIR_HOST}${prefix} 
                    -DCMAKE_PREFIX_PATH=${STAGING_DIR_HOST}${prefix} \
                  "
 
-do_compile_prepend() {
+do_compile:prepend() {
 	sed -i -e 's:I/usr/include:I${STAGING_INCDIR}:g' \
 	       -e 's:-pipe:${HOST_CC_ARCH} ${TOOLCHAIN_OPTIONS} -pipe:g' \
 	          ${B}/CMakeFiles/kodiplatform.dir/flags.make

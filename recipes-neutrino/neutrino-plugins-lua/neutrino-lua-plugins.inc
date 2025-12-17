@@ -13,7 +13,7 @@ SUMMARY = "${PRE_DESCRIPTION} by ${MAINTAINER}"
 
 RDEPENDS_${PN} = "lua-feedparser lua-expat lua-json luaposix"
 
-do_install_prepend () {
+do_install:prepend () {
 	install -d ${D}${N_LUAPLUGIN_DIR}
 	install -d ${D}/share/tuxbox/neutrino
 #	ln -sf ${N_LUAPLUGIN_DIR} ${D}/share/tuxbox/neutrino/plugins

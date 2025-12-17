@@ -14,7 +14,7 @@ SRC_URI[authen-pam-perl-0.16.sha256sum] = "0e949bd9a2a9df0f829971030fe9169cbaf6c
 
 S = "${WORKDIR}/Authen-PAM-${PV}"
 
-do_configure_prepend () {
+do_configure:prepend () {
 	autoreconf --verbose --install --force
 	mkdir -p m4
 	autoreconf -Wcross --verbose --install --force || oefatal "autoreconf execution failed."

@@ -1,7 +1,7 @@
 SUMMARY = 'Customize stuff in the image without having to touch other packages'
 LICENSE = "MIT"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 inherit allarch
 

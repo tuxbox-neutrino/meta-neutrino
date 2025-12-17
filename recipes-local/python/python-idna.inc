@@ -11,7 +11,7 @@ RDEPENDS_${PN}_class-target = "\
 "
 
 # Remove bundled egg-info
-do_compile_prepend() {
+do_compile:prepend() {
     rm -rf ${S}/idna.egg-info
 }
 

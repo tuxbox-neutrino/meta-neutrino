@@ -15,12 +15,12 @@ EXTRA_OEMAKE += '"INCLUDES=-I${STAGING_INCDIR} -I${STAGING_INCDIR}/freetype2 -I$
 
 inherit autotools-brokensep pkgconfig
 
-do_configure_prepend() {
+do_configure:prepend() {
 	#hack: we dont have io.h for arm 32bit
 	touch ${STAGING_INCDIR}/sys/io.h
 }
 
-do_install_prepend() {
+do_install:prepend() {
 	install -d ${D}/etc/udev/rules.d
 }
 

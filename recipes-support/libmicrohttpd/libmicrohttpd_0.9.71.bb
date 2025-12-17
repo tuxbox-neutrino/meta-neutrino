@@ -18,7 +18,7 @@ CFLAGS += "-pthread -D_REENTRANT"
 EXTRA_OECONF += "--disable-static --with-gnutls=${STAGING_LIBDIR}/../"
 
 PACKAGECONFIG ?= "curl https"
-PACKAGECONFIG:append_class-target = "\
+PACKAGECONFIG:append:class-target = "\
         ${@bb.utils.filter('DISTRO_FEATURES', 'largefile', d)} \
 "
 PACKAGECONFIG[largefile] = "--enable-largefile,--disable-largefile,,"

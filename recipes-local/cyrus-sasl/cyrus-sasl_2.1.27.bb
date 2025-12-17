@@ -40,7 +40,7 @@ PACKAGECONFIG[ntlm] = "--enable-ntlm=yes,--enable-ntlm=no,,"
 
 CFLAGS += "-fPIC"
 
-do_configure_prepend () {
+do_configure:prepend () {
     # make it be able to work with db 5.0 version
     local sed_files="sasldb/db_berkeley.c utils/dbconverter-2.c"
     for sed_file in $sed_files; do
@@ -48,7 +48,7 @@ do_configure_prepend () {
     done
 }
 
-do_compile_prepend () {
+do_compile:prepend () {
     cd include
     ${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS} ${S}/include/makemd5.c -o makemd5
     touch makemd5.o makemd5.lo makemd5

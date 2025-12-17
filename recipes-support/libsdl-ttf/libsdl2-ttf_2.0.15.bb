@@ -15,7 +15,7 @@ S = "${WORKDIR}/SDL2_ttf-${PV}"
 
 inherit autotools pkgconfig
 
-do_configure_prepend() {
+do_configure:prepend() {
     touch ${S}/NEWS ${S}/README ${S}/AUTHORS ${S}/ChangeLog
 
     # Removing these files fixes a libtool version mismatch.

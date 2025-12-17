@@ -5,7 +5,7 @@ SECTION = "multimedia"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${WORKDIR}/x265_${PV}/COPYING;md5=c9e0427bc58f129f99728c62d4ad4091"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
 DEPENDS = "yasm"
 

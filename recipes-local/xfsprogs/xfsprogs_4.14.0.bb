@@ -49,7 +49,7 @@ CFLAGS:append += "-Wno-incompatible-pointer-types"
 
 EXTRA_OEMAKE = "DIST_ROOT='${D}'"
 
-do_configure_prepend () {
+do_configure:prepend () {
     export BUILD_CC="${BUILD_CC} ${BUILD_CFLAGS}"
     # Prevent Makefile from calling configure without arguments,
     # when do_configure gets called for a second time.

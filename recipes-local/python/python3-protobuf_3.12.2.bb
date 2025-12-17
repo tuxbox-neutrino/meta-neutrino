@@ -35,6 +35,6 @@ BBCLASSEXTEND = "native nativesdk"
 DISTUTILS_BUILD_ARGS += "--cpp_implementation"
 DISTUTILS_INSTALL_ARGS += "--cpp_implementation"
 
-do_compile_prepend_class-native () {
+do_compile_prepend:class-native () {
     export KOKORO_BUILD_NUMBER="1"
 }

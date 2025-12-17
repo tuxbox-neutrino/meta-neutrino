@@ -16,7 +16,7 @@ inherit autotools binconfig-disabled lib_package pkgconfig
 
 # Enable gnutls or openssl, not both
 PACKAGECONFIG ?= "expat gnutls libproxy webdav zlib"
-PACKAGECONFIG_class-native = "expat gnutls webdav zlib"
+PACKAGECONFIG:class-native = "expat gnutls webdav zlib"
 
 PACKAGECONFIG[expat] = "--with-expat,--without-expat,expat"
 PACKAGECONFIG[gnutls] = "--with-ssl=gnutls,,gnutls"

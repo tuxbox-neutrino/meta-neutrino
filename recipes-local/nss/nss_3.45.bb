@@ -9,7 +9,7 @@ HOMEPAGE = "http://www.mozilla.org/projects/security/pki/nss/"
 SECTION = "libs"
 
 DEPENDS = "sqlite3 nspr zlib nss-native"
-DEPENDS_class-native = "sqlite3-native nspr-native zlib-native"
+DEPENDS:class-native = "sqlite3-native nspr-native zlib-native"
 
 LICENSE = "MPL-2.0 | (MPL-2.0 & GPL-2.0+) | (MPL-2.0 & LGPL-2.1+)"
 
@@ -48,21 +48,21 @@ TDS = "${S}/tentative-dist-staging"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
-do_configure_prepend_libc-musl () {
+do_configure_prepend:libc-musl () {
     sed -i -e '/-DHAVE_SYS_CDEFS_H/d' ${S}/nss/lib/dbm/config/config.mk
 }
 
-do_compile_prepend_class-native() {
+do_compile_prepend:class-native() {
     export NSPR_INCLUDE_DIR=${STAGING_INCDIR_NATIVE}
     export NSPR_LIB_DIR=${STAGING_LIBDIR_NATIVE}
     export NSS_ENABLE_WERROR=0
 }
 
-do_compile_prepend_class-nativesdk() {
+do_compile_prepend:class-nativesdk() {
     export LDFLAGS=""
 }
 
-do_compile_prepend_class-native() {
+do_compile_prepend:class-native() {
     # Need to set RPATH so that chrpath will do its job correctly
     RPATH="-Wl,-rpath-link,${STAGING_LIBDIR_NATIVE} -Wl,-rpath-link,${STAGING_BASE_LIBDIR_NATIVE} -Wl,-rpath,${STAGING_LIBDIR_NATIVE} -Wl,-rpath,${STAGING_BASE_LIBDIR_NATIVE}"
 }
@@ -122,7 +122,7 @@ do_compile() {
 
 do_compile[vardepsexclude] += "SITEINFO_BITS"
 
-do_install_prepend_class-nativesdk() {
+do_install_prepend:class-nativesdk() {
     export LDFLAGS=""
 }
 
@@ -216,7 +216,7 @@ do_install:append() {
     sed -i s:OEINCDIR:${includedir}/nss3:g ${D}${libdir}/pkgconfig/nss.pc
 }
 
-do_install:append_class-target() {
+do_install:append:class-target() {
     # It used to call certutil to create a blank certificate with empty password at
     # build time, but the checksum of key4.db changes every time when certutil is called.
     # It causes non-determinism issue, so provide databases with a blank certificate

@@ -59,7 +59,7 @@ EXTRA_OECONF += "\
 
 EXTRA_OEMAKE += "'ARFLAGS=rc'"
 
-do_configure_prepend() {
+do_configure:prepend() {
 	export AUTOMAKE="automake --foreign --add-missing"
 }
 

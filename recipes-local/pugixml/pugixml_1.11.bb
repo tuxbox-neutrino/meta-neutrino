@@ -18,6 +18,6 @@ S = "${WORKDIR}/${PN}-${PV}"
 
 inherit cmake pkgconfig gettext
 
-do_configure_prepend () {
+do_configure:prepend () {
         sed -i "s|\/\/ #define PUGIXML_HAS_LONG_LONG|#define PUGIXML_HAS_LONG_LONG|" ${S}/src/pugiconfig.hpp
 }

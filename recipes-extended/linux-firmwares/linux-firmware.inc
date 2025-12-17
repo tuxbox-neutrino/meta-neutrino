@@ -14,5 +14,5 @@ S = "${WORKDIR}/git"
 SRCREV = "${AUTOREV}"
 
 PACKAGES = "${PN}"
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 FILES_${PN} += "${base_libdir}/firmware"

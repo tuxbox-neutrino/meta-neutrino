@@ -50,7 +50,7 @@ do_install() {
     cp -pPR ${S}/util/szap/README   ${D}/${docdir}/dvb-apps/szap/
 }
 
-python populate_packages_prepend () {
+python populate_packages:prepend () {
     dvb_libdir = bb.data.expand('${libdir}', d)
     do_split_packages(d, dvb_libdir, '^lib(.*)\.so$', 'lib%s', 'DVB %s package', extra_depends='', allow_links=True)
     do_split_packages(d, dvb_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'DVB %s development package', extra_depends='${PN}-dev')

@@ -32,6 +32,6 @@ PACKAGECONFIG[hwloc] = "--enable-hwloc,--disable-hwloc,hwloc"
 PACKAGECONFIG[setuid] = "--enable-setuid,--disable-setuid"
 PACKAGECONFIG[delayacct] = "--enable-delayacct,--disable-delayacct,libnl"
 
-do_configure_prepend () {
+do_configure:prepend () {
     rm -rf ${S}/config.h
 }

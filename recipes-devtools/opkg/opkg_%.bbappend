@@ -14,7 +14,7 @@ PR:append = ".1"
 
 SRC_URI += "git://github.com/dbt1/opkg-upgrade.git;protocol=https;name=opkg-upgrade"
 
-do_install_append () {
+do_install:append () {
         install -m 755 ${WORKDIR}/git/opkg-upgrade.sh ${D}${bindir}
         install -m 755 ${WORKDIR}/git/system-update ${D}${bindir}
 }

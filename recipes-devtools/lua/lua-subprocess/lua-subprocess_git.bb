@@ -24,7 +24,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
 
 CFLAGS:append += "-I${STAGING_INCDIR}"
 
-do_configure_prepend() {
+do_configure:prepend() {
 	cp -rf ${WORKDIR}/Makefile ${S}/Makefile
 }
 

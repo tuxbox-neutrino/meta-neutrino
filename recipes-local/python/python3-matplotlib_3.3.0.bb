@@ -34,7 +34,7 @@ RDEPENDS_${PN} = "\
     python3-pytz \
 "
 
-do_compile_prepend() {
+do_compile:prepend() {
     echo [libs] > ${S}/setup.cfg
     echo system_freetype = true >> ${S}/setup.cfg
 }

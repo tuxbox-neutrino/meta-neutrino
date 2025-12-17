@@ -19,7 +19,7 @@ SRC_URI[sha256sum] = "5e8cf1df262a3430e063d1ce8aa349f6987a8d78d64ce8f374c0b79bfd
 
 inherit autotools
 
-do_configure_prepend() {
+do_configure:prepend() {
     # remove failing test which checks for something that isn't even used
     sed -i -e '/ye_FUNC_SCANF_MODIF_SIZE_T/d' ${S}/configure.ac
 }

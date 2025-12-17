@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/base-files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/base-files:"
 
 RM_WORK_EXCLUDE += "${PN}"
 
@@ -68,7 +68,7 @@ do_install:append () {
 
 # 	Hack to remove dirty files from base-files package.
 # 	Allthough it's possible to remove some files from SRC_URI with help of local.conf with such line:
-#	SRC_URI_remove_pn-base-files = " file1 file2 ... "
+#	SRC_URI_remove:pn-base-files = " file1 file2 ... "
 #
 # 	... despite that without any check for existing files the do_install:append task will execute all defined install commands
 # 	so the install task will fail and the build aborts.
@@ -78,7 +78,7 @@ do_install:append () {
 # 	If you want to remove some files, add file paths to ${WORKDIR}/.remove
 #	and the follow command will delete defined files.
 #	Here for example add these lines to your local.conf:
-# 	do_install_prepend_pn-base-files  () {
+# 	do_install_prepend:pn-base-files  () {
 # 		echo "${D}${systemd_unitdir}/system/<file-to-remove>" > ${WORKDIR}/.remove
 # 	}
 	if test -f ${WORKDIR}/.remove; then

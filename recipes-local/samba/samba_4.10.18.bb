@@ -29,7 +29,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
            file://0001-Add-options-to-configure-the-use-of-libbsd.patch \
            file://0001-nsswitch-nsstest.c-Avoid-nss-function-conflicts-with.patch \
            "
-SRC_URI:append_libc-musl = " \
+SRC_URI:append:libc-musl = " \
            file://samba-pam.patch \
            file://samba-4.3.9-remove-getpwent_r.patch \
            file://cmocka-uintptr_t.patch \
@@ -50,9 +50,9 @@ DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libld
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "pam"
 
-DEPENDS:append_libc-musl = " libtirpc"
-CFLAGS:append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
-LDFLAGS:append_libc-musl = " -ltirpc"
+DEPENDS:append:libc-musl = " libtirpc"
+CFLAGS:append:libc-musl = " -I${STAGING_INCDIR}/tirpc"
+LDFLAGS:append:libc-musl = " -ltirpc"
 
 INITSCRIPT_NAME = "samba"
 INITSCRIPT_PARAMS = "start 20 3 5 . stop 20 0 1 6 ."
@@ -232,7 +232,7 @@ python samba_populate_packages() {
     do_split_packages(d, moduledir, '^(.*)\.so$', 'samba-pdb-%s', 'Samba %s password backend', hook=module_hook, extra_depends='', prepend=True)
 }
 
-PACKAGESPLITFUNCS_prepend = "samba_populate_packages "
+PACKAGESPLITFUNCS:prepend = "samba_populate_packages "
 PACKAGES_DYNAMIC = "samba-auth-.* samba-pdb-.*"
 
 RDEPENDS_${PN} += "${PN}-base ${PN}-python3 ${PN}-dsdb-modules python3"

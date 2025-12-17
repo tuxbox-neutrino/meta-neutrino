@@ -13,6 +13,6 @@ do_patch () {
 }
 
 # "bindir" will never installed
-do_install_prepend () {
+do_install:prepend () {
 	install -d ${D}${bindir}
 }

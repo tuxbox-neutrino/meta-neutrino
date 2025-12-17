@@ -28,7 +28,7 @@ SYSTEMD_SERVICE_${PN} = "minidlna.service"
 
 CFLAGS += "-fcommon"
 
-do_configure_prepend() {
+do_configure:prepend() {
 	sed -i "s|Coolstream|${MACHINE}|" ${WORKDIR}/minidlna.conf
 }
 

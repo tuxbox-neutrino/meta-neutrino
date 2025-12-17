@@ -20,7 +20,7 @@ EXTRA_OECONF = "--disable-fortran --enable-shared --enable-threads"
 CFLAGS += "-D_GNU_SOURCE"
 
 FFTW_NEON = "${@bb.utils.contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)}"
-FFTW_NEON_class-native = ""
+FFTW_NEON:class-native = ""
 
 do_configure() {
     # configure fftw

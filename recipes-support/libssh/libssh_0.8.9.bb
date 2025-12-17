@@ -26,7 +26,7 @@ EXTRA_OECMAKE = " \
     -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
     "
 
-do_configure_prepend () {
+do_configure:prepend () {
     # Disable building of examples
     sed -i -e '/add_subdirectory(examples)/s/^/#DONOTWANT/' ${S}/CMakeLists.txt \
         || bbfatal "Failed to disable examples"

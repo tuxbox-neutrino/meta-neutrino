@@ -27,7 +27,7 @@ EXTRA_OECONF = "-enable-speed --enable-shared"
 EXTRA_OECONF:append_thumb = " --disable-aso --enable-fpm=default"
 EXTRA_OECONF:append_arm = " --enable-fpm=arm"
 
-do_configure_prepend () {
+do_configure:prepend () {
 #	damn picky automake...
 	touch NEWS AUTHORS ChangeLog
 }
