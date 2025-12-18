@@ -1,12 +1,12 @@
 HOMEPAGE = "https://github.com/TangoCash"
 MAINTAINER = "TangoCash"
 
-SRC_URI += "git://github.com/TangoCash/libstb-hal-tangos.git;protocol=https \
+SRC_URI += "git://github.com/TangoCash/libstb-hal-tangos.git;protocol=https;branch=master \
 "
 
 PKGV = "${FLAVOUR}-${GITPKGV}"
 
-EXTRA_OECONF:append += " \
+EXTRA_OECONF:append = " \
 			--enable-reschange \
                         --with-boxtype=${MACHINE} \
 "

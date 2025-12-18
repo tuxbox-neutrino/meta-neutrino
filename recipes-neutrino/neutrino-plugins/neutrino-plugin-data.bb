@@ -13,7 +13,7 @@ PV = "git+${SRCPV}"
 SRCREV = "${AUTOREV}"
 
 SRC_URI = " \
-	git://github.com/neutrino-images/ni-neutrino-plugins.git;protocol=https;subpath=data;destsuffix=git/data \
+	git://github.com/neutrino-images/ni-neutrino-plugins.git;protocol=https;subpath=data;destsuffix=git/data;branch=master \
 "
 
 S = "${WORKDIR}/git"

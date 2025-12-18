@@ -7,7 +7,7 @@ SECTION = "base/fonts"
 LICENSE = "zsh"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=1a4c4cda3e8096d2fd483ff2f4514fec"
 
-SRC_URI = "git://github.com/powerline/fonts.git;protocol=https"
+SRC_URI = "git://github.com/powerline/fonts.git;protocol=https;branch=master"
 
 SRCREV = "${AUTOREV}"
 PV = "${SRCPV}"

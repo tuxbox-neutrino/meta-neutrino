@@ -1,6 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI:append += " \
+SRC_URI:append = " \
 		file://0001-avoid-race-between-systemd-udevd-and-systemd-modules.patch \
 		file://service \
 		"

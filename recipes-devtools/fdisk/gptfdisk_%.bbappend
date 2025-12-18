@@ -1,1 +1,1 @@
-DEPENDS:append += "e2fsprogs"
+DEPENDS:append = " e2fsprogs"

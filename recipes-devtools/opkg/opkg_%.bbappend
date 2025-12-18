@@ -12,7 +12,7 @@ SRCREV_opkg-upgrade = "${AUTOREV}"
 
 PR:append = ".1"
 
-SRC_URI += "git://github.com/dbt1/opkg-upgrade.git;protocol=https;name=opkg-upgrade"
+SRC_URI += "git://github.com/dbt1/opkg-upgrade.git;protocol=https;name=opkg-upgrade;branch=master"
 
 do_install:append () {
         install -m 755 ${WORKDIR}/git/opkg-upgrade.sh ${D}${bindir}

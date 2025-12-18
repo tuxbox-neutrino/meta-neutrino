@@ -7,7 +7,7 @@ include lcd4linux.inc ${FLAVOUR}.inc
 
 RDEPENDS_${PN} = "lcd4linux"
 
-SRC_URI = "git://github.com/horsti58/SamsungLCD4Linux;protocol=https \
+SRC_URI = "git://github.com/horsti58/SamsungLCD4Linux;protocol=https;branch=master \
 "
 PATCHTOOL = "git"
 

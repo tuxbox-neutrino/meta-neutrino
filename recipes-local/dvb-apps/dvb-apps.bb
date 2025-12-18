@@ -4,7 +4,7 @@ SUMMARY = "Linux DVB API applications and utilities"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 
-SRC_URI = "git://github.com/atvcaptain/dvb-apps.git;protocol=https \
+SRC_URI = "git://github.com/atvcaptain/dvb-apps.git;protocol=https;branch=master \
            file://0001-dst_test.c-add-missing-defines.patch \
 	   file://0001-fix-for-glibc-2.31.patch \
            "

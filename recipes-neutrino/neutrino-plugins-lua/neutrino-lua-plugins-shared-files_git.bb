@@ -5,7 +5,7 @@ include neutrino-lua-plugins.inc
 SUMMARY = "Shared files and scripts for neutrino-lua-plugins"
 
 SRC_URI = " \
-	git://github.com/tuxbox-neutrino/plugin-scripts-lua.git;protocol=https;subpath=share;destsuffix=${SRC_DEST_SUFFIX} \
+	git://github.com/tuxbox-neutrino/plugin-scripts-lua.git;protocol=https;subpath=share;destsuffix=${SRC_DEST_SUFFIX};branch=master \
 "
 
 PV_LUA = "5.2"

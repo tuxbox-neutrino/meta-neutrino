@@ -10,7 +10,7 @@ RCONFLICTS_${PN} = "settings-annie-19.2e-13.0e-23.5e-28.2e-26.0e-0.8w-5.0w setti
 
 SRCREV = "${AUTOREV}"
 
-SRC_URI = "git://github.com/neutrino-hd/settings-annie.git;protocol=https"
+SRC_URI = "git://github.com/neutrino-hd/settings-annie.git;protocol=https;branch=master"
 
 do_install () {
 	install -d ${D}/etc/neutrino/config/zapit  

@@ -3,7 +3,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425
 
 RDEPENDS_${PN} += "git findutils util-linux-mountpoint perl-module-file-glob glibc-utils"
 
-SRC_URI = "git://github.com/neutrino-hd/etckeeper.git;protocol=https \
+SRC_URI = "git://github.com/neutrino-hd/etckeeper.git;protocol=https;branch=master \
            file://etckeeper.conf \
 "
 
@@ -25,7 +25,7 @@ do_install:append () {
 	ln -s /lib/systemd/system/etckeeper.timer ${D}${systemd_unitdir}/system/timers.target.wants/etckeeper.timer
 }
 
-FILES_${PN}:append += "/lib/systemd \
+FILES_${PN}:append = " /lib/systemd \
 		       /usr/share/bash-completion \
 		       /usr/lib/ \
 "

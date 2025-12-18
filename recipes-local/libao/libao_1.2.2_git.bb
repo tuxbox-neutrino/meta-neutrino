@@ -7,7 +7,7 @@ HOMEPAGE = "https://www.xiph.org/ao/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-SRC_URI="git://github.com/xiph/libao.git;tag=${PV};protocol=https"
+SRC_URI="git://github.com/xiph/libao.git;tag=${PV};protocol=https;branch=master"
 
 SRC_URI[md5sum] = "81b5d1b1d04a54a60d49c0fdf8c55d60"
 SRC_URI[sha256sum] = "5a094f6daf939717c833ccfb4feabe3a585a46771be9a0f1cf5f54ba8d80be19"

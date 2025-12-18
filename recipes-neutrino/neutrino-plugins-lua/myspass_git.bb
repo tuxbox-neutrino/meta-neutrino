@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/Ezak91/CST-MYSPASS-Plugin"
 
 PR = "r1"
 
-SRC_URI = "git://github.com/Ezak91/CST-MYSPASS-Plugin"
+SRC_URI = "git://github.com/Ezak91/CST-MYSPASS-Plugin;protocol=https;branch=master"
 
 SRCREV = "${AUTOREV}"
 

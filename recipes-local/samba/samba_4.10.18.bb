@@ -43,7 +43,7 @@ UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
 
 inherit systemd waf-samba cpan-base perlnative update-rc.d ccache
 # remove default added RDEPENDS on perl
-RDEPENDS_${PN}_remove = "perl"
+RDEPENDS:${PN}:remove = "perl"
 
 DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb libaio libpam libtasn1 jansson"
 
@@ -58,14 +58,14 @@ INITSCRIPT_NAME = "samba"
 INITSCRIPT_PARAMS = "start 20 3 5 . stop 20 0 1 6 ."
 
 SYSTEMD_PACKAGES = "${PN}-base ${PN}-ad-dc winbind"
-SYSTEMD_SERVICE_${PN}-base = "nmb.service smb.service"
-SYSTEMD_SERVICE_${PN}-ad-dc = "${@bb.utils.contains('PACKAGECONFIG', 'ad-dc', 'samba.service', '', d)}"
-SYSTEMD_SERVICE_winbind = "winbind.service"
+SYSTEMD_SERVICE:${PN}-base = "nmb.service smb.service"
+SYSTEMD_SERVICE:${PN}-ad-dc = "${@bb.utils.contains('PACKAGECONFIG', 'ad-dc', 'samba.service', '', d)}"
+SYSTEMD_SERVICE:winbind = "winbind.service"
 
 # There are prerequisite settings to enable ad-dc, so disable the service by default.
 # Reference:
 # https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller
-SYSTEMD_AUTO_ENABLE_${PN}-ad-dc = "disable"
+SYSTEMD_AUTO_ENABLE:${PN}-ad-dc = "disable"
 
 #cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
 #to cross Popen

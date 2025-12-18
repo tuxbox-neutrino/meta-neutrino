@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425
 inherit module
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/atvcaptain/mt7603u.git"
+SRC_URI = "git://github.com/atvcaptain/mt7603u.git;protocol=https;branch=master"
 
 EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR} KDIR=${STAGING_KERNEL_DIR}"
 

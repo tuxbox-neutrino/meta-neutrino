@@ -16,7 +16,7 @@ DEPENDS = " \
 inherit autotools-brokensep pkgconfig dos2unix
 
 SRC_URI = " \
-    git://github.com/joncampbell123/dosbox-x.git \
+    git://github.com/joncampbell123/dosbox-x.git;protocol=https;branch=master \
     file://0001-use-pkgconfig-to-find-sdl2.patch \
     file://0002-Enable-unaligned-memory-based-on-recipe-s-suggestion.patch \
     file://0003-Treat-all-arm-hosts-as-armv7.patch \

@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a3d89f44b0b29ba4bd48cf7cf62bc9c3"
 
 RDEPENDS_${PN} = "zsh"
 
-SRC_URI = "git://github.com/robbyrussell/oh-my-zsh.git;protocol=https \
+SRC_URI = "git://github.com/robbyrussell/oh-my-zsh.git;protocol=https;branch=master \
 	   file://zshrc \
 "
 

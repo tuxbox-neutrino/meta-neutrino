@@ -29,6 +29,10 @@ FTPGROUP = "ftp"
 
 inherit autotools-brokensep useradd systemd gettext
 
+USERADD_PACKAGES = "${PN}"
+GROUPADD_PARAM:${PN} = "-r ${FTPGROUP}"
+USERADD_PARAM:${PN} = "-r -g ${FTPGROUP} -d /var/ftp -s /bin/false ${FTPUSER}"
+
 EXTRA_OECONF += " \
 	--enable-dependency-tracking \
         --enable-curses \

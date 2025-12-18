@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425
 DEPENDS = "libusb1 libusb-compat gd ncurses readline jpeg dbus-glib sqlite3"
 RDEPENDS_${PN} = "jpeg samsunglcd4linux"
 
-SRC_URI = "git://github.com/TangoCash/lcd4linux.git;protocol=https \
+SRC_URI = "git://github.com/TangoCash/lcd4linux.git;protocol=https;branch=master \
 	file://lcd4linux.service \
 	file://0001-Makefile.am-fix-libtool-path.patch \
 	file://0002-gitignore-add-some-build-stuff.patch \
@@ -40,7 +40,7 @@ EXTRE_OECONF += "\
     --without-x \
 "
 
-LDFLAGS:append += "-lcurses"
+LDFLAGS:append = " -lcurses"
 
 inherit autotools systemd gettext pkgconfig
 

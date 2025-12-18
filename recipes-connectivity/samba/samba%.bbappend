@@ -1,8 +1,8 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-RDEPENDS_${PN}:append += "glibc-gconv-ibm850"
+RDEPENDS_${PN}:append = " glibc-gconv-ibm850"
 
-SRC_URI:append += "file://samba \
+SRC_URI:append = " file://samba \
 "
 
 do_install:append() {

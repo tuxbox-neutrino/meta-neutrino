@@ -4,7 +4,7 @@ LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://${THISDIR}/files/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
 
 SRC_URI = " \
-	git://github.com/pcherenkov/udpxy.git;protocol=https \
+	git://github.com/pcherenkov/udpxy.git;protocol=https;branch=master \
 	file://GPL-3.0 \
 	file://udpxy.service \
 	file://udpxy.default \

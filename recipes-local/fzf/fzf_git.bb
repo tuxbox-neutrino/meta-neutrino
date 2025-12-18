@@ -10,7 +10,7 @@ DEPENDS = "go-shellwords go-runewidth go-isatty golang-x-terminal golang-x-sys"
 
 GO_IMPORT = "github.com/junegunn/fzf"
 
-SRC_URI = "git://${GO_IMPORT} \
+SRC_URI = "git://${GO_IMPORT};protocol=https;branch=master \
 "
 
 SRCREV = "${AUTOREV}"

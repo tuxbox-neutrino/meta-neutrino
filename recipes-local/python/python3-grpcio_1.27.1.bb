@@ -14,7 +14,7 @@ SRC_URI:append:class-target = " file://ppc-boringssl-support.patch \
 SRC_URI[md5sum] = "ccaf4e7eb4f031d926fb80035d193b98"
 SRC_URI[sha256sum] = "a899725d34769a498ecd3be154021c4368dd22bdc69473f6ec46779696f626c4"
 
-RDEPENDS_${PN} = "${PYTHON_PN}-protobuf \
+RDEPENDS:${PN} = "${PYTHON_PN}-protobuf \
                   ${PYTHON_PN}-setuptools \
                   ${PYTHON_PN}-six \
 "
@@ -24,7 +24,7 @@ inherit pypi
 
 export GRPC_PYTHON_DISABLE_LIBC_COMPATIBILITY = "1"
 
-do_compile_prepend_toolchain-clang() {
+do_compile:prepend:toolchain-clang() {
     export GRPC_PYTHON_CFLAGS='-fvisibility=hidden -fno-wrapv -fno-exceptions'
 }
 

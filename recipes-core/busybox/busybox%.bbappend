@@ -7,7 +7,7 @@ SRC_URI[tarball.sha256sum] = "9d57c4bd33974140fd4111260468af22856f12f5b5ef7c70c8
 
 SYSTEMD_SERVICE_${PN} = "telnet.service"
 
-SRC_URI:append += "file://telnet.service \
+SRC_URI:append = " file://telnet.service \
 		   file://telnetd.cfg \
 		   file://dos2unix.cfg \
 		   file://ether-wake.cfg \

@@ -1,10 +1,10 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI:append += "file://bluetooth-poweron.service"
+SRC_URI:append = " file://bluetooth-poweron.service"
 
 RDEPENDS_${PN} = "firmware-rtl8761b"
 
-PACKAGECONFIG:append += "sixaxis"
+PACKAGECONFIG:append = " sixaxis"
 
 do_install:append() {
 	install -d ${D}${systemd_unitdir}/system/multi-user.target.wants

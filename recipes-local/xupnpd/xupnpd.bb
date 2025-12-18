@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://../LICENSE;md5=193ff0a3bc8b0d2cb0d1d881586d3388"
 DEPENDS += "virtual/lua openssl"
 SRCREV = "${AUTOREV}"
 SRC_URI = "\
-	git://github.com/clark15b/xupnpd.git;branch=master \
+	git://github.com/clark15b/xupnpd.git;branch=master;protocol=https \
 	file://xupnpd.patch \
 	file://xupnpd-dont-bind-daemon-to-specific-ip-address.patch \
 	file://xupnpd.service \

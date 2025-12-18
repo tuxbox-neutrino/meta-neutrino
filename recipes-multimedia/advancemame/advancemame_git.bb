@@ -4,7 +4,7 @@ SECTION = "emulators"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 
-SRC_URI = "git://github.com/amadvance/${BPN}.git;protocol=https \
+SRC_URI = "git://github.com/amadvance/${BPN}.git;protocol=https;branch=master \
 	   file://advmame.rc \
 	   file://advmame@.service \
 	   file://advmame.cfg \
@@ -39,4 +39,3 @@ FILES_${PN} += "${datadir} \
 "
 
 FILES_${PN}-doc += "${prefix}/doc/* ${prefix}/man/*"
-

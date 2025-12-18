@@ -21,10 +21,10 @@ SRCREV = "3316cd1adbbbd68b962558c635723f8259e19c9f"
 #PATCHTOOL = "git"
 
 PV = "18.0+gitr${SRCPV}"
-SRC_URI = "git://github.com/xbmc/xbmc.git;branch=master \
+SRC_URI = "git://github.com/xbmc/xbmc.git;branch=master;protocol=https \
           "
 
-inherit autotools-brokensep native gettext
+inherit autotools-brokensep gettext native
 
 S = "${WORKDIR}/git/tools/depends/native/TexturePacker/src"
 
@@ -33,5 +33,4 @@ S = "${WORKDIR}/git/tools/depends/native/TexturePacker/src"
 do_configure:prepend() {
     sed -i '/STATIC_FLAG/d' ${S}/Makefile.am
 }
-
 

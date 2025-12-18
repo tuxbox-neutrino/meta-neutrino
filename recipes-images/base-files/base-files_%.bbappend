@@ -26,7 +26,7 @@ SRC_URI += " \
 		file://vconsole.conf \
 "
 
-RDEPENDS_${PN}:append += "coreutils"
+RDEPENDS_${PN}:append = " coreutils"
 
 BASEFILESISSUEINSTALL = "do_custom_baseissueinstall"
 

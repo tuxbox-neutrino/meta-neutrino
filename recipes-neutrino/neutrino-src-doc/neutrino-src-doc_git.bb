@@ -15,9 +15,9 @@ SRCREV_widget = "${AUTOREV}"
 SRCREV_components = "${AUTOREV}"
 SRCREV_FORMAT = "doc"
 
-SRC_URI = "	git://github.com/tuxbox-neutrino/gui-neutrino.git;protocol=https;name=doc;subpath=doc;destsuffix=${SRC_PREFIX}_doc \
-		git://github.com/tuxbox-neutrino/gui-neutrino.git;protocol=https;name=widget;subpath=src/gui/widget;destsuffix=${SRC_PREFIX}_widget \
-		git://github.com/tuxbox-neutrino/gui-neutrino.git;protocol=https;name=components;subpath=src/gui/components;destsuffix=${SRC_PREFIX}_components \
+SRC_URI = "	git://github.com/tuxbox-neutrino/gui-neutrino.git;protocol=https;name=doc;subpath=doc;destsuffix=${SRC_PREFIX}_doc;branch=master \
+		git://github.com/tuxbox-neutrino/gui-neutrino.git;protocol=https;name=widget;subpath=src/gui/widget;destsuffix=${SRC_PREFIX}_widget;branch=master \
+		git://github.com/tuxbox-neutrino/gui-neutrino.git;protocol=https;name=components;subpath=src/gui/components;destsuffix=${SRC_PREFIX}_components;branch=master \
 "
 
 do_patch () {

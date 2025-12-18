@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
 DEPENDS = "freetype fontconfig"
 
-SRC_URI = "git://github.com/MaxWiesel/graphlcd-base.git;protocol=https"
+SRC_URI = "git://github.com/MaxWiesel/graphlcd-base.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git"
 SRCREV = "${AUTOREV}"

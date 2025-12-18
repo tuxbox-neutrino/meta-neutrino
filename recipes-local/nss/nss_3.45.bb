@@ -48,21 +48,21 @@ TDS = "${S}/tentative-dist-staging"
 
 TARGET_CC_ARCH += "${LDFLAGS}"
 
-do_configure_prepend:libc-musl () {
+do_configure:prepend:libc-musl() {
     sed -i -e '/-DHAVE_SYS_CDEFS_H/d' ${S}/nss/lib/dbm/config/config.mk
 }
 
-do_compile_prepend:class-native() {
+do_compile:prepend:class-native() {
     export NSPR_INCLUDE_DIR=${STAGING_INCDIR_NATIVE}
     export NSPR_LIB_DIR=${STAGING_LIBDIR_NATIVE}
     export NSS_ENABLE_WERROR=0
 }
 
-do_compile_prepend:class-nativesdk() {
+do_compile:prepend:class-nativesdk() {
     export LDFLAGS=""
 }
 
-do_compile_prepend:class-native() {
+do_compile:prepend:class-native() {
     # Need to set RPATH so that chrpath will do its job correctly
     RPATH="-Wl,-rpath-link,${STAGING_LIBDIR_NATIVE} -Wl,-rpath-link,${STAGING_BASE_LIBDIR_NATIVE} -Wl,-rpath,${STAGING_LIBDIR_NATIVE} -Wl,-rpath,${STAGING_BASE_LIBDIR_NATIVE}"
 }
@@ -122,7 +122,7 @@ do_compile() {
 
 do_compile[vardepsexclude] += "SITEINFO_BITS"
 
-do_install_prepend:class-nativesdk() {
+do_install:prepend:class-nativesdk() {
     export LDFLAGS=""
 }
 

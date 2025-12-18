@@ -1,6 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/ffmpeg:"
 
-DEPENDS:append += "libass libxml2 freetype rtmpdump"
+DEPENDS:append = " libass libxml2 freetype rtmpdump"
 
 SRC_URI:append =  " \
 	file://4_02_fix_mpegts.patch \
@@ -79,4 +79,4 @@ EXTRA_FFCONF = " \
     --extra-ldflags="${TARGET_LDFLAGS},--gc-sections -Wl,--print-gc-sections,-lrt" \
 "
 
-LICENSE_FLAGS_WHITELIST = "commercial"
+LICENSE_FLAGS_ACCEPTED = "commercial"

@@ -8,7 +8,7 @@ PROVIDES="virtual/neutrino-lua-plugin-xupnpd"
 RPROVIDES_${PN} = "virtual/neutrino-lua-plugin-xupnpd"
 
 SRC_URI = " \
-    git://github.com/tuxbox-neutrino/plugin-scripts-lua.git;protocol=https;subpath=${SRC_SUBPATH};destsuffix=${SRC_DEST_SUFFIX} \
+    git://github.com/tuxbox-neutrino/plugin-scripts-lua.git;protocol=https;subpath=${SRC_SUBPATH};destsuffix=${SRC_DEST_SUFFIX};branch=master \
 "
 
 do_install () {

@@ -7,7 +7,7 @@ RDEPENDS_${PN} += "virtual/lua"
 
 include ../lua.inc
 
-SRC_URI = "git://github.com/LuaLanes/lanes.git;protocol=https \
+SRC_URI = "git://github.com/LuaLanes/lanes.git;protocol=https;branch=master \
 "
 
 SRCREV = "${AUTOREV}"

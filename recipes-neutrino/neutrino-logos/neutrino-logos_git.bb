@@ -35,7 +35,7 @@ PROVIDES = "virtual/neutrino-logos"
 RPROVIDES_${PN} = "virtual/neutrino-logos"
 
 SRC_URI = " \
-	git://github.com/neutrino-images/ni-logo-stuff.git;protocol=https \
+	git://github.com/neutrino-images/ni-logo-stuff.git;protocol=https;branch=master \
 "
 
 PR = "r1"

@@ -13,7 +13,7 @@ SRCREV = "${AUTOREV}"
 PV = "${SRCPV}"
 PR = "r4"
 
-SRC_URI = "git://github.com/oscam-emu/OSEmu.git \
+SRC_URI = "git://github.com/oscam-emu/OSEmu.git;protocol=https;branch=master \
 	   file://0002-OSEmu.c-search-keyfile-in-etc-neutrino-config.patch \
 "
 

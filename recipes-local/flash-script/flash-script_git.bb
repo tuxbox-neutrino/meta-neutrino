@@ -7,9 +7,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=285b6276c3a2d7b9bb2783a4ef5af8d4"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+FLASH_SCRIPT_BRANCH = "${@d.getVar('MACHINE_DRIVER') or 'master'}"
+
 IMAGE_FEATURES += " ${PN} "
 
-SRC_URI = "git://github.com/tuxbox-neutrino/flash-script.git;branch=${MACHINE_DRIVER};protocol=https"
+SRC_URI = "git://github.com/tuxbox-neutrino/flash-script.git;branch=${FLASH_SCRIPT_BRANCH};protocol=https"
 
 PR = "r0"
 PV = "0.1+git${SRCPV}"

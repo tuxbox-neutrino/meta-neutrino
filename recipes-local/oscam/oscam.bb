@@ -7,7 +7,7 @@ DEPENDS = "libusb1 openssl pcsc-lite"
 
 DEPENDS_APPEND:libc-uclibc += "virtual/libstb-hal"
 
-SRC_URI = "git://github.com/Schimmelreiter/oscam-smod.git;protocol=https \
+SRC_URI = "git://github.com/Schimmelreiter/oscam-smod.git;protocol=https;branch=master \
            file://oscam.service \
            file://oscam.conf \
 "

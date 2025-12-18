@@ -1,6 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI:append += "file://client.conf \
+SRC_URI:append = " file://client.conf \
 		   file://default.pa \
 		   file://pulseaudio.service \
 		   file://pulseaudio.socket \

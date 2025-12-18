@@ -1,6 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI:append += "file://interfaces \
+SRC_URI:append = " file://interfaces \
 		   file://networking.service \
 		   file://networking \
 		   file://ifupdown-pre.service \
@@ -15,4 +15,4 @@ do_install:append() {
 	ln -sf ${systemd_unitdir}/system/networking.service ${D}${systemd_unitdir}/system/multi-user.target.wants/networking.service 
 }
 
-FILES_${PN}:append += "lib/systemd"
+FILES_${PN}:append = " lib/systemd"

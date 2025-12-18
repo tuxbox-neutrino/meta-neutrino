@@ -10,7 +10,7 @@ SRCREV = "${AUTOREV}"
 PKGV = "${GITPKGVTAG}"
 
 SRC_URI = " \
-	git://git.code.sf.net/p/tuxbox-cvs/libdvbsi++;protocol=https \
+	git://git.code.sf.net/p/tuxbox-cvs/libdvbsi++;protocol=https;branch=master \
 "
 
 S = "${WORKDIR}/git"

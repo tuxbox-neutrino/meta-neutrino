@@ -8,7 +8,7 @@ DEPENDS = "libsdl2 libsdl2-net libpng virtual/libgles2 fluidsynth"
 
 inherit autotools pkgconfig
 
-SRC_URI = "git://github.com/aqualung99/dosbox-0.74-ES.git;protocol=https \
+SRC_URI = "git://github.com/aqualung99/dosbox-0.74-ES.git;protocol=https;branch=master \
 	   file://0001-use-pkgconfig-to-find-sdl2.patch \
 	   file://0001-sdlmain.cpp-adjust-hardcoded-path.patch \
 "

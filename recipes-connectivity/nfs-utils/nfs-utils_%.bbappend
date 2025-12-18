@@ -1,6 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI:append += "file://exports \
+SRC_URI:append = " file://exports \
 " 
 
 RDEPENDS_${PN} = "${PN}-client"

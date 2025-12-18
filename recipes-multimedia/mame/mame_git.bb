@@ -5,7 +5,7 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://COPYING;md5=c9c1babc1ba9605e7b9d320d2d4f6be7"
 
 SRC_URI = " \
-    git://github.com/mamedev/mame.git \
+    git://github.com/mamedev/mame.git;protocol=https;branch=master \
     file://0001-patch-header-for-broadcom-stb.patch \
 "
 PV = "0224"
@@ -33,10 +33,10 @@ DEPENDS = " \
     "
 
 # avoid stip fail for size of executable >> 4GB - stolen from chromium
-DEBUG_FLAGS_remove_arm = "-g"
-DEBUG_FLAGS:append_arm = "-g1"
-DEBUG_FLAGS_remove_aarch64 = "-g"
-DEBUG_FLAGS:append_aarch64 = "-g1"
+DEBUG_FLAGS:remove:arm = "-g"
+DEBUG_FLAGS:append:arm = " -g1"
+DEBUG_FLAGS:remove:aarch64 = "-g"
+DEBUG_FLAGS:append:aarch64 = " -g1"
 
 PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
 
@@ -214,4 +214,3 @@ FILES_${PN}-tools = " \
     ${bindir}/${BPN}-srcclean \
     ${bindir}/unidasm \
 "
-

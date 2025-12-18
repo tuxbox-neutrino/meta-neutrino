@@ -13,7 +13,7 @@ PROVIDES += "golang-x-terminal"
 inherit go
 
 SRC_URI = "\
-	git://github.com/golang/crypto.git;protocol=https;name=crypto;destsuffix=${BPN}-${PV}/src/golang.org/x/crypto \
+	git://github.com/golang/crypto.git;protocol=https;name=crypto;destsuffix=${BPN}-${PV}/src/golang.org/x/crypto;branch=master \
 	"
 
 SRCREV_crypto = "${AUTOREV}"

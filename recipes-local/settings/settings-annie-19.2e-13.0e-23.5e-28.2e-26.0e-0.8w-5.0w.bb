@@ -10,7 +10,7 @@ SRCREV = "${AUTOREV}"
 RREPLACES_${PN} = "settings-annie-19.2e-13.0e-23.5e-28.2e settings-annie-19.2e-13.0e-23.5e settings-annie-19.2e-13.0e settings-annie-19.2e settings-matze-astra settings-matze-astra+hb settings-pathauf"
 RCONFLICTS_${PN} = "settings-annie-19.2e-13.0e-23.5e-28.2e settings-annie-19.2e-13.0e-23.5e settings-annie-19.2e-13.0e settings-annie-19.2e settings-matze-astra settings-matze-astra+hb settings-pathauf"
 
-SRC_URI = "git://github.com/neutrino-hd/settings-annie.git;protocol=https"
+SRC_URI = "git://github.com/neutrino-hd/settings-annie.git;protocol=https;branch=master"
 
 do_install () {
 	install -d ${D}/etc/neutrino/config/zapit  

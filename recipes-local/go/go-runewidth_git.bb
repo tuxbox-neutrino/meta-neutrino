@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 GO_IMPORT = "github.com/mattn/go-runewidth"
 
-SRC_URI = "git://${GO_IMPORT} \
+SRC_URI = "git://${GO_IMPORT};protocol=https;branch=master \
 "
 
 SRCREV = "${AUTOREV}"
@@ -16,4 +16,3 @@ SRCREV = "${AUTOREV}"
 inherit go
 
 GO_INSTALL = "${GO_IMPORT}"
-

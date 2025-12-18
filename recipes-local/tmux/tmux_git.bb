@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/ISC;md5=f3b90e78ea0cffb20bf5cca
 
 DEPENDS = "ncurses libevent sed"
 
-SRC_URI = "git://github.com/tmux/tmux.git;branch=master \
+SRC_URI = "git://github.com/tmux/tmux.git;branch=master;protocol=https \
 	   file://tmux.sh \
 "
 

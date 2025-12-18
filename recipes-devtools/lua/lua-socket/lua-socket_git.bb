@@ -12,7 +12,7 @@ include ../lua.inc
 
 DEPENDS += "lua-native virtual/lua"
 
-SRC_URI = "git://github.com/diegonehab/luasocket.git \
+SRC_URI = "git://github.com/diegonehab/luasocket.git;protocol=https;branch=master \
            file://0001-allow-overrides-for-DESTDIR-CC_linux-LD_linux-LDFLAG.patch \
           "
 

@@ -40,6 +40,10 @@ SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '', '${NOPAM_SRC}', d
 
 inherit update-rc.d useradd systemd
 
+USERADD_PACKAGES = "${PN}"
+GROUPADD_PARAM:${PN} = "-r ftp"
+USERADD_PARAM:${PN} = "-r -g ftp -d /var/ftp -s /bin/false ftp"
+
 CONFFILES_${PN} = "${sysconfdir}/vsftpd.conf"
 LDFLAGS:append =" -lcrypt -lcap"
 EXTRA_OEMAKE = "-e MAKEFLAGS="

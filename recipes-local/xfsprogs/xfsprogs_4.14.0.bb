@@ -45,7 +45,7 @@ export DEBUG="-DNDEBUG"
 export BUILD_VERBOSE="1"
 export tagname="CC"
 
-CFLAGS:append += "-Wno-incompatible-pointer-types"
+CFLAGS:append = " -Wno-incompatible-pointer-types"
 
 EXTRA_OEMAKE = "DIST_ROOT='${D}'"
 

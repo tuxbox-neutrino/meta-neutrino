@@ -34,5 +34,4 @@ do_configure:prepend () {
 
 ARM_INSTRUCTION_SET = "arm"
 
-LICENSE_FLAGS_WHITELIST ?= "commercial"
-
+LICENSE_FLAGS_ACCEPTED ?= "commercial"

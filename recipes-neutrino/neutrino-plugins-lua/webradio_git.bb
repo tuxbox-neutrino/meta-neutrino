@@ -19,7 +19,7 @@ SRC_RAW= "src-raw"
 
 ## We store temporarily the origin git contents into a separate "${WORKDIR}/${SRC_RAW}" directory.
 SRC_URI = " \
-	git://github.com/neutrino-images/ni-neutrino-plugins.git;name=prov0;protocol=https;subpath=scripts-lua/plugins/${SRC_NAME};destsuffix=${SRC_RAW}/${SRC_NAME}-prov0 \
+	git://github.com/neutrino-images/ni-neutrino-plugins.git;name=prov0;protocol=https;subpath=scripts-lua/plugins/${SRC_NAME};destsuffix=${SRC_RAW}/${SRC_NAME}-prov0;branch=master \
 "
 
 ## Before install, we misuse the do_patch routine to prepare content.

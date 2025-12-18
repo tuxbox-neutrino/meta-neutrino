@@ -6,7 +6,7 @@ SRC_URI += "git://github.com/tuxbox-neutrino/library-stb-hal.git;branch=mpx;prot
 
 PKGV = "${GITPKGVTAG}"
 
-EXTRA_OECONF:append += " \
+EXTRA_OECONF:append = " \
 			--with-boxtype=${TARGET_ARCH}box \
 			--with-boxmodel=${MACHINE} \
 			--with-targetroot= \

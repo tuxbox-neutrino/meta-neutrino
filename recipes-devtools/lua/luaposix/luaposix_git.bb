@@ -7,7 +7,7 @@ DEPENDS += "lua-native virtual/lua libxcrypt"
 
 include ../lua.inc
 
-SRC_URI = "git://github.com/luaposix/luaposix.git;branch=master \
+SRC_URI = "git://github.com/luaposix/luaposix.git;branch=master;protocol=https \
 	   file://0001-require-bit-for-luajit.patch \
 "
 SRCREV = "1ff80ab330dad662bec01c377726d8c369e38d18"

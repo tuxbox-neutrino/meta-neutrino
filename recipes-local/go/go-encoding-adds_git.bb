@@ -10,7 +10,7 @@ DEPENDS = "golang-x-net"
 
 GO_IMPORT = "github.com/gdamore/encoding"
 
-SRC_URI = "git://${GO_IMPORT} \
+SRC_URI = "git://${GO_IMPORT};protocol=https;branch=main \
 "
 
 SRCREV = "${AUTOREV}"
