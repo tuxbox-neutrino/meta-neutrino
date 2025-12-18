@@ -1,0 +1,9 @@
+Upstream-Status: Pending
+
+Fix -Werror=format-security by providing an explicit format string.
+
+--- a/logoset.c
++++ b/logoset.c
+@@
+-                                    fprintf(fh, AST_TEXT);
++                                    fprintf(fh, "%s", AST_TEXT);
