@@ -1,6 +1,6 @@
 SUMMARY = "Neutrino 3rd Party Themes"
 DESCRIPTION = "A group themes from different providers."
-LICENSE = "GPL-2.0"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=801f80980d171dd6425610833a22dbe6 \
 "
 
