@@ -1,0 +1,12 @@
+Upstream-Status: Pending
+
+Fix -Werror=format-security by using a literal format string when copying
+the parsed key into the temporary buffer.
+
+--- a/tuxwetter/parser.c
++++ b/tuxwetter/parser.c
+@@
+-								if (!strcmp(keyname,"currently") || !strcmp(keyname,"data"))
+-									sprintf(keyname_tmp, keyname);
++								if (!strcmp(keyname,"currently") || !strcmp(keyname,"data"))
++									snprintf(keyname_tmp, sizeof(keyname_tmp), "%s", keyname);
