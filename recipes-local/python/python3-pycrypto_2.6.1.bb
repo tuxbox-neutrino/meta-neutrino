@@ -1,4 +1,4 @@
-inherit distutils3
+inherit setuptools3
 require python-pycrypto.inc
 
 SRC_URI += "file://0001-Replace-time.clock-with-time.process_time.patch"
@@ -7,5 +7,5 @@ SRC_URI += "file://0001-Replace-time.clock-with-time.process_time.patch"
 # *don't* want the autotools install to run, since this package doesn't
 # provide a "make install" target.
 do_install() {
-       distutils3_do_install
+       setuptools3_do_install
 }
