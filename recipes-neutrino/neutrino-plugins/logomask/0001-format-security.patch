@@ -2,8 +2,16 @@ Upstream-Status: Pending
 
 Fix -Werror=format-security in AST_TEXT fprintf.
 
+diff --git a/logomask/logoset.c b/logomask/logoset.c
+index e2e0c46..0000000 100644
 --- a/logomask/logoset.c
 +++ b/logomask/logoset.c
-@@
+@@ -840,7 +840,7 @@ int main (int argc, char **argv)
+                         {
+                                 if((fh=fopen(AST_FILE,"w"))!=NULL)
+                                 {
 -                                    fprintf(fh, AST_TEXT);
 +                                    fprintf(fh, "%s", AST_TEXT);
+                                     fclose(fh);
+                                     sleep(1);
+                                     chmod(AST_FILE, S_IRWXU | S_IRWXG | S_IRWXO);
