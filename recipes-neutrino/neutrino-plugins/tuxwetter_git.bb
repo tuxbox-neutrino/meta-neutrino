@@ -9,11 +9,6 @@ SRC_URI += " \
 	file://0002-format-security.patch \
 "
 
-do_patch () {
-	git -C ${S}/${PLUGIN_NAME} apply ${S}/0001-tuxwetter-Makefile.am-fix-install.patch
-	git -C ${S}/${PLUGIN_NAME} apply ${S}/0002-format-security.patch
-}
-
 # "bindir" will never installed
 do_install:prepend () {
 	install -d ${D}${bindir}
