@@ -21,7 +21,6 @@ SRC_RAW= "src-raw"
 SRC_URI = " \
 	git://github.com/tuxbox-neutrino/plugin-scripts-lua.git;name=prov0;protocol=https;subpath=plugins/${SRC_NAME};destsuffix=${SRC_RAW}/${SRC_NAME}-prov0;branch=master \
 	git://github.com/neutrino-images/ni-neutrino-plugins.git;name=prov1;protocol=https;subpath=scripts-lua/plugins/${SRC_NAME};destsuffix=${SRC_RAW}/${SRC_NAME}-prov1;branch=master \
-	file://0001-yt_live.xml-update-live-channels.patch \
 "
 
 ## Before install, we misuse the do_patch routine to prepare content.
@@ -36,7 +35,6 @@ do_patch () {
 		cp  ${SRC_RAW}/${SRC_NAME}-$p/*.xml ${S}
 	done
 
-	git -C ${S} apply ${WORKDIR}/0001-yt_live.xml-update-live-channels.patch
 }
 
 do_install () {
