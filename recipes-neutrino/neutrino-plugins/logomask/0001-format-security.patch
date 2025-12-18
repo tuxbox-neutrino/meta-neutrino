@@ -1,9 +1,9 @@
 Upstream-Status: Pending
 
-Fix -Werror=format-security by providing an explicit format string.
+Fix -Werror=format-security in AST_TEXT fprintf.
 
---- a/logoset.c
-+++ b/logoset.c
+--- a/logomask/logoset.c
++++ b/logomask/logoset.c
 @@
 -                                    fprintf(fh, AST_TEXT);
 +                                    fprintf(fh, "%s", AST_TEXT);
