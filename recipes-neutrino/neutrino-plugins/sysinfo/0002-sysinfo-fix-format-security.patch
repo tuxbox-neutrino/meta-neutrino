@@ -1,0 +1,9 @@
+Upstream-Status: Pending
+
+Fix -Werror=format-security by providing an explicit format string in snprintf.
+
+--- a/sysinfo/sysinfo.c
++++ b/sysinfo/sysinfo.c
+@@
+-        snprintf(temp_data, sizeof(temp_data), temp);
++        snprintf(temp_data, sizeof(temp_data), "%s", temp);
