@@ -4,8 +4,7 @@ Fix -Werror=format-security in syslog call.
 
 --- a/stbup/stbup.c
 +++ b/stbup/stbup.c
-@@
-         vsnprintf(buf, 1024, str, ap);
+@@ -102,7 +102,7 @@ void myDebug(const char* str, ...)
          va_end(ap);
  
          printf("%s\n",buf);
