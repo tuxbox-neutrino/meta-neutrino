@@ -1,12 +1,17 @@
 Upstream-Status: Pending
 
-Fix -Werror=format-security by using a literal format string when copying
-the parsed key into the temporary buffer.
+Fix -Werror=format-security by using a literal format string for keyname_tmp.
 
+diff --git a/tuxwetter/parser.c b/tuxwetter/parser.c
+index 3b32f65..0000000 100644
 --- a/tuxwetter/parser.c
 +++ b/tuxwetter/parser.c
-@@
--								if (!strcmp(keyname,"currently") || !strcmp(keyname,"data"))
--									sprintf(keyname_tmp, keyname);
-+								if (!strcmp(keyname,"currently") || !strcmp(keyname,"data"))
-+									snprintf(keyname_tmp, sizeof(keyname_tmp), "%s", keyname);
+@@ -571,7 +571,7 @@
+ 				if (!strcmp(keyname,"currently") || !strcmp(keyname,"daily") || !strcmp(keyname,"data") || !strcmp(keyname,"flags"))
+ 				{
+ 					tcc=0;
+-					sprintf(keyname_tmp, keyname);
++					snprintf(keyname_tmp, sizeof(keyname_tmp), "%s", keyname);
+ 					if (!strcmp(keyname,"flags"))
+ 					{
+ 						// get out here
