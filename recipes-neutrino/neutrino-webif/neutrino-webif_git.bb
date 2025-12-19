@@ -11,7 +11,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRC_URI = "git://github.com/Tuxbox-Project/neutrino-webif.git;protocol=https;branch=master"
 
-PACKAGE_ARCH = "all"
+inherit allarch
+
+PACKAGE_ARCH = "allarch"
 
 DEPENDS += " \
 	neutrino \
