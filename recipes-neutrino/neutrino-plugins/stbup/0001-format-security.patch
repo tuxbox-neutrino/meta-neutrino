@@ -1,20 +1,18 @@
 Upstream-Status: Pending
 
-Fix -Werror=format-security in syslog call.
+Fix -Werror=format-security by using a literal format string in syslog.
 
 diff --git a/stbup/stbup.c b/stbup/stbup.c
-index 7fd6b78..0000000 100644
+index e0a2b5c..e0a2b5c 100644
 --- a/stbup/stbup.c
 +++ b/stbup/stbup.c
-@@ -100,9 +100,9 @@ void myDebug(const char* str, ...)
-         va_list ap;
-         va_start(ap, str);
-         vsnprintf(buf, 1024, str, ap);
-         va_end(ap);
+@@ -105,7 +105,7 @@
  
-         printf("%s\n",buf);
-         if(debug>1)
--                syslog(LOG_USER | LOG_DEBUG, buf);
-+                syslog(LOG_USER | LOG_DEBUG, "%s", buf);
-     }
+ 		printf("%s\n",buf);
+ 		if(debug>1)
+-			syslog(LOG_USER | LOG_DEBUG, buf);
++			syslog(LOG_USER | LOG_DEBUG, "%s", buf);
+ 	}
  }
+ 
+
