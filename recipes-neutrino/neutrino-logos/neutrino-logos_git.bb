@@ -24,7 +24,8 @@ HOMEPAGE = "https://github.com/neutrino-images/ni-logo-stuff"
 LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = ""
 
-PACKAGE_ARCH = "all"
+inherit allarch
+PACKAGE_ARCH = "allarch"
 
 RDEPENDS_${PN} = " \
 	curl \
