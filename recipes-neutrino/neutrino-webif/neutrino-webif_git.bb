@@ -13,8 +13,6 @@ SRC_URI = "git://github.com/Tuxbox-Project/neutrino-webif.git;protocol=https;bra
 
 inherit allarch
 
-PACKAGE_ARCH = "allarch"
-
 DEPENDS += " \
 	neutrino \
 "

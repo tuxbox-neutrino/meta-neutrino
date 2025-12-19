@@ -13,8 +13,7 @@ HOMEPAGE = "https://github.com/tuxbox-neutrino"
 ## summary contains the plugin description
 SUMMARY = "${DESCRIPTION}"
 
-PACKAGE_ARCH = "allarch"
-
+inherit allarch
 PROVIDES = "virtual/neutrino-extra-fonts"
 RPROVIDES_${PN} = "virtual/neutrino-extra-fonts"
 # PROVIDES = "neutrino-extra-fonts"

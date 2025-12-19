@@ -25,7 +25,6 @@ LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = ""
 
 inherit allarch
-PACKAGE_ARCH = "allarch"
 
 RDEPENDS_${PN} = " \
 	curl \
