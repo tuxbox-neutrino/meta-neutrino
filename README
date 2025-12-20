@@ -4,10 +4,11 @@ plugins, themes) for Tuxbox-OS on OE-Alliance platforms.
 Notes
 -----
 - Yocto release: Kirkstone (4.0 LTS)
-- Only Neutrino-specific recipes live here; all generic distro, middleware,
-  connectivity, toolchain, firmware, Qt/Kodi and miscellaneous support recipes
-  were moved to `meta-tuxbox`.
-- Classes, licenses and waf cross-answers are now provided by `meta-tuxbox`.
+- Only Neutrino-specific bits live here: core Neutrino recipes, plugins/themes,
+  libstb-hal, Neutrino packagegroup (`packagegroup-tuxbox-neutrino`).
+- All generic distro, middleware, connectivity, toolchain, firmware, Qt/Kodi
+  and miscellaneous support recipes remain in `meta-tuxbox`.
+- Classes, licenses and waf cross-answers are provided by `meta-tuxbox`.
 
 Usage
 -----
