@@ -1,8 +1,25 @@
-A Layer for creating images designed for and including the neutrino settop box software. It builds with current yocto poky release "Rocko" and probably also future releases. 
+Meta-layer containing only the Neutrino recipes (neutrino-mp, libstb-hal,
+plugins, themes) for Tuxbox-OS on OE-Alliance platforms.
 
-Lots of information has been taken from other layers or found elsewhere in the net. It has grown over the years and an older version can be reviewed in meta-neutrino-deprecated 
+Notes
+-----
+- Yocto release: Kirkstone (4.0 LTS)
+- Only Neutrino-specific recipes live here; all generic distro, middleware,
+  connectivity, toolchain, firmware, Qt/Kodi and miscellaneous support recipes
+  were moved to `meta-tuxbox`.
+- Classes, licenses and waf cross-answers are now provided by `meta-tuxbox`.
 
-This is published under the BSD-2-Clause License. You should find a copy of the license in your yocto/poky/meta/files/common-licenses folder
+Usage
+-----
+Add both layers to `bblayers.conf`:
 
-	September 2017
-	Markus Volk
+    BBLAYERS += "/path/to/meta-neutrino /path/to/meta-tuxbox"
+
+Licensing
+---------
+Published under the BSD-2-Clause License (see poky/common-licenses).
+
+History
+-------
+Originally grown over multiple Yocto releases; split/cleaned for Kirkstone to
+isolate Neutrino payload from distro infrastructure.
