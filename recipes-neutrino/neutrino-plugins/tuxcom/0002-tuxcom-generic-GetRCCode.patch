@@ -1,0 +1,28 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: developers <developers@tuxbox-neutrino.org>
+Date: Thu, 5 Feb 2026 00:00:00 +0000
+Subject: [PATCH] tuxcom: enable GetRCCode for generic hardware
+
+Generic builds define HAVE_GENERIC_HARDWARE but the RC handler was
+only compiled for legacy STB hardware. This makes GetRCCode undefined
+and breaks the plugin link.
+
+Treat generic hardware like the existing evdev-based RC paths.
+---
+ tuxcom.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- a/tuxcom.c
++++ b/tuxcom.c
+@@ -40,7 +40,7 @@ static int sync_blitter = 0;
+ /******************************************************************************
+  * GetRCCode  (Code from Tuxmail)
+  ******************************************************************************/
+ 
+-#if defined HAVE_CST_HARDWARE || HAVE_TRIPLEDRAGON || HAVE_SPARK_HARDWARE || defined(HAVE_DUCKBOX_HARDWARE) || HAVE_ARM_HARDWARE
++#if defined HAVE_CST_HARDWARE || HAVE_TRIPLEDRAGON || HAVE_SPARK_HARDWARE || defined(HAVE_DUCKBOX_HARDWARE) || HAVE_ARM_HARDWARE || defined(HAVE_GENERIC_HARDWARE)
+ int GetRCCode()
+ {
+ 	static int count = 0;
+-- 
+2.43.0

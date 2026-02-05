@@ -9,7 +9,7 @@ CONFLICTS_${PN} = "neutrino-mp"
 REPLACES_${PN} = "neutrino-mp"
 
 
-inherit autotools pkgconfig systemd ccache gitpkgv
+inherit autotools pkgconfig systemd ccache gitpkgv neutrino-boxmap
 
 DEPENDS += " \
 	curl \
@@ -125,6 +125,9 @@ EXTRA_OECONF = " \
 	--enable-pip \
 	--enable-lcd4linux \
 "
+
+EXTRA_OECONF:remove:qemux86 = " --enable-pip"
+EXTRA_OECONF:remove:qemux86-64 = " --enable-pip"
 
 # EXTRA_OECONF += " \
 # 	--enable-dynamicdemux \

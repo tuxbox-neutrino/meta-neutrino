@@ -7,8 +7,8 @@ SRC_URI:append = " git://github.com/neutrino-images/ni-neutrino;protocol=https;b
 "
 
 EXTRA_OECONF:append = " \
-			--with-boxtype=${TARGET_ARCH}box \
-			--with-boxmodel=${MACHINE} \
+			--with-boxtype=${NEUTRINO_BOXTYPE} \
+			--with-boxmodel=${NEUTRINO_BOXMODEL} \
 			--with-targetroot=/usr \
 			--enable-pkg-management \
 "

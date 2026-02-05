@@ -4,7 +4,7 @@ DESCRIPTION = "Terminal controlled menu manager known as Flexmenu."
 
 DEPENDS += "neutrino-fonts-extra"
 
-PR = "r2"
+PR = "r3"
 
 ## Hack: make install is doing strange things, try to fix it here
 do_install () {

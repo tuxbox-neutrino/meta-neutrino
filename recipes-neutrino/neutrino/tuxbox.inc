@@ -12,14 +12,13 @@ PKGV = "${GITPKGVTAG}"
 DEFAULT_THEME ?= "Neutrino-3.0"
 
 EXTRA_OECONF:append = " --with-default-theme=${DEFAULT_THEME} \
-                        --with-boxtype=${TARGET_ARCH}box \
-			--with-boxmodel=${MACHINE} \
+                        --with-boxtype=${NEUTRINO_BOXTYPE} \
+			--with-boxmodel=${NEUTRINO_BOXMODEL} \
 			--with-lcd4liconsdir=${N_LCD4L_ICONSDIR} \
 			--with-lcd4liconsdir_var=${N_LCD4L_ICONSDIR_VAR} \
 			--enable-pkg-management \
 "
 
 do_install:append = " mv -f ${D}${sysconfdir}/neutrino/config/bad_package_pattern.list.sample ${D}${sysconfdir}/neutrino/config/bad_package_pattern.list"
-
 
 

@@ -21,6 +21,8 @@ DEPENDS = "\
 	freetype \
 "
 
+DEPENDS:append = " ${@'glew freeglut' if d.getVar('NEUTRINO_BOXTYPE') == 'generic' else ''}"
+
 include ${FLAVOUR}.inc
 
 # on coolstream, the same is provided by cs-drivers pkg (libcoolstream)
@@ -31,7 +33,7 @@ RDEPENDS_${PN} = "ffmpeg"
 SRCPV_WORKSPACE = "9999"
 PKGV = "${GITPKGVTAG}"
 SRCREV = "${AUTOREV}"
-PR = "r4"
+PR = "r5"
 
 # libstb-hal-bin package for testing binaries etc.
 PACKAGES += "${PN}-bin"
@@ -46,7 +48,7 @@ S = "${WORKDIR}/git"
 
 # the build system is not really broken wrt separate builddir,
 # but I want it to build inside the source for various reasons :-)
-inherit autotools pkgconfig gitpkgv
+inherit autotools pkgconfig gitpkgv neutrino-boxmap
 
 LDFLAGS += " -Wl,-rpath-link,${STAGING_LIBDIR} -L${STAGING_LIBDIR} -lrt -lavformat -lavcodec -lavutil -lswscale -lswresample"
 
@@ -71,6 +73,21 @@ do_install:append() {
 	install -m 0644 ${S}/libarmbox/*.h ${D}/${includedir}/libarmbox
 	install -m 0644 ${S}/common/*.h ${D}/${includedir}/common	
 	install -m 0644 ${S}/include/*.h ${D}/${includedir}/libstb-hal	
+
+	if [ -d "${S}/libgeneric-pc" ]; then
+		install -d ${D}${includedir}/libgeneric-pc
+		install -m 0644 ${S}/libgeneric-pc/*.h ${D}${includedir}/libgeneric-pc
+	fi
+
+	if [ -d "${S}/libraspi" ]; then
+		install -d ${D}${includedir}/libraspi
+		install -m 0644 ${S}/libraspi/*.h ${D}${includedir}/libraspi
+	fi
+
+	if [ -d "${S}/libmipsbox" ]; then
+		install -d ${D}${includedir}/libmipsbox
+		install -m 0644 ${S}/libmipsbox/*.h ${D}${includedir}/libmipsbox
+	fi
 }
 
 # pic2m2v is included in lib package, because it is always needed,

@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-PR = "r1"
+PR = "r2"
 PACKAGES = "${PN}"
 
 RDEPENDS:${PN} = " \

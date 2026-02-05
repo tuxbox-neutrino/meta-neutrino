@@ -1,6 +1,8 @@
 # for some common variables, e.g. plugin paths
 include ../neutrino/neutrino-common-vars.inc
 
+inherit neutrino-boxmap
+
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=801f80980d171dd6425610833a22dbe6"
 
@@ -22,7 +24,7 @@ PROVIDES = "virtual/neutrino-plugin-${PLUGIN_NAME}"
 RPROVIDES_${PN} = "virtual/neutrino-plugin-${PLUGIN_NAME}"
 
 # PV = "${SRCPV}"
-PR = "r1"
+PR = "r2"
 SRCREV = "${AUTOREV}"
 
 inherit gitpkgv
@@ -51,8 +53,8 @@ EXTRA_OECONF = " \
 	--enable-maintainer-mode \
 	--with-target=native \
 	--prefix=${N_PREFIX} \
-	--with-boxtype=${TARGET_ARCH}box \
-	--with-boxmodel=${MACHINE} \
+	--with-boxtype=${NEUTRINO_BOXTYPE} \
+	--with-boxmodel=${NEUTRINO_BOXMODEL} \
 	\
 	--with-plugindir=${N_PLUGIN_DIR} \
 	--with-plugindir_var=${N_PLUGIN_DIR_VAR} \

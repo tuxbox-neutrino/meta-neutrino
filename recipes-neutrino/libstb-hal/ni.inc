@@ -5,8 +5,8 @@ SRC_URI += "git://github.com/neutrino-images/ni-libstb-hal;protocol=https;branch
 "
 
 EXTRA_OECONF:append = " \
-			--with-boxtype=${TARGET_ARCH}box \
-			--with-boxmodel=${MACHINE} \
+			--with-boxtype=${NEUTRINO_BOXTYPE} \
+			--with-boxmodel=${NEUTRINO_BOXMODEL} \
 			--with-targetroot= \
 			--with-targetprefix= /usr \
 "
