@@ -4,6 +4,8 @@ include neutrino-lua-plugins.inc
 #PN = "neutrino-lua-plugins-shared-files"
 SUMMARY = "Shared files and scripts for neutrino-lua-plugins"
 
+MIGIT_ENABLED = "0"
+
 SRC_URI = " \
 	git://github.com/tuxbox-neutrino/plugin-scripts-lua.git;protocol=https;subpath=share;destsuffix=${SRC_DEST_SUFFIX};branch=master \
 "

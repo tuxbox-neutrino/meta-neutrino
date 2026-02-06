@@ -7,8 +7,10 @@ PV = "ni-git-${SRCPV}"
 
 SRC_SUBPATH = "scripts-lua/plugins/${SRC_NAME}"
 
+MIGIT_SUBDIR = "${SRC_SUBPATH}"
+
 SRC_URI = " \
-	git://github.com/neutrino-images/ni-neutrino-plugins.git;protocol=https;subpath=${SRC_SUBPATH};destsuffix=${SRC_DEST_SUFFIX};branch=master \
+	git://github.com/neutrino-images/ni-neutrino-plugins.git;protocol=https;branch=master \
 "
 
 #SRC_NAME = "replay"

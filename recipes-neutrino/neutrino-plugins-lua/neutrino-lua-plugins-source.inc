@@ -3,18 +3,21 @@ SRC_DEST_SUFFIX = "src"
 SRC_NAME = "${BPN}"
 
 SRC_URI = " \
-	git://github.com/tuxbox-neutrino/plugin-scripts-lua.git;protocol=https;subpath=plugins/${SRC_NAME};destsuffix=${SRC_DEST_SUFFIX};branch=master \
+	git://github.com/tuxbox-neutrino/plugin-scripts-lua.git;protocol=https;branch=master \
 "
 
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=801f80980d171dd6425610833a22dbe6"
 
-inherit gitpkgv
-# We have more as one repository without tags, so we
-# suppress warnings for that.
-GITPKGVTAG_NO_WARN_ON_NO_TAG = "1"
-SRCREV = "${AUTOREV}"
-PKGV = "${GITPKGVTAG}"
-PR = "r1"
+inherit neutrino-migit
 
-S = "${WORKDIR}/${SRC_DEST_SUFFIX}"
+# Extract a single plugin from the monorepo via migit.
+MIGIT_ENABLED = "1"
+MIGIT_SUBDIR = "plugins/${SRC_NAME}"
+MIGIT_REPO_NAME = "${SRC_NAME}"
+
+SRCREV = "${AUTOREV}"
+PKGV = "${MIGIT_PKGV}"
+PR = "r2"
+
+S = "${WORKDIR}/git"
