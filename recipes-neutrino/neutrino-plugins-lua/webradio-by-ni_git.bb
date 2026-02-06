@@ -16,12 +16,28 @@ SRC_URI = " \
 
 SRCREV = "${AUTOREV}"
 PKGV = "${MIGIT_PKGV}"
-PR = "r0"
+PR = "r1"
 
 do_compile[noexec] = "1"
 
 do_install () {
 	suffix="by-ni"
+	prefix="ni"
+
+	normalize_name() {
+		local name="$1"
+
+		case "$name" in
+			${prefix}-*) name="${name#${prefix}-}" ;;
+		esac
+
+		case "$name" in
+			*-by-tuxbox) name="${name%-by-tuxbox}" ;;
+			*-by-ni) name="${name%-by-ni}" ;;
+		esac
+
+		echo "$name"
+	}
 
 	install -d ${D}${N_WEBRADIO_DIR}
 
@@ -30,7 +46,9 @@ do_install () {
 		base=$(basename "$f")
 		name="${base%.*}"
 		ext="${base##*.}"
-		new="${name}-${suffix}.${ext}"
+		norm=$(normalize_name "$name")
+		[ -n "$norm" ] || norm="$name"
+		new="${norm}-${suffix}.${ext}"
 		install -m 644 "$f" "${D}${N_WEBRADIO_DIR}/${new}"
 	done
 }

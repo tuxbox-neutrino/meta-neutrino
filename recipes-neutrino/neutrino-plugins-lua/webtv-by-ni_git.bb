@@ -16,23 +16,41 @@ SRC_URI = " \
 
 SRCREV = "${AUTOREV}"
 PKGV = "${MIGIT_PKGV}"
-PR = "r0"
+PR = "r1"
 
 do_compile[noexec] = "1"
 
 do_install () {
 	suffix="by-ni"
+	prefix="ni"
+
+	normalize_name() {
+		local name="$1"
+
+		case "$name" in
+			${prefix}-*) name="${name#${prefix}-}" ;;
+		esac
+
+		case "$name" in
+			*-by-tuxbox) name="${name%-by-tuxbox}" ;;
+			*-by-ni) name="${name%-by-ni}" ;;
+		esac
+
+		echo "$name"
+	}
 
 	install -d ${D}${N_WEBTV_DIR}
 
-	scripts=""
+	scripts_map=""
 	for s in ${S}/*.lua; do
 		[ -e "$s" ] || continue
-		name=$(basename "$s" .lua)
-		if [ "$name" = "filmon" ]; then
+		raw=$(basename "$s" .lua)
+		if [ "$raw" = "filmon" ]; then
 			continue
 		fi
-		scripts="$scripts $name"
+		name=$(normalize_name "$raw")
+		[ -n "$name" ] || name="$raw"
+		scripts_map="$scripts_map ${raw}:${name}-${suffix}"
 	done
 
 	for f in ${S}/*.lua ${S}/*.xml; do
@@ -45,13 +63,17 @@ do_install () {
 			continue
 		fi
 
-		new="${name}-${suffix}.${ext}"
+		norm=$(normalize_name "$name")
+		[ -n "$norm" ] || norm="$name"
+		new="${norm}-${suffix}.${ext}"
 
 		if [ "$ext" = "xml" ]; then
 			tmp="${WORKDIR}/${new}"
 			cp "$f" "$tmp"
-			for s in $scripts; do
-				sed -i "s/script=\"${s}\\.lua\"/script=\"${s}-${suffix}\\.lua\"/g" "$tmp"
+			for pair in $scripts_map; do
+				raw="${pair%%:*}"
+				ren="${pair##*:}"
+				sed -i "s/script=\"${raw}\\.lua\"/script=\"${ren}\\.lua\"/g" "$tmp"
 			done
 			install -m 644 "$tmp" "${D}${N_WEBTV_DIR}/${new}"
 		else
