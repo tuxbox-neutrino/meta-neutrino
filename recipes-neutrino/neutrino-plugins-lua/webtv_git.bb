@@ -1,50 +1,19 @@
-include neutrino-lua-plugins-target-pattern.inc
+SUMMARY = "WebTV content meta package"
+DESCRIPTION = "Install webtv provider content packages."
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SUMMARY = "Content for ${SRC_NAME}, required by Neutrino bouquets. Contributed by tuxbox, ni."
+inherit allarch
+
 MAINTAINER = "community"
 SECTION = "optional"
 
-MIGIT_ENABLED = "0"
+PR = "r4"
+PV = "1.0"
 
-DEPENDS = "plutotv-update"
+ALLOW_EMPTY:${PN} = "1"
 
-PR = "r3"
-PV = "0.${SRCPV}"
-
-SRCREV_prov0 = "${AUTOREV}"
-SRCREV_prov1 = "${AUTOREV}"
-# SRCREV_FORMAT = "${MAINTAINER}_prov0_prov1"
-SRCREV_FORMAT = "${MAINTAINER}"
-
-S = "${WORKDIR}/src"
-SRC_RAW= "src-raw"
-
-## We store temporarily the origin git contents into a separate "${WORKDIR}/${SRC_RAW}" directory.
-SRC_URI = " \
-	git://github.com/tuxbox-neutrino/plugin-scripts-lua.git;name=prov0;protocol=https;subpath=plugins/${SRC_NAME};destsuffix=${SRC_RAW}/${SRC_NAME}-prov0;branch=master \
-	git://github.com/neutrino-images/ni-neutrino-plugins.git;name=prov1;protocol=https;subpath=scripts-lua/plugins/${SRC_NAME};destsuffix=${SRC_RAW}/${SRC_NAME}-prov1;branch=master \
+RDEPENDS:${PN} = " \
+	webtv-by-tuxbox \
+	webtv-by-ni \
 "
-
-## Before install, we misuse the do_patch routine to prepare content.
-## Because we need files from several sources, these have been already fetched into the ${SRC_RAW} directory.
-## We only select the required data from ${SRC_RAW} directory, and we move it into the required source code directory ${S}.
-## Finally we will patch some adjustments.
-do_patch () {
-	WEBTVPROVLIST="prov0 prov1"
-
-	for p in $WEBTVPROVLIST; do
-		cp  ${SRC_RAW}/${SRC_NAME}-$p/*.lua ${S}
-		cp  ${SRC_RAW}/${SRC_NAME}-$p/*.xml ${S}
-	done
-
-}
-
-do_install () {
-	# Clean up.
-	rm -rf ${D}${N_PLUGIN_DIR}
-
-	# Install content from source directory into target.
-	install -d ${D}${N_WEBTV_DIR}
-	install -m 644 ${S}/* ${D}${N_WEBTV_DIR}
-	rm ${D}${N_WEBTV_DIR}/filmon*.*
-}
