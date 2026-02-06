@@ -1,5 +1,6 @@
 # for some common variables, e.g. plugin paths
 include ../neutrino/neutrino-common-vars.inc
+include ../neutrino/neutrino-build-config.inc
 
 inherit neutrino-boxmap
 
@@ -51,42 +52,12 @@ inherit autotools pkgconfig gettext
 
 EXTRA_OECONF = " \
 	--enable-maintainer-mode \
-	--with-target=native \
-	--prefix=${N_PREFIX} \
+	${NEUTRINO_OECONF_BASE} \
 	--with-boxtype=${NEUTRINO_BOXTYPE} \
 	--with-boxmodel=${NEUTRINO_BOXMODEL} \
 	\
-	--with-plugindir=${N_PLUGIN_DIR} \
-	--with-plugindir_var=${N_PLUGIN_DIR_VAR} \
-	--with-plugindir_mnt=${N_PLUGIN_DIR_MNT}\
-	--with-webtvdir=${N_WEBTV_DIR} \
-	--with-webtvdir_var=${N_WEBTV_DIR_VAR} \
-	--with-webradiodir=${N_WEBRADIO_DIR} \
-	--with-webradiodir_var=${N_WEBRADIO_DIR_VAR} \
-	--with-luaplugindir=${N_LUAPLUGIN_DIR} \
-	--with-luaplugindir_var=${N_LUAPLUGIN_DIR_VAR} \
-	--with-gamesdir=${N_GAMES_DIR}  \
-	--with-iconsdir=${N_ICONS_DIR}  \
-	--with-iconsdir_var=${N_ICONS_DIR}  \
-	--with-configdir=${N_CONFIG_DIR} \
-	--with-zapitdir=${N_ZAPITDIR} \
+	${NEUTRINO_OECONF_DIRS_COMMON} \
 	--with-datadir=${N_DATADIR} \
-	--with-datadir_var=${N_DATADIR_VAR} \
-	--with-controldir=${N_CONTROLDIR} \
-	--with-controldir_var=${N_CONTROLDIR_VAR} \
-	--with-fontdir=${N_FONTDIR} \
-	--with-fontdir_var=${N_FONTDIR_VAR} \
-	--with-libdir=${N_LIBDIR}  \
-	--with-localedir=${N_LOCALEDIR} \
-	--with-localedir_var=${N_LOCALEDIR_VAR} \
-	--with-themesdir=${N_THEMESDIR} \
-	--with-themesdir_var=${N_THEMESDIR_VAR} \
-	--with-logodir=${N_LOGODIR} \
-	--with-logodir_var=${N_LOGODIR_VAR} \
-	--with-private_httpddir=${N_PRIVATE_HTTPDDIR} \
-	--with-public_httpddir=${N_PUBLIC_HTTPDDIR} \
-	--with-hosted_httpddir=${N_HOSTED_HTTPDDIR}  \
-	--with-flagdir=${N_FLAGDIR} \
 "
 
 N_CFLAGS = "-Wall -W -Wshadow -g -O2 -funsigned-char -I${STAGING_INCDIR}/freetype2 -fcommon"
