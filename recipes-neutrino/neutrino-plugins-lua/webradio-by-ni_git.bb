@@ -1,4 +1,5 @@
 include neutrino-lua-plugins.inc
+include neutrino-provider-webradio.inc
 
 SUMMARY = "Webradio content from ni"
 DESCRIPTION = "${SUMMARY}"
@@ -16,42 +17,9 @@ SRC_URI = " \
 
 SRCREV = "${AUTOREV}"
 PKGV = "${MIGIT_PKGV}"
-PR = "r1"
+PR = "r2"
 
 do_compile[noexec] = "1"
-
-do_install () {
-	suffix="by-ni"
-	prefix="ni"
-
-	normalize_name() {
-		local name="$1"
-
-		case "$name" in
-			${prefix}-*) name="${name#${prefix}-}" ;;
-		esac
-
-		case "$name" in
-			*-by-tuxbox) name="${name%-by-tuxbox}" ;;
-			*-by-ni) name="${name%-by-ni}" ;;
-		esac
-
-		echo "$name"
-	}
-
-	install -d ${D}${N_WEBRADIO_DIR}
-
-	for f in ${S}/*.xml; do
-		[ -e "$f" ] || continue
-		base=$(basename "$f")
-		name="${base%.*}"
-		ext="${base##*.}"
-		norm=$(normalize_name "$name")
-		[ -n "$norm" ] || norm="$name"
-		new="${norm}-${suffix}.${ext}"
-		install -m 644 "$f" "${D}${N_WEBRADIO_DIR}/${new}"
-	done
-}
 
 FILES:${PN} += " \
 	${N_WEBRADIO_DIR} \
