@@ -23,7 +23,7 @@ DEPENDS = "\
 
 DEPENDS:append = " ${@'glew freeglut' if d.getVar('NEUTRINO_BOXTYPE') == 'generic' else ''}"
 
-include ${FLAVOUR}.inc
+include tuxbox.inc
 
 # on coolstream, the same is provided by cs-drivers pkg (libcoolstream)
 PROVIDES = "virtual/libstb-hal"
@@ -33,7 +33,7 @@ RDEPENDS_${PN} = "ffmpeg"
 SRCPV_WORKSPACE = "9999"
 PKGV = "${GITPKGVTAG}"
 SRCREV = "${AUTOREV}"
-PR = "r5"
+PR = "r6"
 
 # libstb-hal-bin package for testing binaries etc.
 PACKAGES += "${PN}-bin"
