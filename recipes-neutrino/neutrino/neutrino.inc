@@ -82,7 +82,7 @@ EXTRA_OECONF = " \
 	--with-stb-hal-includes=${STAGING_INCDIR}/libstb-hal \
 	\
 	${NEUTRINO_OECONF_DIRS_COMMON} \
-	--with-datadir=${N_ZAPITDIR} \
+	--with-datadir=${N_DATADIR} \
 	\
 	--with-tmdb-api-key="${TMDB_DEV_KEY}" \
 	--with-omdb-api-key="${OMDB_API_KEY}" \
