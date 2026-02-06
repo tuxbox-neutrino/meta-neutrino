@@ -1,3 +1,5 @@
+include ../neutrino/neutrino-flavour-config.inc
+
 HOMEPAGE = "http://www.tuxbox.org"
 MAINTAINER = "Tuxbox-Developers"
 
@@ -7,8 +9,6 @@ SRC_URI += "git://github.com/tuxbox-neutrino/library-stb-hal.git;branch=mpx;prot
 PKGV = "${GITPKGVTAG}"
 
 EXTRA_OECONF:append = " \
-			--with-boxtype=${NEUTRINO_BOXTYPE} \
-			--with-boxmodel=${NEUTRINO_BOXMODEL} \
-			--with-targetroot= \
-			--with-targetprefix= /usr \
+			${NEUTRINO_OECONF_BOXMAP} \
+			${NEUTRINO_OECONF_TARGETROOT} \
 "
