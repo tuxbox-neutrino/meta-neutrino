@@ -5,7 +5,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRCPV_WORKSPACE = "9999"
-PR = "r10"
+PR = "r12"
 SRCREV = "${AUTOREV}"
 
 PATCHTOOL = "git"
@@ -22,12 +22,6 @@ SRC_URI = " \
 	file://mount.mdev \
 	file://etc.tar.gz \
 	file://tobackup.conf \
-	file://backup_rootfs.jpg \
-	file://update_download.jpg \
-	file://update_decompress.jpg \
-	file://update_kernel.jpg \
-	file://update_rootfs.jpg \
-	file://update_done.jpg \
 "
 
 S = "${WORKDIR}/git"
