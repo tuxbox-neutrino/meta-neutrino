@@ -5,7 +5,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRCPV_WORKSPACE = "9999"
-PR = "r12"
+PR = "r14"
 SRCREV = "${AUTOREV}"
 
 PATCHTOOL = "git"
@@ -20,7 +20,6 @@ SRC_URI = " \
 	file://pre-wlan0.sh \
 	file://post-wlan0.sh \
 	file://mount.mdev \
-	file://etc.tar.gz \
 	file://tobackup.conf \
 "
 
