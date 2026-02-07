@@ -9,7 +9,6 @@ HOMEPAGE = "https://github.com/tuxbox-neutrino/plugin-scripts-lua.git"
 
 SRC_NAME = "webtv"
 MIGIT_SUBDIR = "plugins/${SRC_NAME}"
-MIGIT_REPO_NAME = "${SRC_NAME}"
 
 SRCREV = "${AUTOREV}"
 PKGV = "${MIGIT_PKGV}"

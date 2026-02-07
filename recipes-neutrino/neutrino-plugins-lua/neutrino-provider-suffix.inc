@@ -12,9 +12,9 @@ provider_normalize_name() {
 		esac
 	fi
 
+	# Strip any existing provider suffix to keep renaming idempotent.
 	case "$name" in
-		*-by-tuxbox) name="${name%-by-tuxbox}" ;;
-		*-by-ni) name="${name%-by-ni}" ;;
+		*-by-*) name="${name%-by-*}" ;;
 	esac
 
 	echo "$name"

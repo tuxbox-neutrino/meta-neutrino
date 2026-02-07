@@ -9,7 +9,6 @@ HOMEPAGE = "https://github.com/neutrino-images/ni-neutrino-plugins"
 
 SRC_NAME = "webtv"
 MIGIT_SUBDIR = "scripts-lua/plugins/${SRC_NAME}"
-MIGIT_REPO_NAME = "${SRC_NAME}"
 
 SRC_URI = " \
 	git://github.com/neutrino-images/ni-neutrino-plugins.git;protocol=https;branch=master \
