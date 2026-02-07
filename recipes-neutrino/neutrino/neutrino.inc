@@ -155,8 +155,6 @@ do_install:append() {
 	# We don't install the update.urls file with the neutrino target.
 	# The content is inserted during the creation of the image (See: neutrino-image-base.inc).
 	# touch ${D}/etc/update.urls
-
-	cp -rf ${WORKDIR}/etc ${D}
 }
 
 FILES:${PN} += "\
