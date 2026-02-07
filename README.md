@@ -84,3 +84,17 @@ See hardware/integration documentation for the detailed workflow.
 
 - Yocto release: Kirkstone (4.0 LTS)
 - Layer series: `kirkstone`
+
+## License
+
+Layer metadata and infrastructure in this repository are published under
+`BSD-2-Clause`.
+
+Recipe payload keeps its original upstream licensing. Check `LICENSE` and
+`LIC_FILES_CHKSUM` in each recipe for package-level licensing details.
+
+## Credits
+
+- Tuxbox-Neutrino developers and maintainers
+- OE-Alliance project for machine and distro build ecosystem
+- Yocto Project / OpenEmbedded maintainers
