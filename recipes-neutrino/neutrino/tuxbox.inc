@@ -9,6 +9,7 @@ SRC_URI:append = " git://github.com/tuxbox-neutrino/gui-neutrino.git;protocol=ht
 "
 
 PKGV = "${GITPKGVTAG}"
+GITPKGVTAG_NO_WARN_ON_NO_TAG = "1"
 
 DEFAULT_THEME ?= "Neutrino-3.0"
 
@@ -20,4 +21,3 @@ EXTRA_OECONF:append = " --with-default-theme=${DEFAULT_THEME} \
 "
 
 do_install:append = " mv -f ${D}${sysconfdir}/neutrino/config/bad_package_pattern.list.sample ${D}${sysconfdir}/neutrino/config/bad_package_pattern.list"
-
