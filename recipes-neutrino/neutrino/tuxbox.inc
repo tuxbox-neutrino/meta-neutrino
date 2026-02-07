@@ -5,7 +5,6 @@ HOMEPAGE = "http://www.tuxbox.org"
 MAINTAINER = "Tuxbox-Developers"
 
 SRC_URI:append = " git://github.com/tuxbox-neutrino/gui-neutrino.git;protocol=https;branch=master \
-		   file://0001-hdd_menu.cpp-assume-device-mounted.patch \
 "
 
 PKGV = "${GITPKGVTAG}"

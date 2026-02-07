@@ -5,7 +5,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRCPV_WORKSPACE = "9999"
-PR = "r9"
+PR = "r10"
 SRCREV = "${AUTOREV}"
 
 PATCHTOOL = "git"
