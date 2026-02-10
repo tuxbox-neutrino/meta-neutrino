@@ -64,16 +64,24 @@ do_migit_extract() {
         bbfatal "migit: source repo missing at ${MIGIT_SOURCE}"
     fi
 
-    rm -rf "${MIGIT_DEPLOY_DIR}/${MIGIT_PROJECT}"
+    # migit may generate a timestamped root folder name, so we do not assume
+    # a static deploy subdirectory here.
+    rm -rf "${MIGIT_DEPLOY_DIR}"
+    install -d "${MIGIT_DEPLOY_DIR}"
 
-    migit "${MIGIT_SOURCE}" \
-        --subdir "${MIGIT_SUBDIR}" \
-        --deploy-dir "${MIGIT_DEPLOY_DIR}" \
-        --target-root-project-name "${MIGIT_PROJECT}" \
-        ${MIGIT_OPTS}
+    # migit uses $(pwd)/work internally. Run it from a recipe-local directory
+    # to avoid cross-recipe collisions when tasks execute in parallel.
+    (
+        cd "${MIGIT_DEPLOY_DIR}"
+        migit "${MIGIT_SOURCE}" \
+            --subdir "${MIGIT_SUBDIR}" \
+            --deploy-dir "${MIGIT_DEPLOY_DIR}" \
+            --target-root-project-name "${MIGIT_PROJECT}" \
+            ${MIGIT_OPTS}
+    )
 
-    src_repo="${MIGIT_DEPLOY_DIR}/${MIGIT_PROJECT}/${MIGIT_REPO_NAME}"
-    if [ ! -d "${src_repo}/.git" ]; then
+    src_repo=$(ls -td "${MIGIT_DEPLOY_DIR}"/*/"${MIGIT_REPO_NAME}" 2>/dev/null | head -n 1 || true)
+    if [ -z "${src_repo}" ] || [ ! -d "${src_repo}/.git" ]; then
         bbfatal "migit: output repo missing at ${src_repo}"
     fi
 
