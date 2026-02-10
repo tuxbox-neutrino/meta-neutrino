@@ -8,6 +8,7 @@ def neutrino_boxmap(d):
 
     machine = (d.getVar("MACHINE") or "").strip().lower()
     machinebuild = (d.getVar("MACHINEBUILD") or "").strip().lower()
+    warn = getattr(bb, "warnonce", bb.warn)
 
     # Resolve the candidate model name (explicit override wins).
     candidate = machinebuild or machine
@@ -23,8 +24,6 @@ def neutrino_boxmap(d):
         "apollo": "hd2",
     }
 
-    boxmodel = alias_map.get(candidate, candidate)
-
     boxmodels_generic = {"generic", "raspi"}
     boxmodels_coolstream = {"hd1", "hd2"}
     boxmodels_armbox = {
@@ -35,6 +34,14 @@ def neutrino_boxmap(d):
         "vuuno4k", "vuuno4kse", "vuzero4k",
     }
     boxmodels_mipsbox = {"vuduo", "vuduo2", "gb800se", "osnino", "osninoplus", "osninopro"}
+    known_boxmodels = boxmodels_generic | boxmodels_coolstream | boxmodels_armbox | boxmodels_mipsbox
+
+    boxmodel = alias_map.get(candidate, candidate)
+
+    # MACHINE is the canonical OE machine name. If MACHINEBUILD is a brand/model
+    # alias that we do not map explicitly, use MACHINE when it is known.
+    if boxmodel not in known_boxmodels and machine in known_boxmodels:
+        boxmodel = machine
 
     if boxmodel in boxmodels_generic:
         boxtype = "generic"
@@ -57,12 +64,12 @@ def neutrino_boxmap(d):
             boxtype = "generic"
             boxmodel = "generic"
 
-        bb.warn("Neutrino boxmap: unknown machine '%s' (build '%s'); using boxtype '%s' boxmodel '%s'" %
-                (machine or "?", machinebuild or "?", boxtype, boxmodel))
+        warn("Neutrino boxmap: unknown machine '%s' (build '%s'); using boxtype '%s' boxmodel '%s'" %
+             (machine or "?", machinebuild or "?", boxtype, boxmodel))
 
     if not boxmodel:
         boxmodel = "generic"
-        bb.warn("Neutrino boxmap: empty boxmodel, defaulting to 'generic'")
+        warn("Neutrino boxmap: empty boxmodel, defaulting to 'generic'")
 
     return (boxtype, boxmodel)
 
