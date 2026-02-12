@@ -1,0 +1,55 @@
+From 2f787c55fae184c810fc4eecf7247f7033e94636 Mon Sep 17 00:00:00 2001
+From: developers <developers@tuxbox-neutrino.org>
+Date: Thu, 12 Feb 2026 21:44:52 +0100
+Subject: [PATCH] libnet: guard netGetIP against failed ioctls
+
+Avoid populating IP, netmask and broadcast with stale stack data when
+
+an ioctl call fails and fix the socket error check to use fd < 0.
+---
+ lib/libnet/libnet.cpp | 17 ++++++++++-------
+ 1 file changed, 10 insertions(+), 7 deletions(-)
+
+diff --git a/lib/libnet/libnet.cpp b/lib/libnet/libnet.cpp
+index d55f3ee..d726946 100644
+--- a/lib/libnet/libnet.cpp
++++ b/lib/libnet/libnet.cpp
+@@ -97,7 +97,7 @@ void	netGetIP(std::string &dev, std::string &ip, std::string &mask, std::string
+ 	brdcast = "";
+ 
+ 	fd=socket(AF_INET,SOCK_DGRAM,0);
+-	if ( !fd )
++	if ( fd < 0 )
+ 		return;
+ 
+ 
+@@ -108,17 +108,20 @@ void	netGetIP(std::string &dev, std::string &ip, std::string &mask, std::string
+ 
+ 	char tmp[80];
+ 
+-	if( ioctl(fd,SIOCGIFADDR,&req) == 0 )
++	if( ioctl(fd,SIOCGIFADDR,&req) == 0 ) {
+ 		snprintf(tmp, sizeof(tmp),"%d.%d.%d.%d",addr[0],addr[1],addr[2],addr[3]);
+-	ip = std::string(tmp);
++		ip = std::string(tmp);
++	}
+ 
+-	if( ioctl(fd,SIOCGIFNETMASK,&req) == 0 )
++	if( ioctl(fd,SIOCGIFNETMASK,&req) == 0 ) {
+ 		snprintf(tmp, sizeof(tmp),"%d.%d.%d.%d",addr[0],addr[1],addr[2],addr[3]);
+-	mask = std::string(tmp);
++		mask = std::string(tmp);
++	}
+ 
+-	if( ioctl(fd,SIOCGIFBRDADDR,&req) == 0 )
++	if( ioctl(fd,SIOCGIFBRDADDR,&req) == 0 ) {
+ 		snprintf(tmp, sizeof(tmp),"%d.%d.%d.%d",addr[0],addr[1],addr[2],addr[3]);
+-	brdcast = std::string(tmp);
++		brdcast = std::string(tmp);
++	}
+ 
+ 	close(fd);
+ }
+-- 
+2.39.5
+

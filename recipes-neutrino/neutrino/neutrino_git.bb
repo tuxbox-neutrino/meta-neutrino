@@ -5,7 +5,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRCPV_WORKSPACE = "9999"
-PR = "r17"
+PR = "r19"
 SRCREV = "${AUTOREV}"
 
 PATCHTOOL = "git"
@@ -21,6 +21,7 @@ SRC_URI = " \
 	file://mount.mdev \
 	file://tobackup.conf \
 	file://0001-neutrino-prefer-image-version-first.patch \
+	file://0002-libnet-guard-netGetIP-against-failed-ioctls.patch \
 "
 
 S = "${WORKDIR}/git"

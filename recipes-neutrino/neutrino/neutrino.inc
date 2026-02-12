@@ -46,7 +46,10 @@ RDEPENDS_${PN} = "streamripper virtual/libstb-hal virtual/lua luaposix lua-expat
 
 S = "${WORKDIR}/git"
 
-SYSTEMD_SERVICE_${PN} = "neutrino.service"
+# Use modern override syntax so systemd.bbclass can reliably generate
+# package scripts/presets on kirkstone and newer bitbake versions.
+SYSTEMD_SERVICE:${PN} = "neutrino.service"
+SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 
 YT_DEV_KEY ?= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
