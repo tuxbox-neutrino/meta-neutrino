@@ -7,6 +7,7 @@ MAINTAINER = "${FLAVOR}-developers"
 HOMEPAGE = ""
 
 SUMMARY = "${DESCRIPTION}"
+PR = "r1"
 
 PV = "git+${SRCPV}"
 
@@ -24,7 +25,6 @@ do_install () {
 	rm -f ${D}${datadir}/fonts/Makefile*
 }
 
-FILES_${PN} = " \
-	/usr \
-	/etc \
+FILES:${PN} = " \
+	${datadir}/fonts \
 "

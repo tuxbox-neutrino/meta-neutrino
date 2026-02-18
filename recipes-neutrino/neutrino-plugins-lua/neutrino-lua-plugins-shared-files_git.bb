@@ -3,6 +3,7 @@ include neutrino-lua-plugins.inc
 ## PN (package name = filename)
 #PN = "neutrino-lua-plugins-shared-files"
 SUMMARY = "Shared files and scripts for neutrino-lua-plugins"
+PR = "r1"
 
 MIGIT_ENABLED = "0"
 
@@ -17,12 +18,17 @@ SRC_SUBPATH = "lua/${PV_LUA}"
 do_install () {
 #	install -d ${D}/usr/share/lua/${LUA_VER}
 	mkdir -p ${D}/usr/share/lua/${LUA_VER}
-	cp -r ${S}/${SRC_SUBPATH}/n_*.lua ${D}/usr/share/lua/${LUA_VER}/
+	set -- ${S}/${SRC_SUBPATH}/n_*.lua
+	if [ -e "$1" ]; then
+		cp -r "$@" ${D}/usr/share/lua/${LUA_VER}/
+	else
+		bbwarn "No n_*.lua files found in ${S}/${SRC_SUBPATH}; continuing"
+	fi
 ##	json.lua not required, already provided by json package itself
 # 	cp -r ${S}/${PV_LUA}/json.lua ${D}/usr/share/lua/${LUA_VER}/json.lua
 
 # 	install -d ${D}/usr/share/lua/${PV_LUA}
 # 	cp -r ${S}/${SRC_SUBPATH}/* ${D}/usr/share/lua/${PV_LUA}/
 
-	rm -r ${D}/usr/share/tuxbox
+	rm -rf ${D}/usr/share/tuxbox
 }
