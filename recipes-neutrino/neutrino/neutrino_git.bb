@@ -5,7 +5,7 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 SRCPV_WORKSPACE = "9999"
-PR = "r19"
+PR = "r20"
 SRCREV = "${AUTOREV}"
 
 PATCHTOOL = "git"
@@ -15,6 +15,7 @@ SRC_URI = " \
 	file://neutrino.service \
 	file://neutrino-log.service \
 	file://neutrino.sh_tuxbox \
+	file://streamripper.sh \
 	file://timezone.xml \
 	file://pre-wlan0.sh \
 	file://post-wlan0.sh \

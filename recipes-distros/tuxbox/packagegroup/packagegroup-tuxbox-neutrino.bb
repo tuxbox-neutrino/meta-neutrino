@@ -4,6 +4,7 @@
 
 DESCRIPTION = "Tuxbox-OS Neutrino GUI packages"
 LICENSE = "MIT"
+PR = "r1"
 
 inherit packagegroup
 
@@ -13,9 +14,10 @@ RDEPENDS:${PN} = " \
     neutrino-plugins \
 "
 
-# Themes
+# Optional themes and script plugin bundles
 RRECOMMENDS:${PN} = " \
+    neutrino-lua-plugins \
+    neutrino-lua-stb-plugins \
     neutrino-themes \
     neutrino-logos \
-    neutrino-fonts-extra \
 "

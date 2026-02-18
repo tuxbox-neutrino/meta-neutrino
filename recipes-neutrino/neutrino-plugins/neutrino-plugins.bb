@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-PR = "r2"
+PR = "r3"
 PACKAGES = "${PN}"
 
 RDEPENDS:${PN} = " \
@@ -21,6 +21,7 @@ RDEPENDS:${PN} = " \
     input  \
     logomask \
     msgbox  \
+    neutrino-plugin-data \
     neutrino-fonts-extra \
     oled-ctrl  \
     pr-auto-timer \

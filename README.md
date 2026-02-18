@@ -71,6 +71,8 @@ See hardware/integration documentation for the detailed workflow.
 
 ## Documentation
 
+- Runtime dependency matrix:
+  `NEUTRINO_RUNTIME_DEPENDENCY_MATRIX.md`
 - Orchestrator README:
   `https://github.com/tuxbox-neutrino/build-environment/blob/master/README.md`
 - Quick start:

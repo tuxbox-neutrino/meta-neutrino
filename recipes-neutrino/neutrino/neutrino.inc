@@ -43,6 +43,8 @@ DEPENDS += " \
 "
 
 RDEPENDS_${PN} = "streamripper virtual/libstb-hal virtual/lua luaposix lua-expat ffmpeg"
+# `grab` is optional, but enables screenshot/GLCD capture features in Neutrino.
+RRECOMMENDS:${PN} += "grab"
 
 S = "${WORKDIR}/git"
 
@@ -139,6 +141,7 @@ do_install:prepend () {
 	install -m 0644 ${WORKDIR}/neutrino.service ${D}${systemd_unitdir}/system/
 	install -m 0644 ${WORKDIR}/neutrino-log.service  ${D}${systemd_unitdir}/system
 	install -m 0755 ${WORKDIR}/neutrino.sh_tuxbox ${D}${bindir}/neutrino.sh   
+	install -m 0755 ${WORKDIR}/streamripper.sh ${D}${bindir}/streamripper.sh
 	install -m 755 ${WORKDIR}/pre-wlan0.sh ${D}${sysconfdir}/network/
 	install -m 755 ${WORKDIR}/post-wlan0.sh ${D}${sysconfdir}/network/
 	install -m 644 ${WORKDIR}/timezone.xml ${D}${sysconfdir}/timezone.xml
