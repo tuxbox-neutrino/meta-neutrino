@@ -23,6 +23,6 @@ do_install:append () {
 echo "integration=2" >> ${D}/usr/share/tuxbox/plugins/myspass.cfg
 }
 
-FILES_${PN} += " \
-	/usr \
-"
+FILES:${PN} += " \
+		/usr \
+	"

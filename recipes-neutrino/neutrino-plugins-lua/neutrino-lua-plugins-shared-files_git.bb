@@ -12,6 +12,7 @@ SRC_URI = " \
 "
 
 PV_LUA = "5.2"
+S = "${WORKDIR}/${SRC_DEST_SUFFIX}"
 
 SRC_SUBPATH = "lua/${PV_LUA}"
 

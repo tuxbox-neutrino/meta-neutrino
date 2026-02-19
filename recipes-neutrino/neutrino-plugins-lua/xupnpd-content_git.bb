@@ -13,6 +13,7 @@ MIGIT_ENABLED = "0"
 SRC_URI = " \
     git://github.com/tuxbox-neutrino/plugin-scripts-lua.git;protocol=https;subpath=${SRC_SUBPATH};destsuffix=${SRC_DEST_SUFFIX};branch=master \
 "
+S = "${WORKDIR}/${SRC_DEST_SUFFIX}"
 
 do_install () {
 	# install content

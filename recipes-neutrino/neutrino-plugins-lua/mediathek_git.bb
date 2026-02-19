@@ -2,7 +2,7 @@ SUMMARY = "Neutrino Lua Plugin: Mediathek"
 DESCRIPTION = "Standalone Mediathek plugin for Neutrino"
 HOMEPAGE = "https://github.com/tuxbox-neutrino/neutrino-mediathek"
 
-LICENSE = "GPL-2.0+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=e7f9ee1b2802417caeac2327f3f6817b"
 
 PR = "r2"
