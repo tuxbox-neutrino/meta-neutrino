@@ -4,7 +4,6 @@ HOMEPAGE = "http://www.tuxbox.org"
 MAINTAINER = "Tuxbox-Developers"
 
 SRC_URI:append += "git://github.com/tuxbox-neutrino/gui-neutrino.git;protocol=https \
-		   file://0001-hdd_menu.cpp-assume-device-mounted.patch \
 "
 
 PKGV = "${GITPKGVTAG}"
@@ -20,6 +19,5 @@ EXTRA_OECONF:append += "--with-default-theme=${DEFAULT_THEME} \
 "
 
 do_install:append += "mv -f ${D}${sysconfdir}/neutrino/config/bad_package_pattern.list.sample ${D}${sysconfdir}/neutrino/config/bad_package_pattern.list"
-
 
 
