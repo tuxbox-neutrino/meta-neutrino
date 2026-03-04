@@ -6,36 +6,68 @@ MAINTAINER = "flk, content by fred_feuerstein"
 # Source name and additional metadata
 SRC_NAME = "logoupdater"
 
-# Splash image filename and its URL
-SPLASH_PNG = "${SRC_NAME}_1.png"
-SPLASH_URL = "https://raw.githubusercontent.com/neutrino-images/ni-logo-stuff/master/logo-intro/lua-version/${SPLASH_PNG}"
+# Keep this recipe revision local to logoupdater changes.
+PR = "r3"
 
-# SHA256 checksum for the splash image to ensure data integrity
-SPLASH_CHECKSUM = "db5e3aa45b449f81af6ae265d7c607c70fd96eecb66bc0d9a3f6364054c3a245"
+# Track logo-source changes without packaging the full logo repository.
+LOGO_REPO_NAME = "logos"
+LOGO_REPO_BRANCH = "master"
+LOGO_REPO_DIR = "${WORKDIR}/logo-repo"
+LOGO_REPO_URI = "git://github.com/neutrino-images/ni-logo-stuff.git;protocol=https;branch=${LOGO_REPO_BRANCH};name=${LOGO_REPO_NAME};destsuffix=logo-repo"
 
-# Append the splash image URL to the source URI for download during the build process
+# Use a dedicated source revision for logo tracking.
 SRC_URI:append = " \
-    ${SPLASH_URL};name=splash \
+    ${LOGO_REPO_URI} \
 "
+SRCREV_logos = "${AUTOREV}"
+SRCREV_FORMAT = "default_logos"
 
-# Checksum of the downloaded splash image
-SRC_URI[splash.sha256sum] = "${SPLASH_CHECKSUM}"
+def logoupdater_logo_suffix(d):
+    srcpv = d.getVar('SRCPV') or ''
+    if '_' in srcpv:
+        return srcpv.rsplit('_', 1)[-1][:10]
+    return (srcpv or "unknown")[:10]
 
-# Use the fetched asset directly and avoid runtime downloads
-SPLASH_FILE = "${WORKDIR}/${SPLASH_PNG}"
+LOGO_TRACK_SUFFIX = "${@logoupdater_logo_suffix(d)}"
+
+# Include both plugin and logo-source changes in package versioning.
+PKGV = "${MIGIT_PKGV}+logo${LOGO_TRACK_SUFFIX}"
+
+# Plugin splash image expected by logoupdater.lua.
+SPLASH_PNG = "${SRC_NAME}_1.png"
+SPLASH_FILE = "${LOGO_REPO_DIR}/logo-intro/lua-version/${SPLASH_PNG}"
+SPLASH_FALLBACK = "${S}/${SRC_NAME}.png"
+
+# Runtime tools used by the plugin for online updates.
+RDEPENDS_${PN} += "curl rsync unzip ca-certificates"
+RRECOMMENDS_${PN} += "git"
+
+# only marker file, no channel logos are packaged by this recipe
+LOGO_TRACK_FILE = "${SRC_NAME}.logosrc-rev"
 
 do_install () {
     INSTALLDIR=${D}${N_LUAPLUGIN_DIR}
     install -d ${INSTALLDIR}
 
     if [ -f "${SPLASH_FILE}" ]; then
-        install -m 644 ${SPLASH_FILE} ${INSTALLDIR}/${SRC_NAME}.png
+        install -m 644 "${SPLASH_FILE}" "${INSTALLDIR}/${SRC_NAME}.png"
+    elif [ -f "${SPLASH_FALLBACK}" ]; then
+        install -m 644 "${SPLASH_FALLBACK}" "${INSTALLDIR}/${SRC_NAME}.png"
+        bbwarn "logoupdater: using splash fallback ${SPLASH_FALLBACK}"
     else
-        bbwarn "logoupdater: splash ${SPLASH_FILE} missing; skipping image install"
+        bbwarn "logoupdater: splash missing, installing plugin without background image"
     fi
 
-    install -m 755 ${S}/${SRC_NAME}.lua ${INSTALLDIR}/${SRC_NAME}.lua
-    install -m 644 ${S}/${SRC_NAME}.cfg ${INSTALLDIR}/${SRC_NAME}.cfg
+    logo_rev="$(git -C "${LOGO_REPO_DIR}" rev-parse --verify HEAD 2>/dev/null || true)"
+    if [ -n "${logo_rev}" ]; then
+        printf '%s\n' "${logo_rev}" > "${INSTALLDIR}/${LOGO_TRACK_FILE}"
+    else
+        bbwarn "logoupdater: unable to read logo repo revision, using ${SRCPV}"
+        printf '%s\n' "${SRCPV}" > "${INSTALLDIR}/${LOGO_TRACK_FILE}"
+    fi
+
+    install -m 755 "${S}/${SRC_NAME}.lua" "${INSTALLDIR}/${SRC_NAME}.lua"
+    install -m 644 "${S}/${SRC_NAME}.cfg" "${INSTALLDIR}/${SRC_NAME}.cfg"
 }
 
 # Define the files included in the package
