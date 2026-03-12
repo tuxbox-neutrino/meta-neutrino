@@ -15,9 +15,9 @@ MIGIT_ENABLED = "0"
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=a5f8f5771e40cfa0fef989e421db6c7e"
 
-PR = "r3"
+PR = "r4"
 
-PLUGIN_SOURCE_DIR = "${S}/stb_startup"
+PLUGIN_SOURCE_DIR = "${S}/plugin"
 PLUGIN_SCRIPT_NAME = "stb-startup"
 
 do_install:append () {
