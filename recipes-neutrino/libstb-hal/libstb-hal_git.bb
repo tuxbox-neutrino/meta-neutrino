@@ -31,9 +31,11 @@ RPROVIDES_${PN} = "virtual/libstb-hal"
 RDEPENDS_${PN} = "ffmpeg"
 
 SRCPV_WORKSPACE = "9999"
+# Keep package upgrades monotonic after switching from workspace-style 9999 PKGV.
+PE = "1"
 PKGV = "${GITPKGVTAG}"
 SRCREV = "${AUTOREV}"
-PR = "r6"
+PR = "r7"
 
 # libstb-hal-bin package for testing binaries etc.
 PACKAGES += "${PN}-bin"
