@@ -7,7 +7,7 @@ MAINTAINER = "flk, content by fred_feuerstein"
 SRC_NAME = "logoupdater"
 
 # Keep this recipe revision local to logoupdater changes.
-PR = "r5"
+PR = "r7"
 
 # Track logo-source changes without packaging the full logo repository.
 LOGO_REPO_NAME = "logos"
@@ -17,6 +17,7 @@ LOGO_REPO_URI = "git://github.com/neutrino-images/ni-logo-stuff.git;protocol=htt
 
 # Use a dedicated source revision for logo tracking.
 SRC_URI:append = " \
+    file://0001-logoupdater-harden-config-file-creation.patch \
     ${LOGO_REPO_URI} \
 "
 SRCREV_logos = "${AUTOREV}"
@@ -39,8 +40,9 @@ SPLASH_FILE = "${LOGO_REPO_DIR}/logo-intro/lua-version/${SPLASH_PNG}"
 SPLASH_FALLBACK = "${S}/${SRC_NAME}.png"
 
 # Runtime tools used by the plugin for online updates.
-RDEPENDS_${PN} += "curl rsync unzip ca-certificates"
-RRECOMMENDS_${PN} += "git"
+# Use modern override syntax so dependencies are emitted into package metadata.
+RDEPENDS:${PN} += "lua-feedparser lua-expat lua-json luaposix curl rsync unzip ca-certificates"
+RRECOMMENDS:${PN} += "git"
 
 # only marker file, no channel logos are packaged by this recipe
 LOGO_TRACK_FILE = "${SRC_NAME}.logosrc-rev"
