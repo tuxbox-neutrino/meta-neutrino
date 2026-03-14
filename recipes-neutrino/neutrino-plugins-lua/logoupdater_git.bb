@@ -1,79 +1,30 @@
 include neutrino-lua-plugins-target-pattern.inc
 
-# Maintainer information for the package
-MAINTAINER = "flk, content by fred_feuerstein"
+SUMMARY = "Neutrino Lua Plugin: Logo Updater"
+DESCRIPTION = "Standalone logoupdater plugin for channel logo updates."
+HOMEPAGE = "https://github.com/tuxbox-neutrino/plugin-lua-logoupdater"
 
-# Source name and additional metadata
 SRC_NAME = "logoupdater"
 
-# Keep this recipe revision local to logoupdater changes.
-PR = "r7"
+SRC_URI = "git://github.com/tuxbox-neutrino/plugin-lua-logoupdater.git;protocol=https;branch=master"
+SRCREV = "ad60fdca337b2e51d13c7628a9ab6610153e43da"
+S = "${WORKDIR}/git"
 
-# Track logo-source changes without packaging the full logo repository.
-LOGO_REPO_NAME = "logos"
-LOGO_REPO_BRANCH = "master"
-LOGO_REPO_DIR = "${WORKDIR}/logo-repo"
-LOGO_REPO_URI = "git://github.com/neutrino-images/ni-logo-stuff.git;protocol=https;branch=${LOGO_REPO_BRANCH};name=${LOGO_REPO_NAME};destsuffix=logo-repo"
+MIGIT_ENABLED = "0"
 
-# Use a dedicated source revision for logo tracking.
-SRC_URI:append = " \
-    file://0001-logoupdater-harden-config-file-creation.patch \
-    ${LOGO_REPO_URI} \
-"
-SRCREV_logos = "${AUTOREV}"
-SRCREV_FORMAT = "default_logos"
+LICENSE = "BSD-2-Clause"
+LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=a5f8f5771e40cfa0fef989e421db6c7e"
 
-def logoupdater_logo_suffix(d):
-    srcpv = d.getVar('SRCPV') or ''
-    if '_' in srcpv:
-        return srcpv.rsplit('_', 1)[-1][:10]
-    return (srcpv or "unknown")[:10]
+inherit gitpkgv
+PKGV = "${GITPKGV}"
 
-LOGO_TRACK_SUFFIX = "${@logoupdater_logo_suffix(d)}"
+# Keep package feed ordering monotonic after migration from the monorepo recipe.
+PE = "1"
+PR = "r1"
 
-# Include both plugin and logo-source changes in package versioning.
-PKGV = "${MIGIT_PKGV}+logo${LOGO_TRACK_SUFFIX}"
-
-# Plugin splash image expected by logoupdater.lua.
-SPLASH_PNG = "${SRC_NAME}_1.png"
-SPLASH_FILE = "${LOGO_REPO_DIR}/logo-intro/lua-version/${SPLASH_PNG}"
-SPLASH_FALLBACK = "${S}/${SRC_NAME}.png"
+PLUGIN_SOURCE_DIR = "${S}/plugin"
+PLUGIN_SCRIPT_NAME = "logoupdater"
 
 # Runtime tools used by the plugin for online updates.
-# Use modern override syntax so dependencies are emitted into package metadata.
 RDEPENDS:${PN} += "lua-feedparser lua-expat lua-json luaposix curl rsync unzip ca-certificates"
 RRECOMMENDS:${PN} += "git"
-
-# only marker file, no channel logos are packaged by this recipe
-LOGO_TRACK_FILE = "${SRC_NAME}.logosrc-rev"
-
-do_install () {
-    INSTALLDIR=${D}${N_LUAPLUGIN_DIR}
-    install -d ${INSTALLDIR}
-
-    if [ -f "${SPLASH_FILE}" ]; then
-        install -m 644 "${SPLASH_FILE}" "${INSTALLDIR}/${SRC_NAME}.png"
-    elif [ -f "${SPLASH_FALLBACK}" ]; then
-        install -m 644 "${SPLASH_FALLBACK}" "${INSTALLDIR}/${SRC_NAME}.png"
-        bbwarn "logoupdater: using splash fallback ${SPLASH_FALLBACK}"
-    else
-        bbwarn "logoupdater: splash missing, installing plugin without background image"
-    fi
-
-    logo_rev="$(git -C "${LOGO_REPO_DIR}" rev-parse --verify HEAD 2>/dev/null || true)"
-    if [ -n "${logo_rev}" ]; then
-        printf '%s\n' "${logo_rev}" > "${INSTALLDIR}/${LOGO_TRACK_FILE}"
-    else
-        bbwarn "logoupdater: unable to read logo repo revision, using ${SRCPV}"
-        printf '%s\n' "${SRCPV}" > "${INSTALLDIR}/${LOGO_TRACK_FILE}"
-    fi
-
-    install -m 755 "${S}/${SRC_NAME}.lua" "${INSTALLDIR}/${SRC_NAME}.lua"
-    install -m 644 "${S}/${SRC_NAME}.cfg" "${INSTALLDIR}/${SRC_NAME}.cfg"
-}
-
-# Define the files included in the package
-FILES:${PN} = " \
-    /share \
-    ${N_LUAPLUGIN_DIR} \
-"
