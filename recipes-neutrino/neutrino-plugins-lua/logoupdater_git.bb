@@ -7,13 +7,13 @@ LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=a5f8f5771e40cfa0fef989e421db6c7e"
 
 # Recipe metadata update (install style migration from makeit to oe_runmake).
 PE = "1"
-PR = "r4"
+PR = "r5"
 
 inherit gitpkgv
 PKGV = "${GITPKGV}"
 
 SRC_URI = "git://github.com/tuxbox-neutrino/plugin-lua-logoupdater.git;protocol=https;branch=master"
-SRCREV = "7bf87bf10a5d314eaa50e941b5f5724144c25595"
+SRCREV = "${AUTOREV}"
 S = "${WORKDIR}/git"
 
 # for common neutrino paths (icons, plugin dirs, etc.)

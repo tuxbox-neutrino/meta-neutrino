@@ -6,13 +6,13 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=a5f8f5771e40cfa0fef989e421db6c7e"
 
 PE = "2"
-PR = "r6"
+PR = "r7"
 
 inherit gitpkgv
 PKGV = "${GITPKGV}"
 
 SRC_URI = "git://github.com/tuxbox-neutrino/plugin-lua-stb-startup.git;protocol=https;branch=master"
-SRCREV = "a81273ea3969bf9172f162548d81215225ea3f89"
+SRCREV = "${AUTOREV}"
 S = "${WORKDIR}/git"
 
 # for common neutrino paths (icons, plugin dirs, etc.)
