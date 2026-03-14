@@ -7,7 +7,7 @@ MAINTAINER = "flk, content by fred_feuerstein"
 SRC_NAME = "logoupdater"
 
 # Keep this recipe revision local to logoupdater changes.
-PR = "r3"
+PR = "r5"
 
 # Track logo-source changes without packaging the full logo repository.
 LOGO_REPO_NAME = "logos"
