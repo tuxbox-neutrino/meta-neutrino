@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/tuxbox-neutrino/plugin-lua-logoupdater"
 SRC_NAME = "logoupdater"
 
 SRC_URI = "git://github.com/tuxbox-neutrino/plugin-lua-logoupdater.git;protocol=https;branch=master"
-SRCREV = "fab467b1e3d665f90e4b6b0bf0458c4f5dce9eb7"
+SRCREV = "7bf87bf10a5d314eaa50e941b5f5724144c25595"
 S = "${WORKDIR}/git"
 
 MIGIT_ENABLED = "0"
@@ -20,7 +20,7 @@ PKGV = "${GITPKGV}"
 
 # Keep package feed ordering monotonic after migration from the monorepo recipe.
 PE = "1"
-PR = "r2"
+PR = "r3"
 
 PLUGIN_SOURCE_DIR = "${S}/plugin"
 PLUGIN_SCRIPT_NAME = "logoupdater"
