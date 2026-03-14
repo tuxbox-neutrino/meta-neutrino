@@ -1,29 +1,46 @@
-include neutrino-lua-plugins-target-pattern.inc
-
 SUMMARY = "Neutrino Lua Plugin: STB-Startup"
 DESCRIPTION = "Standalone stb-startup plugin for multiboot startup switching."
 HOMEPAGE = "https://github.com/tuxbox-neutrino/plugin-lua-stb-startup"
 
-SRC_NAME = "stb-startup"
-
-SRC_URI = "git://github.com/tuxbox-neutrino/plugin-lua-stb-startup.git;protocol=https;branch=master"
-SRCREV = "39e3dd6ac2f29d9a26d56453f00b8096c0290eed"
-S = "${WORKDIR}/git"
-
-MIGIT_ENABLED = "0"
-
 LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=a5f8f5771e40cfa0fef989e421db6c7e"
+
+PE = "2"
+PR = "r6"
 
 inherit gitpkgv
 PKGV = "${GITPKGV}"
 
-PE = "2"
-PR = "r5"
+SRC_URI = "git://github.com/tuxbox-neutrino/plugin-lua-stb-startup.git;protocol=https;branch=master"
+SRCREV = "a81273ea3969bf9172f162548d81215225ea3f89"
+S = "${WORKDIR}/git"
 
-PLUGIN_SOURCE_DIR = "${S}/plugin"
-PLUGIN_SCRIPT_NAME = "stb-startup"
+# for common neutrino paths (icons, plugin dirs, etc.)
+include ../neutrino/neutrino-common-vars.inc
 
-do_install:append () {
+RDEPENDS:${PN} = "luaposix"
+
+do_compile[noexec] = "1"
+
+do_install () {
+	oe_runmake \
+		DESTDIR=${D} \
+		PREFIX=${N_PREFIX}${N_DATADIR}/neutrino \
+		PLUGIN_SUBDIR=$(basename ${N_PLUGIN_DIR}) \
+		install
+
+	# Keep startup config writable/persistent via /etc with plugin-side symlink.
+	install -d ${D}${N_CONFIG_DIR}
+	install -m 644 ${S}/plugin/stb-startup.conf ${D}${N_CONFIG_DIR}/stb-startup.conf
+	rm -f ${D}${N_PLUGIN_DIR}/stb-startup.conf
+	ln -sf ${N_CONFIG_DIR}/stb-startup.conf ${D}${N_PLUGIN_DIR}/stb-startup.conf
+
+	# Cleanup legacy filename from older package revisions.
 	rm -f ${D}${N_PLUGIN_DIR}/stb-startup_old.lua
 }
+
+FILES:${PN} += " \
+	${datadir}/tuxbox/neutrino \
+	${N_PLUGIN_DIR} \
+	${N_CONFIG_DIR}/stb-startup.conf \
+"
