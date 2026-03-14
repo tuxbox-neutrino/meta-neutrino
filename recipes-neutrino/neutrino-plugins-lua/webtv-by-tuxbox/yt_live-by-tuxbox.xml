@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<webtvs name="YouTube Livestreams">
+	<webtv title="YT: ABC News" url="https://www.youtube.com/@ABCNews/live" script="streamlink-by-tuxbox.lua" description="YouTube Live" />
+	<webtv title="YT: NBC News" url="https://www.youtube.com/@NBCNews/live" script="streamlink-by-tuxbox.lua" description="YouTube Live" />
+	<webtv title="YT: LiveNOW from FOX" url="https://www.youtube.com/@LiveNOWFOX/live" script="streamlink-by-tuxbox.lua" description="YouTube Live" />
+	<webtv title="YT: DW News" url="https://www.youtube.com/@DWNews/live" script="streamlink-by-tuxbox.lua" description="YouTube Live" />
+	<webtv title="YT: TRT World" url="https://www.youtube.com/@TRTWORLD/live" script="streamlink-by-tuxbox.lua" description="YouTube Live" />
+	<webtv title="YT: Reuters" url="https://www.youtube.com/@Reuters/live" script="streamlink-by-tuxbox.lua" description="YouTube Live" />
+	<webtv title="YT: CGTN" url="https://www.youtube.com/@CGTN/live" script="streamlink-by-tuxbox.lua" description="YouTube Live" />
+	<webtv title="YT: WION" url="https://www.youtube.com/@WION/live" script="streamlink-by-tuxbox.lua" description="YouTube Live" />
+	<webtv title="YT: NASASpaceflight" url="https://www.youtube.com/@NasaSpaceflight/live" script="streamlink-by-tuxbox.lua" description="YouTube Live" />
+	<webtv title="YT: The Good Life Radio" url="https://www.youtube.com/@TheGoodLifeRadio/live" script="streamlink-by-tuxbox.lua" description="YouTube Live" />
+	<webtv title="YT: Lofi Girl" url="https://www.youtube.com/@LofiGirl/live" script="streamlink-by-tuxbox.lua" description="YouTube Live" />
+</webtvs>

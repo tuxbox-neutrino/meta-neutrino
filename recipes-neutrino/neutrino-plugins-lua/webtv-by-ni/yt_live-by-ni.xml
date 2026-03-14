@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<webtvs name="YouTube Livestreams">
+	<webtv title="YT: Euronews" url="https://www.youtube.com/@euronews/live" script="streamlink-by-ni.lua" description="YouTube Live" />
+	<webtv title="YT: FRANCE 24 English" url="https://www.youtube.com/@FRANCE24English/live" script="streamlink-by-ni.lua" description="YouTube Live" />
+	<webtv title="YT: Sky News" url="https://www.youtube.com/@SkyNews/live" script="streamlink-by-ni.lua" description="YouTube Live" />
+	<webtv title="YT: WELT" url="https://www.youtube.com/@WELTVideoTV/live" script="streamlink-by-ni.lua" description="YouTube Live" />
+	<webtv title="YT: Bloomberg" url="https://www.youtube.com/@BloombergTelevision/live" script="streamlink-by-ni.lua" description="YouTube Live" />
+	<webtv title="YT: Al Jazeera English" url="https://www.youtube.com/@aljazeeraenglish/live" script="streamlink-by-ni.lua" description="YouTube Live" />
+	<webtv title="YT: NASA" url="https://www.youtube.com/@NASA/live" script="streamlink-by-ni.lua" description="YouTube Live" />
+</webtvs>
