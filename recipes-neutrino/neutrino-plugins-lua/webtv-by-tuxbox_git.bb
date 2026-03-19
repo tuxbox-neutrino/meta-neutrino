@@ -17,7 +17,7 @@ SRC_URI:append = " \
 SRCREV = "${AUTOREV}"
 PKGV = "${MIGIT_PKGV}"
 PE = "1"
-PR = "r4"
+PR = "r5"
 
 do_compile[noexec] = "1"
 
@@ -27,7 +27,8 @@ do_install:append() {
 	install -m 0644 ${WORKDIR}/yt_live-by-tuxbox.xml ${D}${N_WEBTV_DIR}/yt_live-by-tuxbox.xml
 }
 
-RDEPENDS:${PN}:append = " curl"
+RDEPENDS:${PN}:append = " curl lua-json"
+RRECOMMENDS:${PN}:append = " streamlink"
 
 FILES:${PN} += " \
 	${N_WEBTV_DIR} \
