@@ -1,5 +1,9 @@
 include ../../recipes-devtools/lua/lua.inc
 
+# The local include above is optional in this layer layout. Keep a stable Lua
+# module target path even when that include is not resolved from meta-tuxbox.
+LUA_VER ?= "5.1"
+
 # for some common variables, e.g. plugin paths
 include ../neutrino/neutrino-common-vars.inc
 
