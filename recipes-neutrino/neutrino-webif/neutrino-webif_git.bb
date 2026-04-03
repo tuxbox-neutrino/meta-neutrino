@@ -22,7 +22,7 @@ RM_WORK_EXCLUDE += "${PN}"
 PROVIDES = "virtual/neutrino-webif"
 RPROVIDES_${PN} = "virtual/neutrino-webif"
 
-PR = "r2"
+PR = "r3"
 SRCREV = "${AUTOREV}"
 
 inherit gitpkgv
@@ -30,6 +30,11 @@ PKGV = "${GITPKGVTAG}"
 GITPKGV_PREFIX = ""
 
 S = "${WORKDIR}/git"
+
+RDEPENDS:${PN} += " \
+	autofs \
+	virtual/screengrabber \
+"
 
 do_configure[noexec] = "1"
 
