@@ -4,7 +4,7 @@
 
 DESCRIPTION = "Tuxbox-OS Neutrino GUI packages"
 LICENSE = "MIT"
-PR = "r3"
+PR = "r4"
 
 inherit packagegroup
 
@@ -12,6 +12,7 @@ RDEPENDS:${PN} = " \
     neutrino \
     libstb-hal \
     logoupdater \
+    mediathek \
     neutrino-plugins \
     ${@bb.utils.contains('MACHINE_FEATURES', 'fastboot', 'neutrino-lua-stb-plugins', '', d)} \
 "
