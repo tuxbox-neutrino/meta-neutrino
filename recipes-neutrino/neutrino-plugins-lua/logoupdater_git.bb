@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=a5f8f5771e40cfa0fef989e421db6c7e"
 
 # Recipe metadata update (install style migration from makeit to oe_runmake).
 PE = "1"
-PR = "r5"
+PR = "r6"
 
 inherit gitpkgv
 PKGV = "${GITPKGV}"
@@ -19,8 +19,9 @@ S = "${WORKDIR}/git"
 # for common neutrino paths (icons, plugin dirs, etc.)
 include ../neutrino/neutrino-common-vars.inc
 
-RDEPENDS:${PN} = "lua-feedparser lua-expat lua-json luaposix curl rsync unzip ca-certificates"
-RRECOMMENDS:${PN} += "git"
+# The plugin exposes a git download mode in its UI, so git must be present for
+# the default-installed package as well as feed installations.
+RDEPENDS:${PN} = "lua-feedparser lua-expat lua-json luaposix curl rsync unzip ca-certificates git"
 
 do_compile[noexec] = "1"
 

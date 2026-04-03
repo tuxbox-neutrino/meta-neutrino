@@ -4,20 +4,21 @@
 
 DESCRIPTION = "Tuxbox-OS Neutrino GUI packages"
 LICENSE = "MIT"
-PR = "r1"
+PR = "r3"
 
 inherit packagegroup
 
 RDEPENDS:${PN} = " \
     neutrino \
     libstb-hal \
+    logoupdater \
     neutrino-plugins \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'fastboot', 'neutrino-lua-stb-plugins', '', d)} \
 "
 
-# Optional themes and script plugin bundles
+# Optional themes and generic script plugin bundles beyond the default runtime set
 RRECOMMENDS:${PN} = " \
     neutrino-lua-plugins \
-    neutrino-lua-stb-plugins \
     neutrino-themes \
     neutrino-logos \
 "
