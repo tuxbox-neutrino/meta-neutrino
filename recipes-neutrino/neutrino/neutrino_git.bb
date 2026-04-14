@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRCPV_WORKSPACE = "9999"
 # Keep package upgrades monotonic after switching from workspace-style 9999 PKGV.
 PE = "1"
-PR = "r22"
+PR = "r23"
 SRCREV = "${AUTOREV}"
 
 PATCHTOOL = "git"

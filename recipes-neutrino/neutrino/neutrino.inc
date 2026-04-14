@@ -63,6 +63,12 @@ OMDB_API_KEY ?= "XXXXXXXX"
 
 WEATHER_DEV_KEY ?= "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
+# Online Flash portal Update Key.  Defaults to the distro-wide value from
+# tuxbox.conf (${TUXBOX_ONLINE_UPDATE_KEY}) so the compile-time baked
+# constant matches /etc/image-version.  Contract:
+# docs/ONLINE-FLASH-UPDATE-KEY.md
+ONLINE_UPDATE_KEY ?= "${TUXBOX_ONLINE_UPDATE_KEY}"
+
 # to find in neutrino-common-vars.inc
 #N_PREFIX = "/usr" 
 
@@ -95,6 +101,7 @@ EXTRA_OECONF = " \
 	--with-shoutcast-dev-id="${SHOUTCAST_DEV_KEY}" \
 	--with-weather-api-key="${WEATHER_DEV_KEY}" \
 	--with-weather-api-version="${WEATHER_API_VERSION}" \
+	--with-online-update-key="${ONLINE_UPDATE_KEY}" \
 	\
 	--enable-pip \
 	--enable-lcd4linux \
