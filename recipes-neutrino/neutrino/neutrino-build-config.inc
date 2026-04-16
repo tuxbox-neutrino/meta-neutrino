@@ -22,7 +22,7 @@ NEUTRINO_OECONF_DIRS_COMMON = " \
     --with-luaplugindir_var=${N_LUAPLUGIN_DIR_VAR} \
     --with-gamesdir=${N_GAMES_DIR}  \
     --with-iconsdir=${N_ICONS_DIR}  \
-    --with-iconsdir_var=${N_ICONS_DIR}  \
+    --with-iconsdir_var=${N_ICONS_DIR_VAR}  \
     \
     --with-zapitdir=${N_ZAPITDIR} \
     --with-datadir_var=${N_DATADIR_VAR} \
