@@ -7,11 +7,16 @@ MAINTAINER = "${FLAVOR}-developers"
 HOMEPAGE = ""
 
 SUMMARY = "${DESCRIPTION}"
-PR = "r1"
-
-PV = "git+${SRCPV}"
+PE = "1"
+PR = "r2"
+PV = "git"
 
 SRCREV = "${AUTOREV}"
+
+inherit gitpkgv
+
+PKGV = "${GITPKGVTAG}"
+GITPKGVTAG_NO_WARN_ON_NO_TAG = "1"
 
 SRC_URI = " \
 	git://github.com/neutrino-images/ni-neutrino-plugins.git;protocol=https;subpath=data;destsuffix=git/data;branch=master \
