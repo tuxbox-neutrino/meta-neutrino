@@ -12,6 +12,10 @@ REPLACES_${PN} = "neutrino-mp"
 inherit autotools pkgconfig systemd ccache gitpkgv neutrino-boxmap
 include neutrino-build-config.inc
 
+# Keep configure in sync with configure.ac so optional Lua provider selection
+# works in OE builds without relying on generated files in the source tree.
+AUTOTOOLS_AUTORECONF = "1"
+
 DEPENDS += " \
 	curl \
 	ffmpeg \
@@ -86,6 +90,7 @@ EXTRA_OECONF = " \
 	--enable-flac \
 	--enable-ffmpegdec \
 	--enable-lua \
+	--with-lua-provider=${TUXBOX_LUA_PROVIDER} \
 	${NEUTRINO_OECONF_BASE} \
 	--exec_prefix=${N_EXEC_PREFIX} \
 	--includedir=${N_PREFIX}/include \
@@ -118,8 +123,12 @@ EXTRA_OEMAKE += "'ARFLAGS=rc'"
 
 # VERSION_FILE = "${N_PREFIX}/.version"
 
+# Keep Lua headers reachable for both plain Lua and LuaJIT builds.
+N_LUA_CFLAGS = "-I${STAGING_INCDIR} -I${STAGING_INCDIR}/luajit-2.1"
+
 N_CFLAGS = "-Wall -Wextra -Wshadow -Wno-psabi ${DEBUG_FLAGS} ${FULL_OPTIMIZATION} -fno-strict-aliasing -rdynamic -DENABLE_FREESATEPG -DNEW_LIBCURL \
--I${S}/lib/libcoolstream2 -I${STAGING_INCDIR}/freetype2 -I${STAGING_INCDIR}/sigc++-2.0 -I${STAGING_INCDIR}/glib-2.0 -I${STAGING_LIBDIR}/glib-2.0/include -I${STAGING_INCDIR}/luajit-2.1 \
+-I${S}/lib/libcoolstream2 -I${STAGING_INCDIR}/freetype2 -I${STAGING_INCDIR}/sigc++-2.0 -I${STAGING_INCDIR}/glib-2.0 -I${STAGING_LIBDIR}/glib-2.0/include \
+${N_LUA_CFLAGS} \
 "
 
 N_CXXFLAGS = "${N_CFLAGS}"
