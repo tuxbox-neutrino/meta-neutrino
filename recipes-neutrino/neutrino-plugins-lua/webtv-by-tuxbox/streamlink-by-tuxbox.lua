@@ -140,8 +140,8 @@ if cached_url and cached_url ~= "" then
 	return string.format("{\"url\":\"%s\"}", json_escape(cached_url))
 end
 
--- Keep streamlink optional. If command is missing or returns empty,
--- use the resolved URL directly.
+-- Prefer streamlink's resolved stream URL. If it returns empty, use the
+-- provider-resolved URL directly.
 local qualities = quality_profile()
 local cmd = string.format(
 	"timeout -k 2 12 streamlink --retry-open 1 --retry-streams 1 --stream-timeout 5 %q %s --stream-url 2>/dev/null",

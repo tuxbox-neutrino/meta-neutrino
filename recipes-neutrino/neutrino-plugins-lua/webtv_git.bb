@@ -8,12 +8,14 @@ inherit allarch
 MAINTAINER = "community"
 SECTION = "optional"
 
-PR = "r4"
+PR = "r5"
 PV = "1.0"
 
 ALLOW_EMPTY:${PN} = "1"
 
 RDEPENDS:${PN} = " \
+	python3-yt-dlp \
+	streamlink \
 	webtv-by-tuxbox \
 	webtv-by-ni \
 "
