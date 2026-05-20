@@ -7,6 +7,8 @@ SRC_URI += "git://github.com/tuxbox-neutrino/library-stb-hal.git;branch=mpx;prot
 "
 
 PKGV = "${GITPKGVTAG}"
+GITPKGV_PREFIX = "."
+GITPKGVTAG_STYLE = "count-short"
 
 EXTRA_OECONF:append = " \
 			${NEUTRINO_OECONF_BOXMAP} \

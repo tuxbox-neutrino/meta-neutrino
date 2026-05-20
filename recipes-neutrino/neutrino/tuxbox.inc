@@ -8,6 +8,8 @@ SRC_URI:append = " git://github.com/tuxbox-neutrino/gui-neutrino.git;protocol=ht
 "
 
 PKGV = "${GITPKGVTAG}"
+GITPKGV_PREFIX = "."
+GITPKGVTAG_STYLE = "count-short"
 GITPKGVTAG_NO_WARN_ON_NO_TAG = "1"
 
 DEFAULT_THEME ?= "Neutrino-3.0"
