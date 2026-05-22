@@ -8,33 +8,25 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-PR = "r5"
+PR = "r6"
 PACKAGES = "${PN}"
 
 RDEPENDS:${PN} = " \
     asc2uni \
-    autoreboot \
-    epgscan \
     getrc \
-    imgbackup \
     initfb \
     input  \
-    logomask \
     msgbox  \
     neutrino-plugin-data \
     neutrino-fonts-extra \
     oled-ctrl  \
-    pr-auto-timer \
     satfind  \
-    shellexec \
     showiframe \
     stbup  \
     sysinfo \
     turnoff-power \
     tuxcal   \
-    tuxcom \
     tuxmail \
-    tuxwetter \
 "
 
 # On these Gfutures and Maxytec machines, vendor DVB modules already install

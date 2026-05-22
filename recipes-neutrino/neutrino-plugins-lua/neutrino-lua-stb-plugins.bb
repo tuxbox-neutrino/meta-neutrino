@@ -8,16 +8,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-PR = "r1"
+PR = "r2"
 PACKAGES = "${PN}"
 
 RDEPENDS:${PN} = " \
-        stb-backup \
-        stb-flash \
-        stb-flash-local \
         stb-log \
-        stb-move \
-        stb-restore \
         stb-shell \
         stb-startup \
 "
