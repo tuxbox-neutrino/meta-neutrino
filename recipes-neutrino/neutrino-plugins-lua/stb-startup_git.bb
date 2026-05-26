@@ -6,7 +6,7 @@ LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=a5f8f5771e40cfa0fef989e421db6c7e"
 
 PE = "2"
-PR = "r8"
+PR = "r9"
 
 inherit gitpkgv
 PKGV = "${GITPKGV}"
