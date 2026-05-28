@@ -2,11 +2,11 @@
 
 case $ACTION in
 	add)
-		/bin/udevadm trigger --action=add --name-match="$MDEV"
+		/bin/udevadm trigger --action=add --name-match="/dev/$MDEV"
 		/bin/udevadm settle
 		;;
 	remove)
-		/bin/udevadm trigger --action=remove --name-match="$MDEV"
+		/bin/udevadm trigger --action=remove --name-match="/dev/$MDEV"
 		/bin/udevadm settle
 		;;
 	*)  echo "$0: unknown ACTION $ACTION"
