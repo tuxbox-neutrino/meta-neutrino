@@ -49,6 +49,9 @@ DEPENDS += " \
 RDEPENDS_${PN} = "streamripper virtual/libstb-hal virtual/lua luaposix lua-expat ffmpeg"
 # `grab` is optional, but enables screenshot/GLCD capture features in Neutrino.
 RRECOMMENDS:${PN} += "grab"
+# `hd-idle` enables the HDD spindown timeout applied by the disk menu
+# (CHDDDestExec); without it the "Apply" action cannot spin down USB disks.
+RRECOMMENDS:${PN} += "hd-idle"
 
 S = "${WORKDIR}/git"
 
