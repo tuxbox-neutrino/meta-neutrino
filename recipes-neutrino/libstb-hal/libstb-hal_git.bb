@@ -35,10 +35,7 @@ SRCPV_WORKSPACE = "9999"
 PE = "1"
 PKGV = "${GITPKGVTAG}"
 SRCREV = "${AUTOREV}"
-PR = "r8"
-
-# libstb-hal-bin package for testing binaries etc.
-PACKAGES += "${PN}-bin"
+PR = "r9"
 
 SRC_URI:append = " \
 	file://blank_480.mpg \
@@ -91,12 +88,3 @@ do_install:append() {
 		install -m 0644 ${S}/libmipsbox/*.h ${D}${includedir}/libmipsbox
 	fi
 }
-
-# pic2m2v is included in lib package, because it is always needed,
-# libstb-hal-bin contains all other binaries, which are rather for testing only
-FILES_${PN} = "\
-	${libdir}/* \
-	${bindir}/pic2m2v \
-"
-
-FILES_${PN}-dev += "${includedir}"
