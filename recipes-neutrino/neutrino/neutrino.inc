@@ -1,12 +1,12 @@
 
 PROVIDES = "virtual/neutrino"
-RPROVIDES_${PN} = "neutrino-mp virtual/neutrino"
+RPROVIDES:${PN} = "neutrino-mp virtual/neutrino"
 
-RCONFLICTS_${PN} = "neutrino-mp"
-RREPLACES_${PN} = "neutrino-mp"
+RCONFLICTS:${PN} = "neutrino-mp"
+RREPLACES:${PN} = "neutrino-mp"
 
-CONFLICTS_${PN} = "neutrino-mp"
-REPLACES_${PN} = "neutrino-mp"
+CONFLICTS:${PN} = "neutrino-mp"
+REPLACES:${PN} = "neutrino-mp"
 
 
 inherit autotools pkgconfig systemd ccache gitpkgv neutrino-boxmap
@@ -46,7 +46,11 @@ DEPENDS += " \
 	zlib \
 "
 
-RDEPENDS_${PN} = "streamripper virtual/libstb-hal virtual/lua luaposix lua-expat ffmpeg"
+RDEPENDS:${PN} = "virtual/libstb-hal virtual/lua luaposix lua-expat ffmpeg"
+# `streamripper` backs the streamripper.sh internet-radio recording helper.
+# Like grab/hd-idle it is a standalone CLI tool, not linked into Neutrino, so
+# it is an optional recommendation rather than a hard runtime dependency.
+RRECOMMENDS:${PN} += "streamripper"
 # `grab` is optional, but enables screenshot/GLCD capture features in Neutrino.
 RRECOMMENDS:${PN} += "grab"
 # `hd-idle` enables the HDD spindown timeout applied by the disk menu
@@ -209,7 +213,7 @@ fi
 }
 
 
-pkg_postinst_ontarget_${PN} () {
+pkg_postinst_ontarget:${PN} () {
 	update-alternatives --install /bin/backup.sh backup.sh /usr/bin/backup.sh 100
 	update-alternatives --install /bin/install.sh install.sh /usr/bin/install.sh 100
 	update-alternatives --install /bin/restore.sh restore.sh /usr/bin/restore.sh 100

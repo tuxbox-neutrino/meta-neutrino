@@ -27,15 +27,15 @@ include tuxbox.inc
 
 # on coolstream, the same is provided by cs-drivers pkg (libcoolstream)
 PROVIDES = "virtual/libstb-hal"
-RPROVIDES_${PN} = "virtual/libstb-hal"
-RDEPENDS_${PN} = "ffmpeg"
+RPROVIDES:${PN} = "virtual/libstb-hal"
+RDEPENDS:${PN} = "ffmpeg"
 
 SRCPV_WORKSPACE = "9999"
 # Keep package upgrades monotonic after switching from workspace-style 9999 PKGV.
 PE = "1"
 PKGV = "${GITPKGVTAG}"
 SRCREV = "${AUTOREV}"
-PR = "r7"
+PR = "r8"
 
 # libstb-hal-bin package for testing binaries etc.
 PACKAGES += "${PN}-bin"
