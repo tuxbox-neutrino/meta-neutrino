@@ -56,6 +56,11 @@ RRECOMMENDS:${PN} += "grab"
 # `hd-idle` enables the HDD spindown timeout applied by the disk menu
 # (CHDDDestExec); without it the "Apply" action cannot spin down USB disks.
 RRECOMMENDS:${PN} += "hd-idle"
+# `ntpdate` enables Neutrino's optional NTP time sync: sectionsd calls the
+# ntpdate binary (find_executable("ntpdate") + system()) when network_ntpenable
+# is set. Neutrino works without it via DVB stream time (TDT/TOT) and disables
+# NTP gracefully if absent, so this is a recommendation, not a hard dependency.
+RRECOMMENDS:${PN} += "ntpdate"
 
 S = "${WORKDIR}/git"
 
