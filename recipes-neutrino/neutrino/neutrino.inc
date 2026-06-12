@@ -118,7 +118,7 @@ EXTRA_OECONF = " \
 	--with-shoutcast-dev-id="${SHOUTCAST_DEV_KEY}" \
 	--with-weather-api-key="${WEATHER_DEV_KEY}" \
 	--with-weather-api-version="${WEATHER_API_VERSION}" \
-	--with-online-update-key="${SERVICE_KEY}" \
+	--with-service-key="${SERVICE_KEY}" \
 	\
 	--enable-pip \
 	--enable-lcd4linux \
