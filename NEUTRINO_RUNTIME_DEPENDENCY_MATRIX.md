@@ -22,7 +22,7 @@ plugins, and maps them to package integration in this stack.
 
 | Tool | Code path | Behavior |
 | --- | --- | --- |
-| `ntpdate` / `ntpd` | `src/eitd/sectionsd.cpp` | Uses `ntpdate` first, falls back to `ntpd` |
+| `chronyc` (preferred) / `ntpdate` / `ntpd` | `src/eitd/sectionsd.cpp` | Provider selected at sync time: chrony > ntpdate > ntpd > DVB time. chrony is applied via a reloadable `/etc/chrony/sources.d` drop-in (no `chrony.conf` rewrite, no restart); ntpdate/ntpd are the foreign/legacy-image fallback. A helper-script approach that sed-rewrites chrony.conf and restarts chronyd is rejected. |
 | `fdisk` / `sfdisk` / `sgdisk` | `src/gui/hdd_menu.cpp` | Uses first available tool; fallback chain implemented |
 | `hdparm`, `hd-idle` | `src/gui/hdd_menu.cpp` | Optional HDD tuning / standby features |
 | `ether-wake` | `src/neutrino.cpp`, `src/gui/moviebrowser/mb.cpp` | Optional wake-on-LAN for recording paths |
@@ -36,7 +36,7 @@ plugins, and maps them to package integration in this stack.
 
 ## Policy
 
-- Avoid importing helper scripts from NI repositories as-is.
+- Avoid importing helper scripts from upstream fork repositories as-is.
 - Keep layer-owned helper scripts neutral (no external branding assumptions).
 - Prefer strict runtime dependencies only where a feature is mandatory; use
   recommendations for optional UI features.

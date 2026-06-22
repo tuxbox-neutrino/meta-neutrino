@@ -56,10 +56,14 @@ RRECOMMENDS:${PN} += "grab"
 # `hd-idle` enables the HDD spindown timeout applied by the disk menu
 # (CHDDDestExec); without it the "Apply" action cannot spin down USB disks.
 RRECOMMENDS:${PN} += "hd-idle"
-# `ntpdate` enables Neutrino's optional NTP time sync: sectionsd calls the
-# ntpdate binary (find_executable("ntpdate") + system()) when network_ntpenable
-# is set. Neutrino works without it via DVB stream time (TDT/TOT) and disables
-# NTP gracefully if absent, so this is a recommendation, not a hard dependency.
+# `ntpdate` is an optional portability fallback for Neutrino's network-time
+# sync. sectionsd picks a provider at sync time:
+#   chrony (preferred) > ntpdate > ntpd > DVB stream time (TDT/TOT).
+# On Tuxbox-OS default images chrony owns network time, and
+# `NO_RECOMMENDATIONS=1` keeps ntpdate out of the rootfs, so this recommendation
+# only takes effect on opkg/derived images that ship no chrony. Neutrino never
+# rewrites chrony.conf and disables NTP gracefully when no provider is present,
+# so this stays a recommendation, not a hard dependency.
 RRECOMMENDS:${PN} += "ntpdate"
 
 S = "${WORKDIR}/git"
