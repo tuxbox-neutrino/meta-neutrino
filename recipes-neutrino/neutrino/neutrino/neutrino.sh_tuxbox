@@ -1,18 +1,45 @@
 #!/bin/sh
 
+# Follow-up action after Neutrino exits (power off / reboot / restart).
+#
+# Neutrino writes the requested action as a single token into an action file.
+# Older Neutrino builds instead encode it in the exit status (1=poweroff,
+# 2=reboot, 3=restart); we fall back to that when no action file is present, so
+# any mix of old/new binary and old/new start script keeps working.
+
+ACTION_FILE="${NEUTRINO_EXIT_ACTION_FILE:-/tmp/neutrino.exit-action}"
+
+notify() {
+	if [ -w /dev/dbox/oled0 ]; then
+		echo "$1" > /dev/dbox/oled0
+	fi
+}
+
+# Drop a stale action file from an earlier run before starting.
+rm -f "$ACTION_FILE"
+
 echo "### Starting Neutrino ###"
 /usr/bin/neutrino; RET=$?
 
-if [ $RET -eq 0 ]; then
-        :
-elif [ $RET -eq 1 ]; then
-        echo "...Shutdown" > /dev/dbox/oled0
-        systemctl poweroff
-elif [ $RET -eq 2 ]; then
-        echo "...Reboot" > /dev/dbox/oled0
-        systemctl reboot
-elif [ $RET -eq 3 ]; then
-        echo "...Restart" > /dev/dbox/oled0
-        systemctl restart neutrino
+ACTION=""
+if [ -r "$ACTION_FILE" ]; then
+	read -r ACTION < "$ACTION_FILE"
+	rm -f "$ACTION_FILE"
 fi
 
+if [ -z "$ACTION" ]; then
+	case "$RET" in
+		1) ACTION=poweroff ;;
+		2) ACTION=reboot ;;
+		3) ACTION=restart ;;
+		*) ACTION=none ;;
+	esac
+fi
+
+case "$ACTION" in
+	poweroff) notify "...Shutdown"; systemctl poweroff ;;
+	reboot)   notify "...Reboot";   systemctl reboot ;;
+	restart)  notify "...Restart";  systemctl restart neutrino ;;
+	none)     : ;;
+	*) echo "[neutrino.sh] unknown exit action '$ACTION', ignoring" >&2 ;;
+esac
