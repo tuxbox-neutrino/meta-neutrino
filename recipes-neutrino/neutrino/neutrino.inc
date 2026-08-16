@@ -169,17 +169,9 @@ do_install:prepend () {
 	install -d ${D}${systemd_unitdir}/system
 	install -d ${D}${bindir}
 	install -d ${D}${N_CONFIG_DIR}
-	install -d ${D}${sysconfdir}/neutrino/plugins	
-	install -m 0644 ${WORKDIR}/neutrino.service ${D}${systemd_unitdir}/system/
-	install -m 0644 ${WORKDIR}/neutrino-log.service  ${D}${systemd_unitdir}/system
-	install -m 0755 ${WORKDIR}/neutrino.sh_tuxbox ${D}${bindir}/neutrino.sh   
-	install -m 0755 ${WORKDIR}/streamripper.sh ${D}${bindir}/streamripper.sh
-	install -m 755 ${WORKDIR}/pre-wlan0.sh ${D}${sysconfdir}/network/
-	install -m 755 ${WORKDIR}/post-wlan0.sh ${D}${sysconfdir}/network/
-	install -m 644 ${WORKDIR}/timezone.xml ${D}${sysconfdir}/timezone.xml
+	install -d ${D}${sysconfdir}/neutrino/plugins
 	install -d ${D}${localstatedir}/cache
 	install -d ${D}/lib/mdev/fs
-	install -m 755 ${WORKDIR}/mount.mdev ${D}/lib/mdev/fs/mount
 
 	# why this ???
 	touch ${D}/usr/bin/enigma2
@@ -192,6 +184,18 @@ do_install:append() {
 	# We don't install the update.urls file with the neutrino target.
 	# The content is inserted during the creation of the image (See: neutrino-image-base.inc).
 	# touch ${D}/etc/update.urls
+
+	# Install this layer's own files here, not in do_install:prepend: whatever
+	# the upstream "make install" ships under the same name would otherwise
+	# overwrite them again (this is what happened to tobackup.conf).
+	install -m 0644 ${WORKDIR}/neutrino.service ${D}${systemd_unitdir}/system/
+	install -m 0644 ${WORKDIR}/neutrino-log.service ${D}${systemd_unitdir}/system
+	install -m 0755 ${WORKDIR}/neutrino.sh_tuxbox ${D}${bindir}/neutrino.sh
+	install -m 0755 ${WORKDIR}/streamripper.sh ${D}${bindir}/streamripper.sh
+	install -m 755 ${WORKDIR}/pre-wlan0.sh ${D}${sysconfdir}/network/
+	install -m 755 ${WORKDIR}/post-wlan0.sh ${D}${sysconfdir}/network/
+	install -m 644 ${WORKDIR}/timezone.xml ${D}${sysconfdir}/timezone.xml
+	install -m 755 ${WORKDIR}/mount.mdev ${D}/lib/mdev/fs/mount
 }
 
 FILES:${PN} += "\
