@@ -177,7 +177,6 @@ do_install:prepend () {
 	install -m 755 ${WORKDIR}/pre-wlan0.sh ${D}${sysconfdir}/network/
 	install -m 755 ${WORKDIR}/post-wlan0.sh ${D}${sysconfdir}/network/
 	install -m 644 ${WORKDIR}/timezone.xml ${D}${sysconfdir}/timezone.xml
-	install -m 755 ${WORKDIR}/tobackup.conf ${D}${sysconfdir}/neutrino/config
 	install -d ${D}${localstatedir}/cache
 	install -d ${D}/lib/mdev/fs
 	install -m 755 ${WORKDIR}/mount.mdev ${D}/lib/mdev/fs/mount

@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 SRCPV_WORKSPACE = "9999"
 # Keep package upgrades monotonic after switching from workspace-style 9999 PKGV.
 PE = "1"
-PR = "r29"
+PR = "r30"
 SRCREV = "${AUTOREV}"
 
 PATCHTOOL = "git"
@@ -22,7 +22,6 @@ SRC_URI = " \
 	file://pre-wlan0.sh \
 	file://post-wlan0.sh \
 	file://mount.mdev \
-	file://tobackup.conf \
 	file://0001-neutrino-prefer-image-version-first.patch \
 	file://0002-libnet-guard-netGetIP-against-failed-ioctls.patch \
 "
