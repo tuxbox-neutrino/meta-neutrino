@@ -1,6 +1,8 @@
 # Extract subdirectories from monorepos into standalone git trees using migit.
 # Intended for Neutrino script/Lua plugin packaging.
 
+inherit gitpkgv
+
 MIGIT_ENABLED ?= "0"
 MIGIT_SUBDIR ?= ""
 MIGIT_REPO_NAME ?= ""
@@ -22,7 +24,17 @@ MIGIT_SOURCE ?= "${WORKDIR}/git"
 MIGIT_OPTS ?= "--no-backups -n"
 
 MIGIT_PKGV_FILE ?= "${WORKDIR}/migit.pkgv"
-MIGIT_PKGV_FALLBACK ?= "${SRCPV}"
+# ${SRCPV} expands to AUTOINC+<hash>; without a PR server AUTOINC is always
+# "0", so a recipe falls back to 0+<hash> and its version is compared by git
+# hash -- it goes backwards whenever the new hash sorts below the old one
+# (QA: version-going-backwards).
+#
+# Only recipes with migit disabled switch to the rev-list based GITPKGV.  With
+# migit enabled the fallback MUST stay below the "${count}+g${hash}" value that
+# do_migit_version derives from the *filtered* sub-repo: GITPKGV counts the
+# whole monorepo and sorts far above it, which would turn a transient fallback
+# into a permanent downgrade on the next regular build.
+MIGIT_PKGV_FALLBACK ?= "${@d.getVar('SRCPV') if d.getVar('MIGIT_ENABLED') == '1' else d.getVar('GITPKGV')}"
 
 def migit_repo_name(d):
     import os

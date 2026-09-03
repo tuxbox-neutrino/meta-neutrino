@@ -3,7 +3,7 @@ include neutrino-lua-plugins.inc
 ## PN (package name = filename)
 #PN = "neutrino-lua-plugins-shared-files"
 SUMMARY = "Shared files and scripts for neutrino-lua-plugins"
-PR = "r2"
+PR = "r3"
 
 MIGIT_ENABLED = "0"
 

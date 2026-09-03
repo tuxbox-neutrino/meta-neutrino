@@ -3,7 +3,7 @@ include neutrino-lua-plugins-target-pattern.inc
 SRC_NAME = "xupnpd"
 SRC_SUBPATH = "${SRC_NAME}"
 SUMMARY = "Content for xupnpd"
-PR = "r1"
+PR = "r2"
 
 PROVIDES="virtual/neutrino-lua-plugin-xupnpd"
 RPROVIDES_${PN} = "virtual/neutrino-lua-plugin-xupnpd"
