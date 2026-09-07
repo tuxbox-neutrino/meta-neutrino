@@ -16,7 +16,7 @@ SRC_URI = " \
 
 SRCREV = "${AUTOREV}"
 PKGV = "${MIGIT_PKGV}"
-PR = "r3"
+PR = "r4"
 
 do_compile[noexec] = "1"
 
