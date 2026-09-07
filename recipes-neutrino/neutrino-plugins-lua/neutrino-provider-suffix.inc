@@ -44,18 +44,6 @@ do_install () {
 
 	install -d ${D}${PROVIDER_TARGET_DIR}
 
-	scripts_map=""
-	for s in ${S}/${PROVIDER_SCRIPT_GLOB}; do
-		[ -f "$s" ] || continue
-		raw=$(basename "$s" .lua)
-		if provider_should_skip "$raw"; then
-			continue
-		fi
-		name=$(provider_normalize_name "$raw")
-		[ -n "$name" ] || name="$raw"
-		scripts_map="$scripts_map ${raw}:${name}-${suffix}"
-	done
-
 	for f in ${S}/${PROVIDER_SCRIPT_GLOB} ${S}/${PROVIDER_XML_GLOB}; do
 		[ -f "$f" ] || continue
 		base=$(basename "$f")
@@ -68,19 +56,44 @@ do_install () {
 
 		norm=$(provider_normalize_name "$name")
 		[ -n "$norm" ] || norm="$name"
-		new="${norm}-${suffix}.${ext}"
-
-		if [ "$ext" = "xml" ]; then
-			tmp="${WORKDIR}/${new}"
-			cp "$f" "$tmp"
-			for pair in $scripts_map; do
-				raw="${pair%%:*}"
-				ren="${pair##*:}"
-				sed -i "s/script=\"${raw}\\.lua\"/script=\"${ren}\\.lua\"/g" "$tmp"
-			done
-			install -m 644 "$tmp" "${D}${PROVIDER_TARGET_DIR}/${new}"
-		else
-			install -m 644 "$f" "${D}${PROVIDER_TARGET_DIR}/${new}"
-		fi
+		install -m 644 "$f" "${D}${PROVIDER_TARGET_DIR}/${norm}-${suffix}.${ext}"
 	done
+}
+
+# Runs after the complete do_install, including recipe appends that add
+# layer files (streamlink-by-*.lua, override XMLs), so every shipped file
+# is covered. Renaming a script breaks everything that names it: XML
+# script="x.lua" as well as Lua dofile("/x.lua") of a shared helper.
+do_install[postfuncs] += "provider_finalize"
+
+provider_finalize() {
+	suffix="${PROVIDER_SUFFIX}"
+	dir="${D}${PROVIDER_TARGET_DIR}"
+	[ -d "$dir" ] || return 0
+
+	files=$(find "$dir" -maxdepth 1 -type f \( -name '*.lua' -o -name '*.xml' \))
+	[ -n "$files" ] || return 0
+
+	# 1. Point every reference at the renamed script. A reference may use
+	#    the upstream name or the prefixed form provider_normalize_name
+	#    strips; the renamed form itself no longer matches, so this is
+	#    idempotent.
+	for s in "$dir"/*-${suffix}.lua; do
+		[ -e "$s" ] || continue
+		ren=$(basename "$s" .lua)
+		raw="${ren%-${suffix}}"
+		for old in "$raw" "${PROVIDER_PREFIX}-${raw}"; do
+			esc=$(printf '%s' "$old" | sed 's/[.[\*^$]/\\&/g')
+			sed -i -E "s#([\"'/])${esc}\.lua([\"'])#\1${ren}.lua\2#g" $files
+		done
+	done
+
+	# 2. Every *.lua the shipped files mention must exist next to them.
+	missing=""
+	for ref in $(grep -ohE "[\"'/][A-Za-z0-9_.-]+\.lua[\"']" $files | sed -E "s#^[\"'/]##; s#[\"']\$##" | sort -u); do
+		[ -e "$dir/$ref" ] || missing="$missing $ref"
+	done
+	if [ -n "$missing" ]; then
+		bbfatal "provider ${suffix}: shipped files reference missing scripts:${missing}"
+	fi
 }
