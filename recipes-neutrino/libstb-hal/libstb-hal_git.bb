@@ -17,6 +17,7 @@ DEPENDS = "\
 	libaio \
 	fontconfig \
 	atk \
+	jpeg \
 	libpng \
 	freetype \
 "
