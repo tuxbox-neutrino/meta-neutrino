@@ -56,6 +56,16 @@ RRECOMMENDS:${PN} += "grab"
 # `hd-idle` enables the HDD spindown timeout applied by the disk menu
 # (CHDDDestExec); without it the "Apply" action cannot spin down USB disks.
 RRECOMMENDS:${PN} += "hd-idle"
+# `autofs` backs the AutoMount pages of the web interface, which Neutrino's
+# own `make install` ships into the httpd directory. It used to come with the
+# separate neutrino-webif package; images carry it anyway, so like grab it is
+# a recommendation for feed installs rather than a hard dependency.
+RRECOMMENDS:${PN} += "autofs"
+# The web interface was once packaged on its own as neutrino-webif, into the
+# same httpd directory. Neutrino owns those files now and takes that package's
+# place on an upgrade instead of clashing with it.
+RREPLACES:${PN} += "neutrino-webif"
+RCONFLICTS:${PN} += "neutrino-webif"
 # `ntpdate` is an optional portability fallback for Neutrino's network-time
 # sync. sectionsd picks a provider at sync time:
 #   chrony (preferred) > ntpdate > ntpd > DVB stream time (TDT/TOT).
