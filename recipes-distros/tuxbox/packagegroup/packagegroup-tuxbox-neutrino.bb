@@ -4,7 +4,7 @@
 
 DESCRIPTION = "Tuxbox-OS Neutrino GUI packages"
 LICENSE = "MIT"
-PR = "r6"
+PR = "r7"
 
 inherit packagegroup
 
@@ -15,6 +15,7 @@ RDEPENDS:${PN} = " \
     mediathek \
     neutrino-plugins \
     ${@bb.utils.contains('MACHINE_FEATURES', 'fastboot', 'neutrino-lua-stb-plugins', '', d)} \
+    ${@bb.utils.contains('DISTRO_TYPE', 'development', 'neutrino-webui-ext-api-docs', '', d)} \
 "
 
 # Optional themes and generic script plugin bundles beyond the default runtime set
