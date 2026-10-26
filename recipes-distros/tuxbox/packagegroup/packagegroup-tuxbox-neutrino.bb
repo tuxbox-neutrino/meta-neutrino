@@ -4,7 +4,7 @@
 
 DESCRIPTION = "Tuxbox-OS Neutrino GUI packages"
 LICENSE = "MIT"
-PR = "r5"
+PR = "r6"
 
 inherit packagegroup
 
@@ -14,7 +14,6 @@ RDEPENDS:${PN} = " \
     logoupdater \
     mediathek \
     neutrino-plugins \
-    neutrino-webui-ext-info \
     ${@bb.utils.contains('MACHINE_FEATURES', 'fastboot', 'neutrino-lua-stb-plugins', '', d)} \
 "
 
