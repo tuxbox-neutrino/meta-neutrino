@@ -215,6 +215,29 @@ FILES:${PN} += "\
 	/lib \
 "
 
+# Files the user edits on the box: on an update opkg keeps a copy changed
+# on the box and puts the packaged version next to it as <file>-opkg.
+# Release data (satellites.xml, cables.xml, terrestrial.xml,
+# providermap.xml, radio-stations.xml, timezone.xml) and the start
+# templates under initial/ are not listed, so an update keeps replacing
+# them with current data.
+CONFFILES:${PN} += "\
+	${N_CONFIG_DIR}/nhttpd.conf \
+	${N_CONFIG_DIR}/tuxtxt/tuxtxt2.conf \
+	${N_CONFIG_DIR}/radio-favorites.xml \
+	${N_CONFIG_DIR}/weather-favorites.xml \
+	${N_CONFIG_DIR}/tobackup.conf \
+	${N_CONFIG_DIR}/epglanguages.conf \
+	${N_CONFIG_DIR}/encoding.conf \
+	${N_CONFIG_DIR}/bad_package_pattern.list \
+	${N_ZAPITDIR}/myservices.xml \
+	${N_ZAPITDIR}/epgmap.xml \
+	${N_WEBTV_DIR_VAR}/webtv_usr.xml \
+	${N_WEBRADIO_DIR_VAR}/webradio_usr.xml \
+	${sysconfdir}/network/pre-wlan0.sh \
+	${sysconfdir}/network/post-wlan0.sh \
+"
+
 systemd_prerm() {
 }
 
